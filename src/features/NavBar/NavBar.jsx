@@ -149,11 +149,7 @@ function NavBar() {
                 COMICS
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="creators">
-                CREATORS
-              </Link>
-            </li>
+            
             <li className="nav-item">
               <Link className="nav-link" to="events">
                 EVENTS

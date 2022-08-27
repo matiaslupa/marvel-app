@@ -12,7 +12,6 @@ import {
 
 import Characters from '../../features/Characters/Characters';
 import Comics from '../../features/Comics/Comics';
-import Creators from '../../features/Creators/Creators';
 import Events from '../../features/Events/Events';
 
 import './Pages.css';
@@ -33,10 +32,6 @@ function Pages() {
       <motion.div >
         <Comics />
       </motion.div>
-
-      <motion.div >
-        <Creators />
-      </motion.div >
 
       <motion.div >
         <Events />

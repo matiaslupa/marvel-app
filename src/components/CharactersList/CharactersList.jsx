@@ -156,21 +156,17 @@ function CharactersList() {
               >
                 <motion.div
                   className="card-character-list"
-                  whileHover={{
-                    cursor: 'pointer',
-                    transition: { duration: 0.6 },
-                  }}
+
                   onClick={() => dispatch(loadComics(character.id.toString()))}
                 >
                   <motion.img
-                    whileHover={{
-                      opacity: 1,
-                      scale: 1.05,
-                    }}
+                  
+      
                     className="img-characters-list"
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
                   />
+                  
 
                   <div className="name-characters-list">
                     <h3 className="">{`${character.name.slice(0, 17)}${
@@ -201,18 +197,19 @@ function CharactersList() {
                 X
               </motion.button>
 
+              <div className='img-character-list-div'>
+
               <motion.img
-                /* initial={{filter: 'invert(50%)',}}
-                animate={{
-                  filter: 'invert(0%)',
                 
-                }}
-                transition={{ duration: 0.5, repeatType: "loop", repeat: Infinity, repeatDelay: 3 }} */
                 className="img-character"
                 src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
+                alt={selectedCharacter.name}
               />
 
-              <h2 className="character-name">{selectedCharacter.name}</h2>
+              </div>
+
+
+              <h2 className="character-name">{selectedCharacter.name.toUpperCase()}</h2>
               <div className="character-description">
                 <span>
                   {selectedCharacter.description
@@ -234,7 +231,7 @@ function CharactersList() {
                           }}
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                          alt=""
+                          alt={comic.title}
                         />
                         <div className="comic-title-character-list">
                           <span>{comic.title}</span>
