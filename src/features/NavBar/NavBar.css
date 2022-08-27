@@ -1,0 +1,77 @@
+#navbar {
+     transition: top 0.3s; 
+     background-color: transparent;
+     padding: 0;
+     backdrop-filter: blur(1.5px);
+  }
+  
+
+.navbar .search-btn {
+    color: white ;
+    font-weight: 800;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    border-width: 2px;
+}
+
+.navbar .search-btn:hover {
+    background-color: var(--main-color);
+}
+
+.form-control{
+    background-color: transparent;
+    color: var(--text-main-color) !important;
+    font-family: 'Roboto' !important;
+    font-size: 16px;
+}
+
+.form-control:focus{
+    background-color: transparent;
+    color: white;
+    font-family: 'Roboto';
+     
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+  }
+
+.navbar-toggler{
+    background-color: var(--dark-color);
+    
+} 
+
+.menu-icon{
+    color: var(--text-dark-color);
+}
+
+
+.navbar .nav-link {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-main-color);
+    letter-spacing: 2.5px;
+    font-size: 18px;
+    font-weight: 700;
+    text-shadow: 2.6px 2.6px 2.6px rgb(130, 130, 130);
+    /* -webkit-text-stroke: 0.5px var(--main-color); */
+}
+
+
+.nav-link:hover {
+    text-shadow: 2.6px 2.6px 2.6px rgb(130, 130, 130);
+
+    
+}
+
+.navbar .nav-link:focus{
+    color: rgb(246, 192, 91) ;
+    text-shadow: 2.6px 2.6px 2.6px rgb(130, 130, 130);
+}
+
+
+@media only screen and (max-width: 576px) {
+    .arvelSVG{
+        opacity: 0;
+    }
+    
+}

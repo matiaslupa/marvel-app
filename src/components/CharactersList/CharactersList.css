@@ -1,0 +1,241 @@
+.container-charcaters-list{
+    
+    color: var(--text-dark-color);
+    width: 100vw;
+    
+}
+
+.abc-form{
+    color: var(--text-dark-color);
+    display: flex;
+    justify-content: end;
+    margin-left: 60px !important;
+}
+
+.abc-form .inputLabel{
+    color: var(--text-dark-color) !important;
+    margin-left: 60px !important;
+    font-weight: 600;
+}
+
+.select{
+    color: aliceblue !important;
+    text-align: center;
+    font-weight: 700 !important;
+    padding-left: 20px;
+
+}
+
+.MuiList-padding {
+    padding: 0px !important;
+    backdrop-filter: blur(3px) !important;
+    background-color: rgba(152, 152, 152, 0.378) !important;
+}
+
+
+.menuItem{
+    text-align: center !important;
+    background-color: transparent !important;
+}
+
+
+.abc{
+    font-weight: 600;
+    
+}
+
+.abc a{
+    background-color: var(--dark-color);
+    color: rgb(92, 168, 255);
+    
+}
+
+.spinner-characters-list{
+    margin-top: 150px;
+}
+
+.col-pagination-characters-list {
+    margin-bottom: 20px;
+}
+
+.row-characters-list{
+    margin: 0px;
+    margin-top: 120px;
+    width: 100%;
+}
+
+.col-characters-list{
+    margin-bottom: 25px;
+}
+
+.card-character-list{
+    backdrop-filter: blur(0px);
+    max-width: 280px;
+    overflow: hidden;
+    border-bottom-right-radius: 20px;
+    filter: drop-shadow(8px 6px 12px rgba(114, 114, 114, 0.779));
+}
+
+.img-characters-list{
+    opacity: 0.9;
+    width: 100%;
+    position: relative;
+    border-bottom-right-radius: 20px;
+}
+
+.name-characters-list{
+    position: absolute;
+    bottom: 0px;
+    background-color: var(--main-color);
+    width: 100%;
+    height: 55px;
+    border-bottom-right-radius: 15px;
+    backdrop-filter: blur(1.4px);
+    text-transform: uppercase; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.name-characters-list h3 {
+    font-weight: 700;
+    font-size: 20px;
+    text-shadow: 2.6px 2.6px 2.6px rgba(175, 17, 17, 0.906);
+    margin: 5px auto;
+}
+
+
+
+
+
+
+.col-character-list{
+    background-color: rgba(136, 0, 0, 0.696);
+    height: 700px;
+    max-width: 70vw;
+    position: fixed;
+    bottom: 130px;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    margin-bottom: 0px;
+    
+}
+
+.character-name{
+    position: absolute;
+    left: 320px;
+    top: 20px;
+}
+
+.character-description{
+    max-width: 100%;
+    position: absolute;
+    left: 320px;
+    top: 70px;
+    color: antiquewhite;
+    font-size: 18px;
+    font-family: 'Roboto';
+}
+
+.btn-close-character{
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    text-align: center;
+    background-color: black;
+    font-family: 'Roboto';
+    font-weight: 900;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-character{
+    max-width: 300px;
+    border-radius: 20px;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+
+.comics-character-list{
+    max-height: 260px;
+    width: 100%;
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    overflow-x: scroll;
+    display: flex;
+    list-style: none;
+    padding: 20px 0;
+    flex: 0 0 600px;
+    margin: 0 auto;
+    background-color: rgba(78, 3, 3, 0.596);
+    backdrop-filter: blur(1px);
+}
+
+.comics-character-list-div {
+    max-width: 120px ;
+    margin: 0px 15px;
+}
+
+.img-comic-character{
+    max-width: 120px;
+}
+
+.comic-title-character-list{
+    /* border-bottom-right-radius: 15px;
+    backdrop-filter: blur(2px); */
+}
+
+
+.comics-character-list::-webkit-scrollbar {
+    height: 6px;
+  width: 6px;
+  background: rgba(49, 49, 49, 0.839);
+  -webkit-border-radius: 1ex;
+}
+
+.comics-character-list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3) ; 
+    -webkit-border-radius: 10px ;
+    border-radius: 10px ;
+}
+
+/* Handle */
+.comics-character-list::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--text-dark-color);
+  -webkit-border-radius: 1ex;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.comics-character-list::-webkit-scrollbar-corner {
+    background: #fff3;
+  }
+
+@media only screen and (max-width: 576px) {
+    .col-character{
+        bottom: 100px;
+        height: 500px;
+    }
+
+    .row-characters-list{
+        
+        margin-top: 65px !important;
+        
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .row-characters-list{
+        margin-top: 80px !important;
+        
+    }
+}
+
