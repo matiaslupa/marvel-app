@@ -1,0 +1,18 @@
+.img-comic-list-div{
+    max-height: 100%;
+    max-width: 300px;
+    
+}
+
+.col-comic-list{
+    background-color: rgba(138, 42, 202, 0.695); 
+}
+
+.characters-comic-list{
+    background-color: rgba(138, 42, 202, 0.300); 
+}
+
+.name-comics-list{
+    background-color: rgba(138, 42, 202, 0.900); 
+}
+

@@ -121,7 +121,7 @@
 
 
 .col-character-list{
-    background-color: rgba(136, 0, 0, 0.696);
+    background-color: hsla(212, 94%, 51%, 0.696); 
     max-width: 70vw;
     position: fixed;
     top: 130px;
@@ -167,6 +167,7 @@
     font-family: 'Roboto';
     text-align: center;
     filter: drop-shadow(2px 6px 1px rgb(47, 46, 46));
+    margin-bottom: 5px;
 
 }
 
@@ -188,7 +189,7 @@
 
 
 .comics-character-list{
-    height: 280px;
+    max-height: 280px;
     width: 100%;
     overflow-y: hidden;
     overflow-x: scroll;
@@ -196,8 +197,11 @@
     list-style: none;
     padding: 20px 0;
     margin: 0 auto;
-    background-color: rgba(78, 3, 3, 0.596);
-    backdrop-filter: blur(3px);
+    background-color: hsla(212, 94%, 51%, 0.300); 
+    backdrop-filter: blur(1px);
+    text-align: center;
+    font-size: 14px;
+    filter: drop-shadow(2px 6px 1px rgb(47, 46, 46));
 }
 
 .comics-character-list-div {
@@ -272,7 +276,7 @@ background: rgba(49, 49, 49, 0.839);
         
         
         max-width: 380px;
-        max-height: 600px;
+        max-height: 620px;
     }
 
     .col-character-list::-webkit-scrollbar{

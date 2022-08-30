@@ -75,6 +75,20 @@ function NavBar() {
     backgroundColorNavbar = { backgroundColor: 'hsla(212, 94%, 51%, 0.900)' };
   }
 
+  //comics
+
+  if (
+    (!isActive && location.pathname.includes('/comics')  ) ||
+    (isActive && location.pathname.includes('/comics') )
+  ) {
+    backgroundColorNavbar = { backgroundColor: 'rgba(138, 42, 202, 0.895)' };
+  }
+
+
+
+
+
+
   const navbar = {
     navbarShow: backgroundColorNavbar,
   };
