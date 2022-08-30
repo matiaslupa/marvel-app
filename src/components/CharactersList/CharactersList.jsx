@@ -188,12 +188,15 @@ function CharactersList() {
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.1 }}
             >
+              
+                
               <motion.button
                 className="btn btn-outline-warning btn-close-character"
                 onClick={() => setSelectedCharacter(null)}
-              >
+                >
                 X
               </motion.button>
+                
 
               <div className="row m-0 justify-content-around row-name-description-character-list">
                 <div className="col-7 col-name-description-character-list">
