@@ -6,6 +6,7 @@ import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
+  selectHasError,
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -34,6 +35,7 @@ function CharactersList() {
 
   const characters = useSelector(selectCharacters);
   const isLoading = useSelector(selectIsLoading);
+  const hasError = useSelector(selectHasError);
 
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
@@ -156,17 +158,13 @@ function CharactersList() {
               >
                 <motion.div
                   className="card-character-list"
-
                   onClick={() => dispatch(loadComics(character.id.toString()))}
                 >
                   <motion.img
-                  
-      
                     className="img-characters-list"
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
                   />
-                  
 
                   <div className="name-characters-list">
                     <h3 className="">{`${character.name.slice(0, 17)}${
@@ -182,7 +180,7 @@ function CharactersList() {
         <AnimatePresence>
           {selectedCharacter && (
             <motion.div
-              className="col-12 col-character-list"
+              className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
               initial={{ opacity: 0, scale: 0 }}
@@ -197,40 +195,44 @@ function CharactersList() {
                 X
               </motion.button>
 
-              <div className='img-character-list-div'>
+              <div className="row m-0 justify-content-around row-name-description-character-list">
+                <div className="col-7 col-name-description-character-list">
+                  <h2 className="character-name">
+                    {selectedCharacter.name.toUpperCase()}
+                  </h2>
+                  <div className="character-description">
+                    <span>
+                      {selectedCharacter.description
+                        ? selectedCharacter.description
+                        : 'Description not available'}
+                    </span>
+                  </div>
+                </div>
 
-              <motion.img
-                
-                className="img-character"
-                src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
-                alt={selectedCharacter.name}
-              />
-
+                <div className="col-5 img-character-list-div">
+                  <motion.img
+                    className="img-character"
+                    src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
+                    alt={selectedCharacter.name}
+                  />
+                </div>
               </div>
-
-
-              <h2 className="character-name">{selectedCharacter.name.toUpperCase()}</h2>
-              <div className="character-description">
-                <span>
-                  {selectedCharacter.description
-                    ? selectedCharacter.description
-                    : 'Description not available'}
-                </span>
-              </div>
-
               <div className="comics-character-list">
-                {!isLoadingComics &&
+                {!isLoadingComics ? (
                   comics.map((comic) => {
                     return (
-                      <motion.div key={comic.id} className="comics-character-list-div">
+                      <motion.div
+                        key={comic.id}
+                        className="comics-character-list-div"
+                      >
                         <motion.img
-        
-                          whileHover={{
+                          initial={{ opacity: 0 }}
+                          animate={{
                             opacity: 1,
-                            scale: 1.08,
+                            transition: { duration: 1.5 },
                           }}
                           className="img-comic-character"
-                          src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                          src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                           alt={comic.title}
                         />
                         <div className="comic-title-character-list">
@@ -238,7 +240,14 @@ function CharactersList() {
                         </div>
                       </motion.div>
                     );
-                  })}
+                  })
+                ) : (
+                  <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           )}

@@ -50,6 +50,8 @@
     
 }
 
+
+
 .spinner-characters-list{
     margin-top: 150px;
 }
@@ -115,33 +117,20 @@
 
 
 
+
+
+
 .col-character-list{
     background-color: rgba(136, 0, 0, 0.696);
-    height: 700px;
     max-width: 70vw;
     position: fixed;
-    bottom: 130px;
+    top: 130px;
     backdrop-filter: blur(5px);
     border-radius: 20px;
     margin-bottom: 0px;
+    padding: 0;
+    padding-bottom: 10px;
     
-}
-
-.character-name{
-    position: absolute;
-    left: 400px;
-    top: 50px;
-}
-
-.character-description{
-    max-width: 100%;
-    position: absolute;
-    left: 400px;
-    top: 100px;
-    color: antiquewhite;
-    font-size: 18px;
-    font-family: 'Roboto';
-    margin-right: 20px;
 }
 
 .btn-close-character{
@@ -158,30 +147,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
+
+.character-name{
+    margin-top: 15px;
+    font-size: 25px;
+}
+
+.character-description{
+    max-width: 100%;
+    color: antiquewhite;
+    font-size: 18px;
+    font-family: 'Roboto';
+}
+
+
 .img-character-list-div{
     max-width: 370px;
     border-radius: 10px;
-    position: absolute;
-    top: 7px;
-    left: 7px;
-    overflow: hidden;
     max-height: 370px;
+    overflow: hidden;
+    padding: 20px;
 }
 
 .img-character{
     max-width: 100%;
     border-radius: 10px;
+    filter: drop-shadow(8px 10px 10px rgba(33, 33, 33, 0.974));
 }
 
 
 
 .comics-character-list{
-    max-height: 400px;
+    height: 280px;
     width: 100%;
-    position: absolute;
-    bottom: 17px;
-    left: 0;
+    overflow-y: hidden;
     overflow-x: scroll;
     display: flex;
     list-style: none;
@@ -234,21 +235,18 @@
 
 @media only screen and (max-width: 576px) {
     .col-character-list{
-        bottom: 0px;
-        height: 100vh;
-        max-width: 400px;
         
+        top: 60px;
+        max-width: 380px;
     }
 
     .row-characters-list{
-        
         margin-top: 65px !important;
-        
     }
 
     .img-character-list-div{
         
-        height: 200px; 
+       
     }
 
     .btn-close-character{
@@ -262,54 +260,38 @@
     }
 }
 
-@media only screen and (max-width: 673px) {
-    .img-character-list-div{
-        
-        max-height: 250px; 
-    }
-}
+
 
 
 
 @media only screen and (max-width: 830px) {
-    .comics-character-list{
-
-        max-height: 200px;
-        
-
+    .row-name-description-character-list{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
     }
 
+    .col-name-description-character-list{
+        width: 100%;
+        text-align: center;
+    }
+    
+
     .img-character-list-div{
-        top: 53px;
-        left: inherit;
-        max-width: 100%;
-        margin-right: 12px;
-        /* max-width: 150px; */
-        /* max-height: 150px; */
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .character-name{
-        font-size: 20px;
-        left: 21px;
-        
-        top:22px;
+        /* font-size: 20px; */
+        margin-top: 0;
     }
 
-    .character-description{
-        font-size: 16px;
-        left: 20px;
-        bottom: 222px;
-        top:inherit;
-        
-    }
+    
 
 }
 
 
-@media only screen and (max-width: 1200px) {
-    .row-characters-list{
-        margin-top: 80px !important;
-        
-    }
-}
 
