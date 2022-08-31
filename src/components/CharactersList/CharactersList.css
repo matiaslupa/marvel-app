@@ -212,6 +212,10 @@
     filter: drop-shadow(8px 6px 12px rgba(33, 33, 33, 0.934));
 }
 
+.comics-character-list-div:hover{
+    cursor: pointer;
+}
+
 .img-comic-character{
     max-width: 120px;
 }

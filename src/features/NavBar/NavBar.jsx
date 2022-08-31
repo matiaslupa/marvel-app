@@ -49,17 +49,22 @@ function NavBar() {
   let prevScrollpos = window.pageYOffset;
   window.onscroll = function () {
     let currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-      document.getElementById('navbar').style.top = '0';
-      setIsScroll('up');
-    } else {
-      if (isActive) {
+
+    
+      
+
+      if (prevScrollpos > currentScrollPos) {
         document.getElementById('navbar').style.top = '0px';
-      } else {
-        setIsScroll('down');
-        document.getElementById('navbar').style.top = '-79px';
+        setIsScroll('up');
+      }else{
+        if (isActive) {
+          document.getElementById('navbar').style.top = '0px';
+        } else {
+          setIsScroll('down');
+          document.getElementById('navbar').style.top = '-79px';
+        }
       }
-    }
+    
     prevScrollpos = currentScrollPos;
   };
 
@@ -71,8 +76,8 @@ function NavBar() {
 
   // Main navbar
   if (
-    (isActive && location.pathname === '/') ||
-    (!isActive && location.pathname === '/')
+    (isActive && location.pathname === '/events') ||
+    (!isActive && location.pathname === '/events')
   ) {
     backgroundColorNavbar = { backgroundColor: 'rgba(136, 0, 0, 0.696)' };
   }

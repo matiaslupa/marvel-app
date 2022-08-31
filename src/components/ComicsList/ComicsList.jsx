@@ -20,7 +20,7 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -39,12 +39,20 @@ const ComicsList = () => {
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
 
+  let navigate = useNavigate();
+
   let { letter = 'amazing spider-man' } = useParams();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadComics(letter));
+
+    /* if(selectedComic){
+      dispatch(toggleNavBarTrue())
+    }else{
+      dispatch(toggleNavBarFalse())
+    } */
   }, [letter]);
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
@@ -54,11 +62,7 @@ const ComicsList = () => {
     setAbc(event.target.value);
   };
 
-  if(selectedComic){
-    dispatch(toggleNavBarTrue())
-  }else{
-    dispatch(toggleNavBarFalse())
-  }
+  
 
   return (
     <div className="container container-charcaters-list">
@@ -156,7 +160,7 @@ const ComicsList = () => {
               <motion.div
                 layoutId={comic.id}
                 animate={selectedComic && { opacity: 0.6 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.1 }}
                 onClick={() => setSelectedComic(comic)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={comic.id}
@@ -166,7 +170,10 @@ const ComicsList = () => {
                   onClick={() => dispatch(loadCharacters(comic.id.toString()))}
                 >
                   <motion.img
-                  
+                    whileHover={{
+                      scale: 1.05,
+                      transition: { duration: 0.8 },
+                    }} 
                     className="img-characters-list"
                     src={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
                     alt={comic.title}
@@ -190,7 +197,7 @@ const ComicsList = () => {
               layoutId={selectedComic.id}
               key={selectedComic.id}
               
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.1 }}
             >
               <motion.button
                 className="btn btn-outline-warning btn-close-character"
@@ -199,9 +206,10 @@ const ComicsList = () => {
                 X
               </motion.button>
 
-              <div className="row m-0 justify-content-center row-name-description-character-list">
+              <div className="row m-0 justify-content-around row-name-description-character-list">
                 <div className="col-5 img-character-list-div img-comic-list-div">
                   <motion.img
+
                     className="img-character"
                     src={`${selectedComic.thumbnail.path}/detail.${selectedComic.thumbnail.extension}`}
                     alt={selectedComic.name}
@@ -227,6 +235,7 @@ const ComicsList = () => {
                       <motion.div
                         key={character.id}
                         className="comics-character-list-div"
+                        onClick={() => navigate(`/characters/${character.id}`)}
                       >
                         <motion.img
                           initial={{ opacity: 0 }}

@@ -18,13 +18,13 @@ import {
 import {
   toggleNavBarTrue,
   toggleNavBarFalse,
-  
+  selectNavBar
 }
 from '../../features/NavBar/NavBarSlice'
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate, useNavigate  } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -35,6 +35,7 @@ import Select from '@mui/material/Select';
 
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+
 
 function CharactersList() {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -56,14 +57,16 @@ function CharactersList() {
 
   useEffect(() => {
     dispatch(loadCharacters(letter));
+
+    /* if(selectedCharacter){
+      dispatch(toggleNavBarTrue())
+    }else{
+      dispatch(toggleNavBarFalse())
+    } */
     
   }, [letter]);
 
-  if(selectedCharacter){
-    dispatch(toggleNavBarTrue())
-  }else{
-    dispatch(toggleNavBarFalse())
-  }
+  
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
@@ -71,6 +74,8 @@ function CharactersList() {
   const handleChange = (event) => {
     setAbc(event.target.value);
   };
+
+  let navigate = useNavigate();
 
   return (
     <div className="container container-charcaters-list">
@@ -169,7 +174,7 @@ function CharactersList() {
               <motion.div
                 layoutId={character.id}
                 animate={selectedCharacter && { opacity: 0.6 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.1 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
@@ -180,10 +185,10 @@ function CharactersList() {
                 >
                   <motion.img
                     className="img-characters-list"
-                    whileHover={{
+                     whileHover={{
                       scale: 1.05,
                       transition: { duration: 0.8 },
-                    }}
+                    }} 
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
                   />
@@ -208,7 +213,7 @@ function CharactersList() {
               
               
               
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.1 }}
             >
               
                 
@@ -246,16 +251,19 @@ function CharactersList() {
                 {!isLoadingComics ? (
                   comics.map((comic) => {
                     return (
+                      
+                        
                       <motion.div
                         key={comic.id}
                         className="comics-character-list-div"
+                        onClick={() => navigate(`/comics/${comic.id}`)}
                       >
                         <motion.img
-                          initial={{ opacity: 0 }}
+                           initial={{ opacity: 0 }}
                           animate={{
                             opacity: 1,
                             transition: { duration: 1.5 },
-                          }}
+                          }} 
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                           alt={comic.title}
@@ -264,6 +272,7 @@ function CharactersList() {
                           <span>{comic.title}</span>
                         </div>
                       </motion.div>
+                      
                     );
                   })
                 ) : (

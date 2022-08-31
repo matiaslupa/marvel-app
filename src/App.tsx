@@ -13,6 +13,8 @@ import CharactersList from './components/CharactersList/CharactersList';
 
 import ComicsList from './components/ComicsList/ComicsList';
 
+import EventsList from './components/EventsList/EventsList';
+
 function App() {
   return (
     <div className="App">
@@ -26,6 +28,10 @@ function App() {
 
         <Route path="comics" element={<ComicsList />} >
         <Route path=":letter" element={<ComicsList />} />
+        </Route>
+
+        <Route path="events" element={<EventsList />} >
+        <Route path=":letter" element={<EventsList />} />
         </Route>
 
 
