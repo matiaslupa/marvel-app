@@ -16,3 +16,9 @@
     background-color: rgba(138, 42, 202, 0.900); 
 }
 
+
+.abc-comics a{
+    color: rgba(138, 42, 202, 1);
+    /* background-color: var(--dark-color); */
+    
+}

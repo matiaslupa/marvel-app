@@ -45,9 +45,8 @@
 }
 
 .abc a{
-    background-color: var(--dark-color);
-    color: rgb(92, 168, 255);
-    
+    color: rgb(41, 140, 253);
+    filter: drop-shadow(1px 2px 2px rgb(0, 0, 0));
 }
 
 
@@ -83,11 +82,13 @@
 }
 
 .img-characters-list{
-    opacity: 0.97;
+    opacity: 0.9;
     width: 100%;
     position: relative;
     border-bottom-right-radius: 20px;
 }
+
+
 
 .name-characters-list{
     position: absolute;
@@ -158,6 +159,7 @@
     font-size: 25px;
     filter: drop-shadow(2px 6px 1px rgb(43, 43, 43));
     text-align: center;
+    font-weight: 700;
 }
 
 .character-description{
@@ -276,7 +278,7 @@ background: rgba(49, 49, 49, 0.839);
         
         
         max-width: 380px;
-        max-height: 700px;
+        max-height: 87vh;
     }
 
     .col-character-list::-webkit-scrollbar{
@@ -309,7 +311,7 @@ background: rgba(49, 49, 49, 0.839);
 
     .character-name{
         
-        font-size: 20px;
+        font-size: 25px;
     }
 }
 
@@ -331,7 +333,7 @@ background: rgba(49, 49, 49, 0.839);
     
 
     .img-character-list-div{
-        
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -339,7 +341,8 @@ background: rgba(49, 49, 49, 0.839);
 
     .character-name{
         /* font-size: 20px; */
-        margin-top: 0;
+        margin-top: 45px;
+       
     }
 
     .col-character-list{

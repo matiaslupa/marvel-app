@@ -5,6 +5,9 @@ import { MenuToggle } from '../../components/MenuToggle/MenuToggle';
 
 import { Link, useLocation } from 'react-router-dom';
 
+import { selectNavBar} from './NavBarSlice'
+import { useSelector } from 'react-redux';
+
 import './NavBar.css';
 
 function NavBar() {
@@ -13,6 +16,9 @@ function NavBar() {
   const [isScroll, setIsScroll] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const navBar = useSelector(selectNavBar);
+
 
   const { scrollYProgress } = useScroll();
 
@@ -58,6 +64,10 @@ function NavBar() {
   };
 
   let backgroundColorNavbar = {};
+
+  if (navBar) {
+    document.getElementById('navbar').style.top = '-79px';
+  }
 
   // Main navbar
   if (

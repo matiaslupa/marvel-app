@@ -37,7 +37,7 @@ export const charactersSlice = createSlice({
       .addCase(loadCharacters.fulfilled, (state, action) => {
         state.isLoading = false;
         state.charactersArray = action.payload;
-        console.log(state.charactersArray)
+        
       })
       .addCase(loadCharacters.rejected, (state) => {
         state.isLoading = false;

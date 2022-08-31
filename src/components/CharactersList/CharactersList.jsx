@@ -15,6 +15,13 @@ import {
   loadComics,
 } from '../../features/Comics/ComicsSlice';
 
+import {
+  toggleNavBarTrue,
+  toggleNavBarFalse,
+  
+}
+from '../../features/NavBar/NavBarSlice'
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import { useParams, Link, Navigate } from 'react-router-dom';
@@ -31,6 +38,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 function CharactersList() {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+
   const [abc, setAbc] = useState('');
 
   const characters = useSelector(selectCharacters);
@@ -39,6 +47,8 @@ function CharactersList() {
 
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
+  
+  
 
   let { letter = 'a' } = useParams();
 
@@ -46,7 +56,14 @@ function CharactersList() {
 
   useEffect(() => {
     dispatch(loadCharacters(letter));
+    
   }, [letter]);
+
+  if(selectedCharacter){
+    dispatch(toggleNavBarTrue())
+  }else{
+    dispatch(toggleNavBarFalse())
+  }
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
@@ -114,7 +131,7 @@ function CharactersList() {
               {alphabet.map((letter) => {
                 return (
                   <li className="page-item" key={letter}>
-                    <Link className="page-link" to={letter.toLowerCase()}>
+                    <Link className="page-link" to={letter.toLowerCase()} >
                       {letter}
                     </Link>
                   </li>
@@ -130,6 +147,7 @@ function CharactersList() {
                       : 'z'
                   }
                   aria-label="Next"
+
                 >
                   <span aria-hidden="true">»</span>
                   <span className="sr-only">Next</span>
@@ -151,7 +169,7 @@ function CharactersList() {
               <motion.div
                 layoutId={character.id}
                 animate={selectedCharacter && { opacity: 0.6 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0.6 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
@@ -162,6 +180,10 @@ function CharactersList() {
                 >
                   <motion.img
                     className="img-characters-list"
+                    whileHover={{
+                      scale: 1.05,
+                      transition: { duration: 0.8 },
+                    }}
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
                   />
@@ -183,10 +205,10 @@ function CharactersList() {
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.1 }}
+              
+              
+              
+              transition={{ duration: 0.6 }}
             >
               
                 
@@ -199,6 +221,13 @@ function CharactersList() {
                 
 
               <div className="row m-0 justify-content-around row-name-description-character-list">
+                <div className="col-5 img-character-list-div">
+                  <motion.img
+                    className="img-character"
+                    src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
+                    alt={selectedCharacter.name}
+                  />
+                </div>
                 <div className="col-7 col-name-description-character-list">
                   <h2 className="character-name">
                     {selectedCharacter.name.toUpperCase()}
@@ -212,13 +241,6 @@ function CharactersList() {
                   </div>
                 </div>
 
-                <div className="col-5 img-character-list-div">
-                  <motion.img
-                    className="img-character"
-                    src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
-                    alt={selectedCharacter.name}
-                  />
-                </div>
               </div>
               <div className="comics-character-list">
                 {!isLoadingComics ? (

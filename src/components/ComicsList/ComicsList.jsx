@@ -1,32 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import './ComicsList.css'
+import React, { useEffect, useState } from 'react';
+import './ComicsList.css';
 
 import {
-    loadCharacters,
-    selectCharacters,
-    selectIsLoading,
-    
-  } from '../../features/Characters/CharactersSlice';
-  
-  import {
-    selectComics,
-    selectIsLoadingComics,
-    loadComics,
-  } from '../../features/Comics/ComicsSlice';
-  
-  import { useSelector, useDispatch } from 'react-redux';
-  
-  import { useParams, Link, Navigate } from 'react-router-dom';
-  
-  import { motion, AnimatePresence } from 'framer-motion';
-  
-  import InputLabel from '@mui/material/InputLabel';
-  import MenuItem from '@mui/material/MenuItem';
-  import FormControl from '@mui/material/FormControl';
-  import Select from '@mui/material/Select';
+  loadCharacters,
+  selectCharacters,
+  selectIsLoading,
+} from '../../features/Characters/CharactersSlice';
+
+import {
+  selectComics,
+  selectIsLoadingComics,
+  loadComics,
+} from '../../features/Comics/ComicsSlice';
+
+import {
+  toggleNavBarTrue,
+  toggleNavBarFalse,
+} from '../../features/NavBar/NavBarSlice';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useParams, Link, Navigate } from 'react-router-dom';
+
+import { motion, AnimatePresence } from 'framer-motion';
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const ComicsList = () => {
-    const [selectedComic, setSelectedComic] = useState(null);
+  const [selectedComic, setSelectedComic] = useState(null);
   const [abc, setAbc] = useState('');
 
   const characters = useSelector(selectCharacters);
@@ -34,8 +38,6 @@ const ComicsList = () => {
 
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
-
-  
 
   let { letter = 'amazing spider-man' } = useParams();
 
@@ -51,6 +53,13 @@ const ComicsList = () => {
   const handleChange = (event) => {
     setAbc(event.target.value);
   };
+
+  if(selectedComic){
+    dispatch(toggleNavBarTrue())
+  }else{
+    dispatch(toggleNavBarFalse())
+  }
+
   return (
     <div className="container container-charcaters-list">
       <motion.div className="row justify-content-center row-characters-list">
@@ -92,7 +101,7 @@ const ComicsList = () => {
           animate={selectedComic && { opacity: 0.6 }}
         >
           <nav aria-label="Page navigation example">
-            <ul className="pagination abc">
+            <ul className="pagination abc abc-comics">
               <li className="page-item">
                 <Link
                   className="page-link"
@@ -147,7 +156,7 @@ const ComicsList = () => {
               <motion.div
                 layoutId={comic.id}
                 animate={selectedComic && { opacity: 0.6 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0.6 }}
                 onClick={() => setSelectedComic(comic)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={comic.id}
@@ -157,6 +166,7 @@ const ComicsList = () => {
                   onClick={() => dispatch(loadCharacters(comic.id.toString()))}
                 >
                   <motion.img
+                  
                     className="img-characters-list"
                     src={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
                     alt={comic.title}
@@ -179,22 +189,24 @@ const ComicsList = () => {
               className="container col-character-list col-comic-list"
               layoutId={selectedComic.id}
               key={selectedComic.id}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.1 }}
-            >
               
-                
+              transition={{ duration: 0.6 }}
+            >
               <motion.button
                 className="btn btn-outline-warning btn-close-character"
                 onClick={() => setSelectedComic(null)}
-                >
+              >
                 X
               </motion.button>
-                
 
               <div className="row m-0 justify-content-center row-name-description-character-list">
+                <div className="col-5 img-character-list-div img-comic-list-div">
+                  <motion.img
+                    className="img-character"
+                    src={`${selectedComic.thumbnail.path}/detail.${selectedComic.thumbnail.extension}`}
+                    alt={selectedComic.name}
+                  />
+                </div>
                 <div className="col-7 col-name-description-character-list">
                   <h2 className="character-name">
                     {selectedComic.title.toUpperCase()}
@@ -206,14 +218,6 @@ const ComicsList = () => {
                         : 'Description not available'}
                     </span>
                   </div>
-                </div>
-
-                <div className="col-5 img-character-list-div img-comic-list-div">
-                  <motion.img
-                    className="img-character"
-                    src={`${selectedComic.thumbnail.path}/detail.${selectedComic.thumbnail.extension}`}
-                    alt={selectedComic.name}
-                  />
                 </div>
               </div>
               <div className="comics-character-list characters-comic-list">
@@ -254,8 +258,6 @@ const ComicsList = () => {
       </motion.div>
     </div>
   );
-    
-  
-}
+};
 
-export default ComicsList
+export default ComicsList;

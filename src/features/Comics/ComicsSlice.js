@@ -37,7 +37,7 @@ export const comicsSlice = createSlice({
       .addCase(loadComics.fulfilled, (state, action) => {
         state.isLoading = false;
         state.comicsArray = action.payload; 
-        console.log(state.comicsArray)
+        
         
            
       })
