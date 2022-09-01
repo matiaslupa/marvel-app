@@ -8,16 +8,16 @@ export const loadCharacters = createAsyncThunk(
     let url = ''
 
     if (regex.test(letter) && letter.length === 5) {
-      url = `https://gateway.marvel.com:443/v1/public/characters?comics=${letter}&orderBy=name&limit=25&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/characters?comics=${letter}&orderBy=name&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }else if(regex.test(letter) && letter.length > 5){
       url = `https://gateway.marvel.com:443/v1/public/characters/${letter}?ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }else if(regex.test(letter) && letter.length === 3){
-      url = `https://gateway.marvel.com:443/v1/public/events/${letter}/characters?orderBy=name&limit=100&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/events/${letter}/characters?orderBy=name&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
     
     
     else{
-      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=name&limit=25&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=name&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     

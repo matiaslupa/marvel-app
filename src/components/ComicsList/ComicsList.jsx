@@ -48,12 +48,18 @@ const ComicsList = () => {
   useEffect(() => {
     dispatch(loadComics(letter));
 
-    /* if(selectedComic){
+    
+  }, [letter]);
+
+  useEffect(() => {
+  
+    if(selectedComic){
       dispatch(toggleNavBarTrue())
     }else{
       dispatch(toggleNavBarFalse())
-    } */
-  }, [letter]);
+    } 
+    
+  }, [selectedComic]);
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
@@ -180,8 +186,8 @@ const ComicsList = () => {
                   />
 
                   <div className="name-characters-list name-comics-list">
-                    <h3 className="">{`${comic.title.slice(0, 17)}${
-                      comic.title.length > 17 ? '...' : ''
+                    <h3 className="">{`${comic.title.slice(0, 20)}${
+                      comic.title.length > 20 ? '...' : ''
                     }`}</h3>
                   </div>
                 </motion.div>

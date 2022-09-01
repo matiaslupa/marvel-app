@@ -53,23 +53,27 @@ const EventsList = () => {
   
   let navigate = useNavigate();
   
-  let { letter = 'amazing spider-man' } = useParams();
   
+
   
-  const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-  const alphabet = alpha.map((x) => String.fromCharCode(x));
-  
-  const handleChange = (event) => {
-      setAbc(event.target.value);
-    };
     
     useEffect(() => {
       dispatch(loadEvents());
     }, []);
 
+    useEffect(() => {
+  
+      if(selectedEvent){
+        dispatch(toggleNavBarTrue())
+      }else{
+        dispatch(toggleNavBarFalse())
+      } 
+      
+    }, [selectedEvent]);
+
   return (
     <div className="container container-charcaters-list">
-      <motion.div className="row justify-content-center row-characters-list">
+      <motion.div className="row justify-content-center row-characters-list row-events-list">
         
         
 
@@ -105,8 +109,8 @@ const EventsList = () => {
                   />
 
                   <div className="name-characters-list name-events-list">
-                    <h3 className="">{`${event.title.slice(0, 17)}${
-                      event.title.length > 17 ? '...' : ''
+                    <h3 className="">{`${event.title.slice(0, 20)}${
+                      event.title.length > 20 ? '...' : ''
                     }`}</h3>
                   </div>
                 </motion.div>

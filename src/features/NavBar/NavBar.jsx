@@ -5,7 +5,7 @@ import { MenuToggle } from '../../components/MenuToggle/MenuToggle';
 
 import { Link, useLocation } from 'react-router-dom';
 
-import { selectNavBar} from './NavBarSlice'
+import { selectNavBar } from './NavBarSlice';
 import { useSelector } from 'react-redux';
 
 import './NavBar.css';
@@ -19,7 +19,6 @@ function NavBar() {
 
   const navBar = useSelector(selectNavBar);
 
-
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
@@ -32,10 +31,10 @@ function NavBar() {
     hidden: {
       width: 130,
     },
-    
+
     show: {
       width: 37,
-      transition: { type: 'spring', stiffness: 150, duration: 5},
+      transition: { type: 'spring', stiffness: 150, duration: 5 },
     },
 
     hover: {
@@ -46,33 +45,37 @@ function NavBar() {
 
   const location = useLocation();
 
-  let prevScrollpos = window.pageYOffset;
+  let topNavbar = {};
+
+  /* let prevScrollpos = window.pageYOffset;
   window.onscroll = function () {
     let currentScrollPos = window.pageYOffset;
 
-    
-      
-
-      if (prevScrollpos > currentScrollPos) {
-        document.getElementById('navbar').style.top = '0px';
-        setIsScroll('up');
-      }else{
-        if (isActive) {
-          document.getElementById('navbar').style.top = '0px';
-        } else {
-          setIsScroll('down');
-          document.getElementById('navbar').style.top = '-79px';
-        }
+    if (prevScrollpos > currentScrollPos) {
+      setIsScroll('up');
+      topNavbar = {
+        top: '100px',
+        transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
+      };
+    } else {
+      if (isActive) {
+        topNavbar = {
+          top: '0px',
+          transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
+        };
+      } else {
+        setIsScroll('down');
+        topNavbar = {
+          top: '-79px',
+          transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
+        };
       }
-    
+    }
+
     prevScrollpos = currentScrollPos;
-  };
+  }; */
 
   let backgroundColorNavbar = {};
-
-  if (navBar) {
-    document.getElementById('navbar').style.top = '-79px';
-  }
 
   // Main navbar
   if (
@@ -84,8 +87,8 @@ function NavBar() {
 
   // Characters navbar
   if (
-    (!isActive && location.pathname.includes('/characters')  ) ||
-    (isActive && location.pathname.includes('/characters') )
+    (!isActive && location.pathname.includes('/characters')) ||
+    (isActive && location.pathname.includes('/characters'))
   ) {
     backgroundColorNavbar = { backgroundColor: 'hsla(212, 94%, 51%, 0.900)' };
   }
@@ -93,25 +96,34 @@ function NavBar() {
   //comics
 
   if (
-    (!isActive && location.pathname.includes('/comics')  ) ||
-    (isActive && location.pathname.includes('/comics') )
+    (!isActive && location.pathname.includes('/comics')) ||
+    (isActive && location.pathname.includes('/comics'))
   ) {
     backgroundColorNavbar = { backgroundColor: 'rgba(138, 42, 202, 0.895)' };
   }
 
-
-
-
-
+  if (navBar) {
+    topNavbar = {
+      top: '-79px',
+      transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
+    };
+  }else{
+    topNavbar = {
+      top: '0px',
+      transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
+    };
+  }
 
   const navbar = {
     navbarShow: backgroundColorNavbar,
+
+    navBarShow2: topNavbar,
   };
 
   return (
     <motion.nav
       variants={navbar}
-      animate={'navbarShow'}
+      animate={['navbarShow', 'navBarShow2']}
       transition={{
         duration: 2,
         type: 'Tween',
@@ -140,8 +152,8 @@ function NavBar() {
           >
             <rect fill="#EB0501" width="100%" height="100%"></rect>
             <motion.path
-            initial={{opacity: 1}}
-              animate={ isHover ? { opacity: 1 } : { opacity: 0 } } 
+              initial={{ opacity: 1 }}
+              animate={isHover ? { opacity: 1 } : { opacity: 0 }}
               className="arvelSVG"
               fill="#FEFEFE"
               d="M126.222 40.059v7.906H111.58V4h7.885v36.059h6.757zm-62.564-14.5c-.61.294-1.248.44-1.87.442v-14.14h.04c.622-.005 5.264.184 5.264 6.993 0 3.559-1.58 5.804-3.434 6.705zM40.55 34.24l2.183-18.799 2.265 18.799H40.55zm69.655-22.215V4.007H87.879l-3.675 26.779-3.63-26.78h-8.052l.901 7.15c-.928-1.832-4.224-7.15-11.48-7.15-.047-.002-8.06 0-8.06 0l-.031 39.032-5.868-39.031-10.545-.005-6.072 40.44.002-40.435H21.278L17.64 26.724 14.096 4.006H4v43.966h7.95V26.78l3.618 21.192h4.226l3.565-21.192v21.192h15.327l.928-6.762h6.17l.927 6.762 15.047.008h.01v-.008h.02V33.702l1.845-.27 3.817 14.55h7.784l-.002-.01h.022l-5.011-17.048c2.538-1.88 5.406-6.644 4.643-11.203v-.002C74.894 19.777 79.615 48 79.615 48l9.256-.027 6.327-39.85v39.85h15.007v-7.908h-7.124v-10.08h7.124v-8.03h-7.124v-9.931h7.124z"
@@ -166,9 +178,12 @@ function NavBar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <motion.li className="nav-item" onClick={() => {
-              window.scrollTo(0, 0);
-            }}>
+            <motion.li
+              className="nav-item"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
               <Link className="nav-link" to="characters">
                 CHARACTERS
               </Link>
@@ -178,7 +193,7 @@ function NavBar() {
                 COMICS
               </Link>
             </li>
-            
+
             <li className="nav-item">
               <Link className="nav-link" to="events">
                 EVENTS

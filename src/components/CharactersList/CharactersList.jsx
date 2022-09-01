@@ -40,6 +40,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 function CharactersList() {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
+
   const [abc, setAbc] = useState('');
 
   const characters = useSelector(selectCharacters);
@@ -49,7 +50,6 @@ function CharactersList() {
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
   
-  
 
   let { letter = 'a' } = useParams();
 
@@ -58,13 +58,19 @@ function CharactersList() {
   useEffect(() => {
     dispatch(loadCharacters(letter));
 
-    /* if(selectedCharacter){
+    
+  }, [letter]);
+
+  useEffect(() => {
+  
+    if(selectedCharacter){
       dispatch(toggleNavBarTrue())
     }else{
       dispatch(toggleNavBarFalse())
-    } */
+    } 
     
-  }, [letter]);
+  }, [selectedCharacter]);
+
 
   
 
@@ -194,8 +200,8 @@ function CharactersList() {
                   />
 
                   <div className="name-characters-list">
-                    <h3 className="">{`${character.name.slice(0, 17)}${
-                      character.name.length > 17 ? '...' : ''
+                    <h3 className="">{`${character.name.slice(0, 20)}${
+                      character.name.length > 20 ? '...' : ''
                     }`}</h3>
                   </div>
                 </motion.div>
