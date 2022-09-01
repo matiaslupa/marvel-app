@@ -52,21 +52,14 @@
     letter-spacing: 2.5px;
     font-size: 18px;
     font-weight: 700;
-    text-shadow: 2.6px 2.6px 2.6px rgb(130, 130, 130);
+    text-shadow: 2.6px 2.6px 2.6px rgb(36, 36, 36);
+    filter: drop-shadow(2px 3px 1px rgb(47, 46, 46));
     /* -webkit-text-stroke: 0.5px var(--main-color); */
 }
 
 
-.nav-link:hover {
-    text-shadow: 2.6px 2.6px 2.6px rgb(130, 130, 130);
 
-    
-}
 
-.navbar .nav-link:focus{
-    color: rgb(246, 192, 91) ;
-    text-shadow: 2.6px 2.6px 2.6px rgb(130, 130, 130);
-}
 
 
 @media only screen and (max-width: 576px) {

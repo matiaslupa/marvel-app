@@ -1,0 +1,23 @@
+.img-serie-list-div{
+    max-height: 60%;
+    
+    
+}
+
+.col-serie-list{
+    background-color: rgba(29, 164, 83, 0.695); 
+}
+
+.characters-serie-list{
+    background-color: rgba(29, 164, 83, 0.300); 
+}
+
+.name-series-list{
+    background-color: rgba(29, 164, 83, 0.9); 
+}
+
+.abc-series a{
+    color: rgba(29, 164, 83, 1);
+    /* background-color: var(--dark-color); */
+    
+}

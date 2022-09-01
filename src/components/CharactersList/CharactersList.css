@@ -131,6 +131,9 @@
     margin-bottom: 0px;
     padding: 0;
     padding-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 80vh;
     
     
 }
@@ -139,8 +142,8 @@
     width: 35px;
     height: 35px;
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: 2px;
+    right: 3px;
     text-align: center;
     background-color: black;
     font-family: 'Roboto';
@@ -150,12 +153,13 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    border-top-right-radius: 20px;
 }
 
 
 
 .character-name{
-    margin-top: 15px;
+    margin-top: 45px;
     font-size: 25px;
     filter: drop-shadow(2px 6px 1px rgb(43, 43, 43));
     text-align: center;
@@ -177,9 +181,11 @@
 .img-character-list-div{
     max-width: 370px;
     border-radius: 10px;
-    max-height: 370px;
+    max-height: 100%;
     overflow: hidden;
     padding: 20px;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .img-character{
@@ -194,7 +200,7 @@
     max-height: 280px;
     width: 100%;
     overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
     display: flex;
     list-style: none;
     padding: 20px 0;
@@ -280,9 +286,9 @@ background: rgba(49, 49, 49, 0.839);
 @media only screen and (max-width: 576px) {
     .col-character-list{
         
+        top: 60px !important;
         
-        max-width: 380px;
-        max-height: 87vh;
+        
     }
 
     .col-character-list::-webkit-scrollbar{
@@ -352,7 +358,9 @@ background: rgba(49, 49, 49, 0.839);
     .col-character-list{
         overflow-y: scroll;
         overflow-x: hidden;
-        top: 60px;
+        top: 90px;
+        max-width: 100%;
+        max-height: 87vh;
     }
 
     .btn-close-character{

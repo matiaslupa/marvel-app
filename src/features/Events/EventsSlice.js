@@ -36,7 +36,7 @@ export const eventsSlice = createSlice({
       .addCase(loadEvents.fulfilled, (state, action) => {
         state.isLoadingEvents = false;
         state.eventsArray = action.payload;
-        console.log(state.eventsArray)
+        
       })
       .addCase(loadEvents.rejected, (state) => {
         state.isLoadingEvents = false;

@@ -77,7 +77,7 @@ function NavBar() {
 
   let backgroundColorNavbar = {};
 
-  // Main navbar
+  // Events navbar
   if (
     (isActive && location.pathname === '/events') ||
     (!isActive && location.pathname === '/events')
@@ -100,6 +100,15 @@ function NavBar() {
     (isActive && location.pathname.includes('/comics'))
   ) {
     backgroundColorNavbar = { backgroundColor: 'rgba(138, 42, 202, 0.895)' };
+  }
+
+  //Series 
+
+  if (
+    (!isActive && location.pathname.includes('/series')) ||
+    (isActive && location.pathname.includes('/series'))
+  ) {
+    backgroundColorNavbar = { backgroundColor: 'rgba(29, 164, 83, 0.900)' };
   }
 
   if (navBar) {
@@ -204,11 +213,7 @@ function NavBar() {
                 SERIES
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="stories">
-                STORIES
-              </Link>
-            </li>
+    
           </ul>
           <form className="d-flex" role="search">
             <input

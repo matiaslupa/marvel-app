@@ -41,6 +41,8 @@ const ComicsList = () => {
 
   let navigate = useNavigate();
 
+  
+
   let { letter = 'amazing spider-man' } = useParams();
 
   const dispatch = useDispatch();
