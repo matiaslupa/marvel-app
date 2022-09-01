@@ -102,7 +102,7 @@ function NavBar() {
     backgroundColorNavbar = { backgroundColor: 'rgba(138, 42, 202, 0.895)' };
   }
 
-  //Series 
+  //Series
 
   if (
     (!isActive && location.pathname.includes('/series')) ||
@@ -116,7 +116,7 @@ function NavBar() {
       top: '-79px',
       transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
     };
-  }else{
+  } else {
     topNavbar = {
       top: '0px',
       transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
@@ -128,6 +128,8 @@ function NavBar() {
 
     navBarShow2: topNavbar,
   };
+
+  console.log(isActive)
 
   return (
     <motion.nav
@@ -147,6 +149,9 @@ function NavBar() {
           <motion.svg
             onClick={() => {
               window.scrollTo(0, 0);
+              isActive && toggleOpen();
+              setIsActive(false);
+              
             }}
             onMouseEnter={() => togglehover()}
             onMouseLeave={() => togglehover()}
@@ -158,6 +163,8 @@ function NavBar() {
             height="52"
             xmlns="http://www.w3.org/2000/svg"
             className="rounded"
+            data-bs-toggle={isActive && 'collapse'}
+            data-bs-target={isActive && '#navbarSupportedContent'}
           >
             <rect fill="#EB0501" width="100%" height="100%"></rect>
             <motion.path
@@ -187,33 +194,65 @@ function NavBar() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <motion.li
-              className="nav-item"
-              onClick={() => {
-                window.scrollTo(0, 0);
-              }}
-            >
-              <Link className="nav-link" to="characters">
+            <Link className="nav-link" to="characters">
+              <motion.li
+                className="nav-item"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  toggleOpen();
+                  setIsActive((current) => !current);
+                }}
+                data-bs-toggle={isActive && 'collapse'}
+                data-bs-target={isActive && '#navbarSupportedContent'}
+              >
                 CHARACTERS
-              </Link>
-            </motion.li>
-            <li className="nav-item">
-              <Link className="nav-link" to="comics">
-                COMICS
-              </Link>
-            </li>
+              </motion.li>
+            </Link>
 
-            <li className="nav-item">
-              <Link className="nav-link" to="events">
+            <Link className="nav-link" to="comics">
+              <li
+                className="nav-item"
+                data-bs-toggle={isActive && 'collapse'}
+                data-bs-target={isActive && '#navbarSupportedContent'}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  toggleOpen();
+                  setIsActive((current) => !current);
+                }}
+              >
+                COMICS
+              </li>
+            </Link>
+
+            <Link className="nav-link" to="events">
+              <li
+                className="nav-item"
+                data-bs-toggle={isActive && 'collapse'}
+                data-bs-target={isActive && '#navbarSupportedContent'}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  toggleOpen();
+                  setIsActive((current) => !current);
+                }}
+              >
                 EVENTS
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="series">
+              </li>
+            </Link>
+
+            <Link className="nav-link" to="series">
+              <li
+                className="nav-item"
+                data-bs-toggle={isActive && 'collapse'}
+                data-bs-target={isActive && '#navbarSupportedContent'}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  toggleOpen();
+                  setIsActive((current) => !current);
+                }}
+              >
                 SERIES
-              </Link>
-            </li>
-    
+              </li>
+            </Link>
           </ul>
           <form className="d-flex" role="search">
             <input
