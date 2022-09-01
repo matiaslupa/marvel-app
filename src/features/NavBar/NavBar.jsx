@@ -200,7 +200,7 @@ function NavBar() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   toggleOpen();
-                  setIsActive((current) => !current);
+                  setIsActive(false);
                 }}
                 data-bs-toggle={isActive && 'collapse'}
                 data-bs-target={isActive && '#navbarSupportedContent'}
@@ -217,7 +217,7 @@ function NavBar() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   toggleOpen();
-                  setIsActive((current) => !current);
+                  setIsActive(false);
                 }}
               >
                 COMICS
@@ -232,7 +232,7 @@ function NavBar() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   toggleOpen();
-                  setIsActive((current) => !current);
+                  setIsActive(false);
                 }}
               >
                 EVENTS
@@ -247,7 +247,7 @@ function NavBar() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   toggleOpen();
-                  setIsActive((current) => !current);
+                  setIsActive(false);
                 }}
               >
                 SERIES
