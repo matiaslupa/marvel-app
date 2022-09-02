@@ -30,7 +30,7 @@ function App() {
         <Route path=":letter" element={<CharactersList />} />
         </Route>
 
-        <Route path="comics" element={<ComicsList />} >
+        {/* <Route path="comics" element={<ComicsList />} >
         <Route path=":letter" element={<ComicsList />} />
         </Route>
 
@@ -41,7 +41,7 @@ function App() {
         <Route path="series" element={<SeriesList />} >
         <Route path=":letter" element={<SeriesList />} />
         </Route>
-
+ */}
         
       </Routes>
     </div>
