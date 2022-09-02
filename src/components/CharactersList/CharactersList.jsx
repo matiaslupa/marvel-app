@@ -182,7 +182,7 @@ function CharactersList() {
               <motion.div
                 layoutId={character.id}
                 animate={selectedCharacter && { opacity: 0.6 }}
-                transition={{ duration: 0.1 }}
+                // transition={{ duration: 0.1 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
@@ -195,7 +195,7 @@ function CharactersList() {
                     className="img-characters-list"
                      whileHover={{
                       scale: 1.05,
-                      transition: { duration: 0.8 },
+                      // transition: { duration: 0.8 },
                     }} 
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
@@ -221,7 +221,7 @@ function CharactersList() {
               
               
               
-              transition={{ duration: 0.1 }}
+              // transition={{ duration: 0.1 }}
             >
               
                 
@@ -270,7 +270,7 @@ function CharactersList() {
                            initial={{ opacity: 0 }}
                           animate={{
                             opacity: 1,
-                            transition: { duration: 1.5 },
+                            // transition: { duration: 1.5 },
                           }} 
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}

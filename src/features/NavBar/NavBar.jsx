@@ -129,7 +129,7 @@ function NavBar() {
     navBarShow2: topNavbar,
   };
 
-  console.log(isActive)
+  
 
   return (
     <motion.nav
