@@ -103,12 +103,12 @@ function NavBar() {
 
   if (navBar) {
     topNavbar = {
-      top: '-79px',
+      y: '-79px',
       // transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
     };
   } else {
     topNavbar = {
-      top: '0px',
+      y: '0px',
       // transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
     };
   }

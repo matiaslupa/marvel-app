@@ -18,13 +18,12 @@ import {
 import {
   toggleNavBarTrue,
   toggleNavBarFalse,
-  selectNavBar
-}
-from '../../features/NavBar/NavBarSlice'
+  selectNavBar,
+} from '../../features/NavBar/NavBarSlice';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams, Link, Navigate, useNavigate  } from 'react-router-dom';
+import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -33,10 +32,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-
 function CharactersList() {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
-
 
   const [abc, setAbc] = useState('');
 
@@ -46,32 +43,22 @@ function CharactersList() {
 
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
-  
 
   let { letter = 'a' } = useParams();
-
-  
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadCharacters(letter));
-
-    
   }, [letter]);
 
   useEffect(() => {
-  
-    if(selectedCharacter){
-      dispatch(toggleNavBarTrue())
-    }else{
-      dispatch(toggleNavBarFalse())
-    } 
-    
+    if (selectedCharacter) {
+      dispatch(toggleNavBarTrue());
+    } else {
+      dispatch(toggleNavBarFalse());
+    }
   }, [selectedCharacter]);
-
-
-  
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
@@ -84,7 +71,7 @@ function CharactersList() {
 
   return (
     <div className="container container-charcaters-list">
-      <motion.div className="row justify-content-center row-characters-list">
+      <div className="row justify-content-center row-characters-list">
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
           // animate={selectedCharacter && { opacity: 0.6 }}
@@ -141,7 +128,7 @@ function CharactersList() {
               {alphabet.map((letter) => {
                 return (
                   <li className="page-item" key={letter}>
-                    <Link className="page-link" to={letter.toLowerCase()} >
+                    <Link className="page-link" to={letter.toLowerCase()}>
                       {letter}
                     </Link>
                   </li>
@@ -157,7 +144,6 @@ function CharactersList() {
                       : 'z'
                   }
                   aria-label="Next"
-
                 >
                   <span aria-hidden="true">»</span>
                   <span className="sr-only">Next</span>
@@ -167,18 +153,13 @@ function CharactersList() {
           </nav>
         </motion.div>
 
-        {
-        
-        isLoading ? (
+        {isLoading ? (
           <div className="col-12 spinner-characters-list d-flex justify-content-center">
             <div className="spinner-border " role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
-        ) : 
-        
-        
-        (
+        ) : (
           characters.map((character) => {
             return (
               <motion.div
@@ -195,7 +176,7 @@ function CharactersList() {
                 >
                   <motion.img
                     className="img-characters-list"
-                     /* whileHover={{
+                    /* whileHover={{
                       scale: 1.05,
                       transition: { duration: 0.8 },
                     }}  */
@@ -214,30 +195,25 @@ function CharactersList() {
           })
         )}
 
-          {selectedCharacter && (
         <AnimatePresence>
-            <motion.div
+          {selectedCharacter && (
+            <div
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-              
-              
-              
+
               // transition={{ duration: 0.1 }}
             >
-              
-                
-              <motion.button
+              <button
                 className="btn btn-outline-warning btn-close-character"
                 onClick={() => setSelectedCharacter(null)}
-                >
+              >
                 X
-              </motion.button>
-                
+              </button>
 
               <div className="row m-0 justify-content-around row-name-description-character-list">
                 <div className="col-5 img-character-list-div">
-                  <motion.img
+                  <img
                     className="img-character"
                     src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
                     alt={selectedCharacter.name}
@@ -255,25 +231,22 @@ function CharactersList() {
                     </span>
                   </div>
                 </div>
-
               </div>
               <div className="comics-character-list">
                 {!isLoadingComics ? (
                   comics.map((comic) => {
                     return (
-                      
-                        
-                      <motion.div
+                      <div
                         key={comic.id}
                         className="comics-character-list-div"
                         onClick={() => navigate(`/comics/${comic.id}`)}
                       >
-                        <motion.img
-                           /*  initial={{ opacity: 0 }}
+                        <img
+                          /*  initial={{ opacity: 0 }}
                           animate={{
                             opacity: 1,
                             transition: { duration: 1.5 },
-                          }}  */ 
+                          }}  */
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                           alt={comic.title}
@@ -281,8 +254,7 @@ function CharactersList() {
                         <div className="comic-title-character-list">
                           <span>{comic.title}</span>
                         </div>
-                      </motion.div>
-                      
+                      </div>
                     );
                   })
                 ) : (
@@ -292,11 +264,11 @@ function CharactersList() {
                     </div>
                   </div>
                 )}
-              </div> 
-            </motion.div>
-        </AnimatePresence>
+              </div>
+            </div>
           )}
-      </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
