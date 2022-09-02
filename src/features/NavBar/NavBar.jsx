@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import { motion, useCycle, useScroll } from 'framer-motion';
+import { motion, useCycle } from 'framer-motion';
 import { MenuToggle } from '../../components/MenuToggle/MenuToggle';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -13,12 +12,10 @@ import './NavBar.css';
 function NavBar() {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [isHover, togglehover] = useCycle(false, true);
-  const [isScroll, setIsScroll] = useState('');
+
   const [isActive, setIsActive] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navBar = useSelector(selectNavBar);
-
 
   const svgMarvel = {
     hidden: {
@@ -122,8 +119,6 @@ function NavBar() {
     navBarShow2: topNavbar,
   };
 
-  
-
   return (
     <motion.nav
       variants={navbar}
@@ -144,7 +139,6 @@ function NavBar() {
               window.scrollTo(0, 0);
               isActive && toggleOpen();
               setIsActive(false);
-              
             }}
             onMouseEnter={() => togglehover()}
             onMouseLeave={() => togglehover()}

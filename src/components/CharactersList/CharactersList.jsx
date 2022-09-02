@@ -252,7 +252,7 @@ function CharactersList() {
                 </div>
 
               </div>
-              {/* <div className="comics-character-list">
+              <div className="comics-character-list">
                 {!isLoadingComics ? (
                   comics.map((comic) => {
                     return (
@@ -287,7 +287,7 @@ function CharactersList() {
                     </div>
                   </div>
                 )}
-              </div> */}
+              </div> 
             </motion.div>
           )}
         </AnimatePresence>
