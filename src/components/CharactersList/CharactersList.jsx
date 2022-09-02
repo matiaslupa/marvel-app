@@ -18,12 +18,13 @@ import {
 import {
   toggleNavBarTrue,
   toggleNavBarFalse,
-  selectNavBar,
-} from '../../features/NavBar/NavBarSlice';
+  selectNavBar
+}
+from '../../features/NavBar/NavBarSlice'
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, Link, Navigate, useNavigate  } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -32,8 +33,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+
+
+
 function CharactersList() {
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+
 
   const [abc, setAbc] = useState('');
 
@@ -43,22 +48,32 @@ function CharactersList() {
 
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
+  
 
   let { letter = 'a' } = useParams();
+
+  
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadCharacters(letter));
+
+    
   }, [letter]);
 
   useEffect(() => {
-    if (selectedCharacter) {
-      dispatch(toggleNavBarTrue());
-    } else {
-      dispatch(toggleNavBarFalse());
-    }
+  
+    if(selectedCharacter){
+      dispatch(toggleNavBarTrue())
+    }else{
+      dispatch(toggleNavBarFalse())
+    } 
+    
   }, [selectedCharacter]);
+
+
+  
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
@@ -71,10 +86,10 @@ function CharactersList() {
 
   return (
     <div className="container container-charcaters-list">
-      <div className="row justify-content-center row-characters-list">
+      <motion.div className="row justify-content-center row-characters-list">
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
-          // animate={selectedCharacter && { opacity: 0.6 }}
+          animate={selectedCharacter && { opacity: 0.6 }}
         >
           <FormControl
             variant="filled"
@@ -107,7 +122,7 @@ function CharactersList() {
         </motion.div>
         <motion.div
           className="col-12 d-none d-xl-flex col-pagination-characters-list justify-content-center "
-          // animate={selectedCharacter && { opacity: 0.6 }}
+          animate={selectedCharacter && { opacity: 0.6 }}
         >
           <nav aria-label="Page navigation example">
             <ul className="pagination abc">
@@ -128,7 +143,7 @@ function CharactersList() {
               {alphabet.map((letter) => {
                 return (
                   <li className="page-item" key={letter}>
-                    <Link className="page-link" to={letter.toLowerCase()}>
+                    <Link className="page-link" to={letter.toLowerCase()} >
                       {letter}
                     </Link>
                   </li>
@@ -144,6 +159,7 @@ function CharactersList() {
                       : 'z'
                   }
                   aria-label="Next"
+
                 >
                   <span aria-hidden="true">»</span>
                   <span className="sr-only">Next</span>
@@ -164,8 +180,8 @@ function CharactersList() {
             return (
               <motion.div
                 layoutId={character.id}
-                // animate={selectedCharacter && { opacity: 0.6 }}
-                // transition={{ duration: 0.1 }}
+                animate={selectedCharacter && { opacity: 0.6 }}
+                transition={{ duration: 0.1 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
@@ -176,10 +192,10 @@ function CharactersList() {
                 >
                   <motion.img
                     className="img-characters-list"
-                    /* whileHover={{
+                     whileHover={{
                       scale: 1.05,
                       transition: { duration: 0.8 },
-                    }}  */
+                    }} 
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
                   />
@@ -197,23 +213,28 @@ function CharactersList() {
 
         <AnimatePresence>
           {selectedCharacter && (
-            <div
+            <motion.div
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-
-              // transition={{ duration: 0.1 }}
+              
+              
+              
+              transition={{ duration: 0.1 }}
             >
-              <button
+              
+                
+              <motion.button
                 className="btn btn-outline-warning btn-close-character"
                 onClick={() => setSelectedCharacter(null)}
-              >
+                >
                 X
-              </button>
+              </motion.button>
+                
 
               <div className="row m-0 justify-content-around row-name-description-character-list">
                 <div className="col-5 img-character-list-div">
-                  <img
+                  <motion.img
                     className="img-character"
                     src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
                     alt={selectedCharacter.name}
@@ -231,22 +252,25 @@ function CharactersList() {
                     </span>
                   </div>
                 </div>
+
               </div>
               <div className="comics-character-list">
                 {!isLoadingComics ? (
                   comics.map((comic) => {
                     return (
-                      <div
+                      
+                        
+                      <motion.div
                         key={comic.id}
                         className="comics-character-list-div"
                         onClick={() => navigate(`/comics/${comic.id}`)}
                       >
-                        <img
-                          /*  initial={{ opacity: 0 }}
+                        <motion.img
+                           initial={{ opacity: 0 }}
                           animate={{
                             opacity: 1,
                             transition: { duration: 1.5 },
-                          }}  */
+                          }} 
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                           alt={comic.title}
@@ -254,7 +278,8 @@ function CharactersList() {
                         <div className="comic-title-character-list">
                           <span>{comic.title}</span>
                         </div>
-                      </div>
+                      </motion.div>
+                      
                     );
                   })
                 ) : (
@@ -265,10 +290,10 @@ function CharactersList() {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useCycle } from 'framer-motion';
+import MenuIcon from '@mui/icons-material/Menu';
+import { motion, useCycle, useScroll } from 'framer-motion';
 import { MenuToggle } from '../../components/MenuToggle/MenuToggle';
 
 import { Link, useLocation } from 'react-router-dom';
@@ -12,10 +13,19 @@ import './NavBar.css';
 function NavBar() {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [isHover, togglehover] = useCycle(false, true);
-
+  const [isScroll, setIsScroll] = useState('');
   const [isActive, setIsActive] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navBar = useSelector(selectNavBar);
+
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      setScrollProgress(latest * 100 - 5.6);
+    });
+  }, []);
 
   const svgMarvel = {
     hidden: {
@@ -24,12 +34,12 @@ function NavBar() {
 
     show: {
       width: 37,
-      // transition: { type: 'spring', stiffness: 150, duration: 5 },
+      transition: { type: 'spring', stiffness: 150, duration: 5 },
     },
 
     hover: {
       width: 130,
-      // transition: { type: 'Tween', stiffness: 100 },
+      transition: { type: 'Tween', stiffness: 100 },
     },
   };
 
@@ -102,14 +112,22 @@ function NavBar() {
   }
 
   if (navBar) {
-    topNavbar = {
-      y: '-79px',
-      // transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
-    };
+    if(isActive){
+      topNavbar = {
+        y: '-300px',
+        transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
+      };
+    }else{
+
+      topNavbar = {
+        y: '-79px',
+        transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
+      };
+    }
   } else {
     topNavbar = {
       y: '0px',
-      // transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
+      transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
     };
   }
 
@@ -119,16 +137,18 @@ function NavBar() {
     navBarShow2: topNavbar,
   };
 
+  
+
   return (
     <motion.nav
       variants={navbar}
       animate={['navbarShow', 'navBarShow2']}
-      /* transition={{
+      transition={{
         duration: 2,
         type: 'Tween',
         stiffness: 100,
         ease: 'easeIn',
-      }} */
+      }}
       id="navbar"
       className="navbar navbar-expand-lg fixed-top mt-lg-2"
     >
@@ -139,6 +159,7 @@ function NavBar() {
               window.scrollTo(0, 0);
               isActive && toggleOpen();
               setIsActive(false);
+              
             }}
             onMouseEnter={() => togglehover()}
             onMouseLeave={() => togglehover()}
