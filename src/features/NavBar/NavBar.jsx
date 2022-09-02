@@ -19,13 +19,6 @@ function NavBar() {
 
   const navBar = useSelector(selectNavBar);
 
-  const { scrollYProgress } = useScroll();
-
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      setScrollProgress(latest * 100 - 5.6);
-    });
-  }, []);
 
   const svgMarvel = {
     hidden: {
@@ -34,12 +27,12 @@ function NavBar() {
 
     show: {
       width: 37,
-      transition: { type: 'spring', stiffness: 150, duration: 5 },
+      // transition: { type: 'spring', stiffness: 150, duration: 5 },
     },
 
     hover: {
       width: 130,
-      transition: { type: 'Tween', stiffness: 100 },
+      // transition: { type: 'Tween', stiffness: 100 },
     },
   };
 
@@ -114,12 +107,12 @@ function NavBar() {
   if (navBar) {
     topNavbar = {
       top: '-79px',
-      transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
+      // transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
     };
   } else {
     topNavbar = {
       top: '0px',
-      transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
+      // transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
     };
   }
 
@@ -135,12 +128,12 @@ function NavBar() {
     <motion.nav
       variants={navbar}
       animate={['navbarShow', 'navBarShow2']}
-      transition={{
+      /* transition={{
         duration: 2,
         type: 'Tween',
         stiffness: 100,
         ease: 'easeIn',
-      }}
+      }} */
       id="navbar"
       className="navbar navbar-expand-lg fixed-top mt-lg-2"
     >

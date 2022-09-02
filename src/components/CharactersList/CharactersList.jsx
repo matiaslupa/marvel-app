@@ -87,7 +87,7 @@ function CharactersList() {
       <motion.div className="row justify-content-center row-characters-list">
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
-          animate={selectedCharacter && { opacity: 0.6 }}
+          // animate={selectedCharacter && { opacity: 0.6 }}
         >
           <FormControl
             variant="filled"
@@ -120,7 +120,7 @@ function CharactersList() {
         </motion.div>
         <motion.div
           className="col-12 d-none d-xl-flex col-pagination-characters-list justify-content-center "
-          animate={selectedCharacter && { opacity: 0.6 }}
+          // animate={selectedCharacter && { opacity: 0.6 }}
         >
           <nav aria-label="Page navigation example">
             <ul className="pagination abc">
