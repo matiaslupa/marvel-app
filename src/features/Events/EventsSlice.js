@@ -6,9 +6,9 @@ export const loadEvents = createAsyncThunk(
     const regex = /^[0-9]*$/;
     let url = '';
 
-    if (regex.test(event) && event.length <= 5) {
-      url = `https://gateway.marvel.com:443/v1/public/events?comics=${event}&orderBy=name&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
-    } else if (regex.test(event) && event.length > 5) {
+    if (event.includes('c')) {
+      url = `https://gateway.marvel.com:443/v1/public/characters/${event.slice(0,-1)}/events?orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+    } else if (regex.test(event) && event.length === 3) {
       url = `https://gateway.marvel.com:443/v1/public/events/${event}?ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     } else {
       url = `https://gateway.marvel.com:443/v1/public/events?limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
@@ -36,6 +36,7 @@ export const eventsSlice = createSlice({
       .addCase(loadEvents.fulfilled, (state, action) => {
         state.isLoadingEvents = false;
         state.eventsArray = action.payload;
+        
         
       })
       .addCase(loadEvents.rejected, (state) => {

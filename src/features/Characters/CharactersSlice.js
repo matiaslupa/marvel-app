@@ -19,7 +19,7 @@ export const loadCharacters = createAsyncThunk(
     
     
     else{
-      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=name&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     
@@ -52,7 +52,7 @@ export const charactersSlice = createSlice({
       .addCase(loadCharacters.rejected, (state) => {
         state.isLoading = false;
         state.hasError = true;
-        console.log(state.hasError)
+        
       });
   },
 });

@@ -90,7 +90,7 @@ function NavBar() {
     (!isActive && location.pathname.includes('/characters')) ||
     (isActive && location.pathname.includes('/characters'))
   ) {
-    backgroundColorNavbar = { backgroundColor: 'hsla(212, 94%, 51%, 0.900)' };
+    backgroundColorNavbar = { backgroundColor: 'hsla(213, 65%, 20%, 0.895)' };
   }
 
   //comics

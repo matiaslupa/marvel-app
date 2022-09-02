@@ -12,6 +12,8 @@ export const loadSeries = createAsyncThunk(
       url = `https://gateway.marvel.com:443/v1/public/characters/${serie}/series?orderBy=onsaleDate&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }else if(regex.test(serie) && serie.length <= 5){
       url = `https://gateway.marvel.com:443/v1/public/series/${serie}?ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+    }else if(serie.includes('c')){
+      url = `https://gateway.marvel.com:443/v1/public/characters/${serie.slice(0,-1)}/series?contains=comic&orderBy=title&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
     
     
@@ -42,7 +44,7 @@ export const seriesSlice = createSlice({
       .addCase(loadSeries.fulfilled, (state, action) => {
         state.isLoading = false;
         state.seriesArray = action.payload; 
-        console.log(state.seriesArray)
+        
         
         
            

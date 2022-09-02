@@ -54,12 +54,12 @@ const EventsList = () => {
   let navigate = useNavigate();
   
   
-
+  let { letter = 'a' } = useParams();
   
     
     useEffect(() => {
-      dispatch(loadEvents());
-    }, []);
+      dispatch(loadEvents(letter));
+    }, [letter]);
 
     useEffect(() => {
   
