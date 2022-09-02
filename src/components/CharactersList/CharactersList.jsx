@@ -255,7 +255,7 @@ function CharactersList() {
                 </div>
 
               </div>
-              <div className="comics-character-list">
+              {/* <div className="comics-character-list">
                 {!isLoadingComics ? (
                   comics.map((comic) => {
                     return (
@@ -267,11 +267,11 @@ function CharactersList() {
                         onClick={() => navigate(`/comics/${comic.id}`)}
                       >
                         <motion.img
-                           /* initial={{ opacity: 0 }}
+                            initial={{ opacity: 0 }}
                           animate={{
                             opacity: 1,
                             transition: { duration: 1.5 },
-                          }}  */
+                          }}  
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                           alt={comic.title}
@@ -290,7 +290,7 @@ function CharactersList() {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
             </motion.div>
           )}
         </AnimatePresence>

@@ -94,7 +94,7 @@ function Characters() {
 
   return (
     <div className="container-fluid characters-container">
-      <motion.div className="row row-characters d-flex justify-content-center">
+      {/* <motion.div className="row row-characters d-flex justify-content-center">
         <motion.div className="col-12 col-marvel-1">
           <motion.div variants={item} animate="marvel2" initial="initial">
             <ParallaxText baseVelocity={-1}>-MARVEL-</ParallaxText>
@@ -172,7 +172,7 @@ function Characters() {
             <ParallaxText baseVelocity={-1}>-MARVEL-</ParallaxText>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </motion.div> */}
 
       {/* <motion.row className="row row-image-character">
         <div className="col-12 justify-content-center d-flex col-image-character">
