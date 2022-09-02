@@ -167,13 +167,18 @@ function CharactersList() {
           </nav>
         </motion.div>
 
-        {isLoading ? (
+        {
+        
+        isLoading ? (
           <div className="col-12 spinner-characters-list d-flex justify-content-center">
             <div className="spinner-border " role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
-        ) : (
+        ) : 
+        
+        
+        (
           characters.map((character) => {
             return (
               <motion.div
@@ -209,8 +214,8 @@ function CharactersList() {
           })
         )}
 
-        <AnimatePresence>
           {selectedCharacter && (
+        <AnimatePresence>
             <motion.div
               className="container col-character-list"
               layoutId={selectedCharacter.id}
@@ -264,11 +269,11 @@ function CharactersList() {
                         onClick={() => navigate(`/comics/${comic.id}`)}
                       >
                         <motion.img
-                            initial={{ opacity: 0 }}
+                           /*  initial={{ opacity: 0 }}
                           animate={{
                             opacity: 1,
                             transition: { duration: 1.5 },
-                          }}  
+                          }}  */ 
                           className="img-comic-character"
                           src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                           alt={comic.title}
@@ -289,8 +294,8 @@ function CharactersList() {
                 )}
               </div> 
             </motion.div>
-          )}
         </AnimatePresence>
+          )}
       </motion.div>
     </div>
   );
