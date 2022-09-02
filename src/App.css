@@ -9,10 +9,12 @@
     background-color: black;
     font-family: 'Roboto';
     
+    transition: all 0.05s ease-in-out;
   }
 
   html {
     scroll-snap-type: y mandatory;
+    scroll-behavior:smooth;
   }
 
 .App{
