@@ -68,10 +68,9 @@ const AccordionSummary = styled((props) => (
     expandIcon={
       <ArrowForwardIosSharpIcon
         sx={{
-          fontSize: '0.9rem',
           color: '#FFC107',
           fontSize: '18px',
-          fontWeight: '600',
+          fontWeight: '700',
         }}
       />
     }
@@ -84,7 +83,7 @@ const AccordionSummary = styled((props) => (
       : 'rgba(0, 0, 0, .03)',
   flexDirection: 'row',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
+    transform: 'rotate(-90deg)',
   },
   '& .MuiAccordionSummary-content': {
     marginLeft: theme.spacing(1),
@@ -93,9 +92,10 @@ const AccordionSummary = styled((props) => (
 
 function CharactersList() {
   const [expanded, setExpanded] = useState(null);
-
+  
   const handleChangeAcordion = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
+    
   };
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
@@ -128,6 +128,8 @@ function CharactersList() {
     } else {
       dispatch(toggleNavBarFalse());
     }
+
+    
   }, [selectedCharacter]);
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
@@ -138,6 +140,8 @@ function CharactersList() {
   };
 
   let navigate = useNavigate();
+
+  
 
   return (
     <div className="container container-charcaters-list">
@@ -240,14 +244,7 @@ function CharactersList() {
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
               >
-                <motion.div
-                  className="card-character-list"
-                  onClick={() =>
-                    dispatch(loadComics(character.id.toString())) &&
-                    dispatch(loadEvents(`${character.id.toString()}c`)) &&
-                    dispatch(loadSeries(`${character.id.toString()}c`))
-                  }
-                >
+                <motion.div className="card-character-list">
                   <motion.img
                     className="img-characters-list"
                     whileHover={{
@@ -288,8 +285,7 @@ function CharactersList() {
                 X
               </motion.button>
 
-              <div className="separator">
-
+              <div className="separator" id="separator">
                 <div className="row m-0 justify-content-around row-name-description-character-list">
                   <div className="col-5 img-character-list-div">
                     <motion.img
@@ -316,12 +312,19 @@ function CharactersList() {
                   <Accordion
                     className="acordion-character-list"
                     expanded={expanded === 'panel1'}
-                    onChange={handleChangeAcordion('panel1')}
+                    onChange={
+                      handleChangeAcordion('panel1')
+                      
+                    }
+                    
                   >
                     <AccordionSummary
                       className="acordion-character-list-summary"
                       aria-controls="panel1d-content"
                       id="panel1d-header"
+                      onClick={() =>
+                        dispatch(loadComics(selectedCharacter.id.toString()))
+                      }
                     >
                       <Typography className="acordion-character-list-typography">
                         COMICS
@@ -333,6 +336,7 @@ function CharactersList() {
                         comics.map((comic) => {
                           return (
                             <motion.div
+                            id='comics'
                               key={comic.id}
                               className="comics-character-list-div"
                               onClick={() => navigate(`/comics/${comic.id}`)}
@@ -376,6 +380,11 @@ function CharactersList() {
                       className="acordion-character-list-summary"
                       aria-controls="panel2d-content"
                       id="panel2d-header"
+                      onClick={() =>
+                        dispatch(
+                          loadEvents(`${selectedCharacter.id.toString()}c`)
+                        )
+                      }
                     >
                       <Typography className="acordion-character-list-typography">
                         EVENTS
@@ -430,6 +439,11 @@ function CharactersList() {
                       className="acordion-character-list-summary"
                       aria-controls="panel3d-content"
                       id="panel3d-header"
+                      onClick={() =>
+                        dispatch(
+                          loadSeries(`${selectedCharacter.id.toString()}c`)
+                        )
+                      }
                     >
                       <Typography className="acordion-character-list-typography">
                         SERIES
