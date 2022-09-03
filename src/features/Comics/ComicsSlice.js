@@ -8,15 +8,32 @@ export const loadComics = createAsyncThunk(
   async (comic ) => {
     const regex = /^[0-9]*$/;
     let url = ''
-    if (regex.test(comic) && comic.length > 5) {
-      url = `https://gateway.marvel.com:443/v1/public/characters/${comic}/comics?orderBy=onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
-    }else if(regex.test(comic) && comic.length <= 5){
+
+    if (comic.includes('character')) {
+
+      // By character ID
+      url = `https://gateway.marvel.com:443/v1/public/characters/${comic.slice(0,-9)}/comics?orderBy=onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+
+
+    }else if(comic.includes('events')){
+
+      // By event ID
+      url = `https://gateway.marvel.com:443/v1/public/events/${comic.slice(0,-6)}/comics?orderBy=onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+    }
+    
+    
+    
+    else if(regex.test(comic)){
+
+      // Only one by comic ID
       url = `https://gateway.marvel.com:443/v1/public/comics/${comic}?ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
     
     
     else{
-      url = `https://gateway.marvel.com:443/v1/public/comics?format=comic&titleStartsWith=${comic}&orderBy=onsaleDate&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+
+      // By letter name start...
+      url = `https://gateway.marvel.com:443/v1/public/comics?format=comic&titleStartsWith=${comic}&orderBy=onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     const response = await fetch(url)
@@ -42,6 +59,7 @@ export const comicsSlice = createSlice({
       .addCase(loadComics.fulfilled, (state, action) => {
         state.isLoading = false;
         state.comicsArray = action.payload; 
+        
         
         
            

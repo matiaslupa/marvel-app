@@ -6,11 +6,32 @@ export const loadEvents = createAsyncThunk(
     const regex = /^[0-9]*$/;
     let url = '';
 
-    if (event.includes('c')) {
-      url = `https://gateway.marvel.com:443/v1/public/characters/${event.slice(0,-1)}/events?orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
-    } else if (regex.test(event) && event.length === 3) {
+    if (event.includes('character')) {
+
+      // By character ID
+      url = `https://gateway.marvel.com:443/v1/public/characters/${event.slice(0,-9)}/events?orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+
+
+    } else if (event.includes('comic')) {
+
+      // By comic ID
+      url = `https://gateway.marvel.com:443/v1/public/comics/${event.slice(0,-5)}/events?orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+
+
+    
+    } else if (regex.test(event)) {
+
+      // Only one event by ID
       url = `https://gateway.marvel.com:443/v1/public/events/${event}?ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
-    } else {
+
+    }else if (event.length === 1 ){
+
+        // By letter start name
+        url = `https://gateway.marvel.com:443/v1/public/events?nameStartsWith=${event}&orderBy=name&limit=100&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      
+    } else if (!event ){
+
+      // By default
       url = `https://gateway.marvel.com:443/v1/public/events?limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
@@ -36,7 +57,7 @@ export const eventsSlice = createSlice({
       .addCase(loadEvents.fulfilled, (state, action) => {
         state.isLoadingEvents = false;
         state.eventsArray = action.payload;
-        
+        // console.log(state.eventsArray)
         
       })
       .addCase(loadEvents.rejected, (state) => {

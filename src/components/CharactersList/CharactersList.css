@@ -45,7 +45,7 @@
 }
 
 .abc a{
-    color: rgb(41, 140, 253);
+    color: hsla(213, 98%, 50%, 0.966);
     filter: drop-shadow(1px 2px 2px rgb(0, 0, 0));
 }
 
@@ -53,6 +53,11 @@
 
 .spinner-characters-list{
     margin-top: 150px;
+    overflow-x: hidden;
+}
+
+.spinner-characters-list::-webkit-scrollbar{
+    display: none;
 }
 
 .col-pagination-characters-list {
@@ -72,6 +77,7 @@
 .card-character-list{
     backdrop-filter: blur(0px);
     max-width: 280px;
+    max-height: 288px;
     overflow: hidden;
     border-bottom-right-radius: 20px;
     filter: drop-shadow(8px 6px 12px rgba(114, 114, 114, 0.779));
@@ -123,6 +129,7 @@
 
 .col-character-list{
     /* background-color: hsla(212, 94%, 51%, 0.696);  */
+    background-color: hsla(212, 94%, 51%, 0.120); 
     max-width: 70vw;
     position: fixed;
     top: 130px;
@@ -132,7 +139,7 @@
     padding: 0;
     padding-bottom: 20px;
     max-height: 80vh;
-    overflow: unset;
+    overflow-y: hidden;
     
     
     
@@ -162,6 +169,7 @@
     overflow-x: hidden;
     max-height: 76vh;
     margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 
@@ -306,6 +314,7 @@
 width: 6px;
 background: rgba(164, 163, 163, 0.839);
 -webkit-border-radius: 1ex;
+
 }
 
 .separator::-webkit-scrollbar-track {

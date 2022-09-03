@@ -6,7 +6,7 @@ import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
-  selectHasError,
+  
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -92,10 +92,9 @@ const AccordionSummary = styled((props) => (
 
 function CharactersList() {
   const [expanded, setExpanded] = useState(null);
-  
+
   const handleChangeAcordion = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
-    
   };
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
@@ -103,7 +102,6 @@ function CharactersList() {
 
   const characters = useSelector(selectCharacters);
   const isLoading = useSelector(selectIsLoading);
-  const hasError = useSelector(selectHasError);
 
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
@@ -128,8 +126,6 @@ function CharactersList() {
     } else {
       dispatch(toggleNavBarFalse());
     }
-
-    
   }, [selectedCharacter]);
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
@@ -141,7 +137,6 @@ function CharactersList() {
 
   let navigate = useNavigate();
 
-  
 
   return (
     <div className="container container-charcaters-list">
@@ -312,18 +307,16 @@ function CharactersList() {
                   <Accordion
                     className="acordion-character-list"
                     expanded={expanded === 'panel1'}
-                    onChange={
-                      handleChangeAcordion('panel1')
-                      
-                    }
-                    
+                    onChange={handleChangeAcordion('panel1')}
                   >
                     <AccordionSummary
                       className="acordion-character-list-summary"
                       aria-controls="panel1d-content"
                       id="panel1d-header"
                       onClick={() =>
-                        dispatch(loadComics(selectedCharacter.id.toString()))
+                        expanded !== 'panel1' &&
+                        dispatch(loadComics(`${selectedCharacter.id.toString()}character`))
+                        
                       }
                     >
                       <Typography className="acordion-character-list-typography">
@@ -336,7 +329,7 @@ function CharactersList() {
                         comics.map((comic) => {
                           return (
                             <motion.div
-                            id='comics'
+                              id="comics"
                               key={comic.id}
                               className="comics-character-list-div"
                               onClick={() => navigate(`/comics/${comic.id}`)}
@@ -381,8 +374,9 @@ function CharactersList() {
                       aria-controls="panel2d-content"
                       id="panel2d-header"
                       onClick={() =>
-                        dispatch(
-                          loadEvents(`${selectedCharacter.id.toString()}c`)
+                        expanded !== 'panel2' && dispatch(
+                          
+                            loadEvents(`${selectedCharacter.id.toString()}character`)
                         )
                       }
                     >
@@ -440,8 +434,9 @@ function CharactersList() {
                       aria-controls="panel3d-content"
                       id="panel3d-header"
                       onClick={() =>
+                        expanded !== 'panel3' &&
                         dispatch(
-                          loadSeries(`${selectedCharacter.id.toString()}c`)
+                          loadSeries(`${selectedCharacter.id.toString()}character`)
                         )
                       }
                     >
