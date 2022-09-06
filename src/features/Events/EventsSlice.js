@@ -17,7 +17,14 @@ export const loadEvents = createAsyncThunk(
       // By comic ID
       url = `https://gateway.marvel.com:443/v1/public/comics/${event.slice(0,-5)}/events?orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
 
+    }  else if (event.includes('series')) {
 
+        // By serie ID
+        url = `https://gateway.marvel.com:443/v1/public/series/${event.slice(0,-6)}/events?orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+  
+  
+      
+      
     
     } else if (regex.test(event)) {
 

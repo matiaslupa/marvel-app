@@ -79,10 +79,10 @@ function NavBar() {
 
   // Events navbar
   if (
-    (isActive && location.pathname === '/events') ||
-    (!isActive && location.pathname === '/events')
+    (isActive && location.pathname.includes('/events')) ||
+    (!isActive && location.pathname.includes('/events'))
   ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(136, 0, 0, 0.696)' };
+    backgroundColorNavbar = { backgroundColor: 'rgba(178, 21, 21, 0.639)' };
   }
 
   // Characters navbar
@@ -90,7 +90,7 @@ function NavBar() {
     (!isActive && location.pathname.includes('/characters')) ||
     (isActive && location.pathname.includes('/characters'))
   ) {
-    backgroundColorNavbar = { backgroundColor: 'hsla(213, 73%, 36%, 0.695)' };
+    backgroundColorNavbar = { backgroundColor: 'rgba(13, 117, 244, 0.639)' };
   }
 
   //comics
@@ -99,7 +99,8 @@ function NavBar() {
     (!isActive && location.pathname.includes('/comics')) ||
     (isActive && location.pathname.includes('/comics'))
   ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(138, 42, 202, 0.895)' };
+    // backgroundColorNavbar = { backgroundColor: 'rgba(100, 16, 156, 0.695)' };
+    backgroundColorNavbar = { backgroundColor: 'rgba(100, 16, 156, 0.695)' };
   }
 
   //Series
@@ -108,7 +109,7 @@ function NavBar() {
     (!isActive && location.pathname.includes('/series')) ||
     (isActive && location.pathname.includes('/series'))
   ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(29, 164, 83, 0.900)' };
+    backgroundColorNavbar = { backgroundColor: 'rgba(29, 120, 105, 0.800)' };
   }
 
   if (navBar) {

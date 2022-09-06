@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './SeriesList.css';
 
-import { useSelector, useDispatch } from 'react-redux';
-
-import {
-  loadSeries,
-  selectSeries,
-  selectIsLoadingSeries,
-} from '../../features/Series/SeriesSlice';
-
 import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
-  selectHasError,
+  
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -23,10 +15,24 @@ import {
 } from '../../features/Comics/ComicsSlice';
 
 import {
+  selectEvents,
+  selectIsLoadingEvents,
+  loadEvents,
+} from '../../features/Events/EventsSlice';
+
+import {
+  loadSeries,
+  selectSeries,
+  selectIsLoadingSeries,
+} from '../../features/Series/SeriesSlice';
+
+import {
   toggleNavBarTrue,
   toggleNavBarFalse,
   selectNavBar,
 } from '../../features/NavBar/NavBarSlice';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
 
@@ -37,13 +43,61 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import { styled } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion from '@mui/material/Accordion';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+
+const Accordion = styled((props) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+}));
+
+const AccordionSummary = styled((props) => (
+  <MuiAccordionSummary
+    expandIcon={
+      <ArrowForwardIosSharpIcon
+        sx={{
+          color: '#FFC107',
+          fontSize: '18px',
+          fontWeight: '700',
+        }}
+      />
+    }
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(-90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
 
 
 const SeriesList = () => {
-  const series = useSelector(selectSeries);
-  const isLoadingSeries = useSelector(selectIsLoadingSeries);
+  const [expanded, setExpanded] = useState(null);
 
+  const handleChangeAcordion = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
   const [selectedSerie, setSelectedSerie] = useState(null);
+
   const [abc, setAbc] = useState('');
 
   const characters = useSelector(selectCharacters);
@@ -52,28 +106,26 @@ const SeriesList = () => {
   const comics = useSelector(selectComics);
   const isLoadingComics = useSelector(selectIsLoadingComics);
 
-  let navigate = useNavigate();
+  const events = useSelector(selectEvents);
+  const isLoadingEvents = useSelector(selectIsLoadingEvents);
 
-  
+  const series = useSelector(selectSeries);
+  const isLoadingSeries = useSelector(selectIsLoadingSeries);
 
-  let { letter = 'a' } = useParams();
+  let { letter = 'a'} = useParams();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadSeries(letter));
-
-    
   }, [letter]);
 
   useEffect(() => {
-  
-    if(selectedSerie){
-      dispatch(toggleNavBarTrue())
-    }else{
-      dispatch(toggleNavBarFalse())
-    } 
-    
+    if (selectedSerie) {
+      dispatch(toggleNavBarTrue());
+    } else {
+      dispatch(toggleNavBarFalse());
+    }
   }, [selectedSerie]);
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
@@ -83,6 +135,8 @@ const SeriesList = () => {
     setAbc(event.target.value);
   };
 
+  let navigate = useNavigate();
+
   
 
   return (
@@ -90,7 +144,8 @@ const SeriesList = () => {
       <motion.div className="row justify-content-center row-characters-list">
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
-          animate={selectedSerie && { opacity: 0.6 }}
+          animate={selectedSerie && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <FormControl
             variant="filled"
@@ -123,7 +178,8 @@ const SeriesList = () => {
         </motion.div>
         <motion.div
           className="col-12 d-none d-xl-flex col-pagination-characters-list justify-content-center "
-          animate={selectedSerie && { opacity: 0.6 }}
+          animate={selectedSerie && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <nav aria-label="Page navigation example">
             <ul className="pagination abc abc-series">
@@ -180,22 +236,19 @@ const SeriesList = () => {
             return (
               <motion.div
                 layoutId={serie.id}
-                animate={selectedSerie && { opacity: 0.6 }}
-                transition={{ duration: 0.1 }}
+                animate={selectedSerie && { opacity: 0.4 }}
+                transition={{ duration: 0 }}
                 onClick={() => setSelectedSerie(serie)}
-                className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
+                className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list "
                 key={serie.id}
               >
-                <motion.div
-                  className="card-character-list"
-                  onClick={() => dispatch(loadCharacters(`${serie.id.toString()}s`))}
-                >
+                <motion.div className="card-character-list">
                   <motion.img
+                    className="img-characters-list"
                     whileHover={{
                       scale: 1.05,
                       transition: { duration: 0.8 },
-                    }} 
-                    className="img-characters-list"
+                    }}
                     src={`${serie.thumbnail.path}/portrait_uncanny.${serie.thumbnail.extension}`}
                     alt={serie.title}
                   />
@@ -211,80 +264,233 @@ const SeriesList = () => {
           })
         )}
 
-        <AnimatePresence>
+          <AnimatePresence>
           {selectedSerie && (
             <motion.div
               className="container col-character-list col-serie-list"
               layoutId={selectedSerie.id}
               key={selectedSerie.id}
-              
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0 }}
+              id="character"
             >
               <motion.button
                 className="btn btn-outline-warning btn-close-character"
-                onClick={() => setSelectedSerie(null)}
+                onClick={() => {
+                  setExpanded(null);
+                  setSelectedSerie(null);
+                }}
               >
                 X
               </motion.button>
 
-              <div className="row m-0 justify-content-around row-name-description-character-list">
-                <div className="col-5 img-character-list-div img-serie-list-div">
-                  <motion.img
-
-                    className="img-character"
-                    src={`${selectedSerie.thumbnail.path}/detail.${selectedSerie.thumbnail.extension}`}
-                    alt={selectedSerie.name}
-                  />
-                </div>
-                <div className="col-7 col-name-description-character-list">
-                  <h2 className="character-name">
-                    {selectedSerie.title.toUpperCase()}
-                  </h2>
-                  <div className="character-description">
-                    <span>
-                      {selectedSerie.description
-                        ? selectedSerie.description
-                        : 'Description not available'}
-                    </span>
+              <div className="separator" id="separator">
+                <div className="row m-0 justify-content-around row-name-description-character-list">
+                  <div className="col-5 img-character-list-div">
+                    <motion.img
+                      className="img-character"
+                      src={`${selectedSerie.thumbnail.path}.${selectedSerie.thumbnail.extension}`}
+                      alt={selectedSerie.title}
+                    />
                   </div>
-                </div>
-              </div>
-              <div className="comics-character-list characters-serie-list">
-                {!isLoading ? (
-                  characters.map((character) => {
-                    return (
-                      <motion.div
-                        key={character.id}
-                        className="comics-character-list-div"
-                        onClick={() => navigate(`/characters/${character.id}`)}
-                      >
-                        <motion.img
-                          initial={{ opacity: 0 }}
-                          animate={{
-                            opacity: 1,
-                            transition: { duration: 1.5 },
-                          }}
-                          className="img-comic-character"
-                          src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
-                          alt={character.name}
-                        />
-                        <div className="comic-title-character-list">
-                          <span>{character.name.toUpperCase()}</span>
-                        </div>
-                      </motion.div>
-                    );
-                  })
-                ) : (
-                  <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
-                    <div className="spinner-border" role="status">
-                      <span className="visually-hidden">Loading...</span>
+                  <div className="col-7 col-name-description-character-list">
+                    <h2 className="character-name">
+                      {selectedSerie.title.toUpperCase()}
+                    </h2>
+                    <div className="character-description">
+                      <span>
+                        {selectedSerie.description
+                          ? selectedSerie.description
+                          : 'Description not available'}
+                      </span>
                     </div>
                   </div>
-                )}
+                </div>
+
+                <div className="row">
+                  <Accordion
+                    className="acordion-character-list acordion-serie-list"
+                    expanded={expanded === 'panel1'}
+                    onChange={handleChangeAcordion('panel1')}
+                  >
+                    <AccordionSummary
+                      className="acordion-character-list-summary"
+                      aria-controls="panel1d-content"
+                      id="panel1d-header"
+                      onClick={() =>
+                        expanded !== 'panel1' &&
+                        dispatch(loadCharacters(`${selectedSerie.id.toString()}series`))
+                        
+                      }
+                    >
+                      <Typography className="acordion-character-list-typography">
+                        CHARACTERS
+                      </Typography>
+                    </AccordionSummary>
+
+                    <div className="comics-character-list">
+                      {!isLoading ? (
+                        characters.map((character) => {
+                          return (
+                            <motion.div
+                              id="comics"
+                              key={character.id}
+                              className="comics-character-list-div"
+                              onClick={() => navigate(`/characters/${character.id}`)}
+                            >
+                              <motion.img
+                                className="img-comic-character"
+                                src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
+                                alt={character.name}
+                              />
+                              <div className="comic-title-character-list">
+                                <span>{`${character.name
+                                  .slice(0, 23)
+                                  .toUpperCase()}${
+                                    character.name.length > 23 ? '...' : ''
+                                }`}</span>
+                              </div>
+                            </motion.div>
+                          );
+                        })
+                      ) : (
+                        <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                          <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      )}
+                      {characters.length === 0 && (
+                        <span className="not-available">
+                          Characters not available
+                        </span>
+                      )}
+                    </div>
+                  </Accordion>
+
+                  <Accordion
+                    className="acordion-character-list acordion-serie-list"
+                    expanded={expanded === 'panel2'}
+                    onChange={handleChangeAcordion('panel2')}
+                  >
+                    <AccordionSummary
+                      className="acordion-character-list-summary"
+                      aria-controls="panel2d-content"
+                      id="panel2d-header"
+                      onClick={() =>
+                        expanded !== 'panel2' && dispatch(
+                          
+                            loadComics(`${selectedSerie.id.toString()}series`)
+                        )
+                      }
+                    >
+                      <Typography className="acordion-character-list-typography">
+                        COMICS
+                      </Typography>
+                    </AccordionSummary>
+
+                    <div className="comics-character-list">
+                      {!isLoadingComics ? (
+                        comics.map((comic) => {
+                          return (
+                            <motion.div
+                              key={comic.id}
+                              className="comics-character-list-div"
+                              onClick={() => navigate(`/comics/${comic.id}`)}
+                            >
+                              <motion.img
+                                className="img-comic-character"
+                                src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
+                                alt={comic.title}
+                              />
+                              <div className="comic-title-character-list">
+                                <span>{`${comic.title
+                                  .slice(0, 23)
+                                  .toUpperCase()}${
+                                  comic.title.length > 23 ? '...' : ''
+                                }`}</span>
+                              </div>
+                            </motion.div>
+                          );
+                        })
+                      ) : (
+                        <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                          <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      )}
+                      {comics.length === 0 && (
+                        <span className="not-available">
+                          Comics not available
+                        </span>
+                      )}
+                    </div>
+                  </Accordion>
+
+                  <Accordion
+                    className="acordion-character-list acordion-serie-list"
+                    expanded={expanded === 'panel3'}
+                    onChange={handleChangeAcordion('panel3')}
+                  >
+                    <AccordionSummary
+                      className="acordion-character-list-summary"
+                      aria-controls="panel3d-content"
+                      id="panel3d-header"
+                      onClick={() =>
+                        expanded !== 'panel3' &&
+                        dispatch(
+                          loadEvents(`${selectedSerie.id.toString()}series`)
+                        )
+                      }
+                    >
+                      <Typography className="acordion-character-list-typography">
+                        EVENTS
+                      </Typography>
+                    </AccordionSummary>
+
+                    <div className="comics-character-list">
+                      {!isLoadingEvents ? (
+                        events.map((event) => {
+                          return (
+                            <motion.div
+                              key={event.id}
+                              className="comics-character-list-div"
+                              onClick={() => navigate(`/events/${event.id}`)}
+                            >
+                              <motion.img
+                                className="img-comic-character"
+                                src={`${event.thumbnail.path}/portrait_xlarge.${event.thumbnail.extension}`}
+                                alt={event.title}
+                              />
+                              <div className="comic-title-character-list">
+                                <span>{`${event.title
+                                  .slice(0, 23)
+                                  .toUpperCase()}${
+                                  event.title.length > 23 ? '...' : ''
+                                }`}</span>
+                              </div>
+                            </motion.div>
+                          );
+                        })
+                      ) : (
+                        <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                          <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      )}
+                      {events.length === 0 && (
+                        <span className="not-available">
+                          Events not available
+                        </span>
+                      )}
+                    </div>
+                  </Accordion>
+                </div>
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>  
       </motion.div>
     </div>
   );

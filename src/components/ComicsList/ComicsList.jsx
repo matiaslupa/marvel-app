@@ -111,7 +111,7 @@ const ComicsList = () => {
   const series = useSelector(selectSeries);
   const isLoadingSeries = useSelector(selectIsLoadingSeries);
 
-  let { letter = 'amazing spider' } = useParams();
+  let { letter = 'a' } = useParams();
 
   const dispatch = useDispatch();
 
@@ -145,11 +145,12 @@ const ComicsList = () => {
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
           animate={selectedComic && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <FormControl
             variant="filled"
             sx={{ m: 1, minWidth: 100 }}
-            className="abc-form"
+            className="abc-form "
           >
             <InputLabel
               id="demo-simple-select-filled-label"
@@ -178,9 +179,10 @@ const ComicsList = () => {
         <motion.div
           className="col-12 d-none d-xl-flex col-pagination-characters-list justify-content-center "
           animate={selectedComic && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <nav aria-label="Page navigation example">
-            <ul className="pagination abc">
+            <ul className="pagination abc abc-comics">
               <li className="page-item">
                 <Link
                   className="page-link"
@@ -235,7 +237,7 @@ const ComicsList = () => {
               <motion.div
                 layoutId={comic.id}
                 animate={selectedComic && { opacity: 0.4 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0 }}
                 onClick={() => setSelectedComic(comic)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={comic.id}
@@ -251,7 +253,7 @@ const ComicsList = () => {
                     alt={comic.title}
                   />
 
-                  <div className="name-characters-list">
+                  <div className="name-characters-list name-comics-list">
                     <h3 className="">{`${comic.title.slice(0, 20)}${
                       comic.title.length > 20 ? '...' : ''
                     }`}</h3>
@@ -265,10 +267,10 @@ const ComicsList = () => {
         <AnimatePresence>
           {selectedComic && (
             <motion.div
-              className="container col-character-list"
+              className="container col-character-list col-comic-list"
               layoutId={selectedComic.id}
               key={selectedComic.id}
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0}}
               id="character"
             >
               <motion.button
@@ -306,7 +308,7 @@ const ComicsList = () => {
 
                 <div className="row">
                   <Accordion
-                    className="acordion-character-list"
+                    className="acordion-character-list acordion-comic-list"
                     expanded={expanded === 'panel1'}
                     onChange={handleChangeAcordion('panel1')}
                   >
@@ -365,7 +367,7 @@ const ComicsList = () => {
                   </Accordion>
 
                   <Accordion
-                    className="acordion-character-list"
+                    className="acordion-character-list acordion-comic-list"
                     expanded={expanded === 'panel2'}
                     onChange={handleChangeAcordion('panel2')}
                   >

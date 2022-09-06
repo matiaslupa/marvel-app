@@ -144,6 +144,7 @@ function CharactersList() {
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
           animate={selectedCharacter && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <FormControl
             variant="filled"
@@ -177,6 +178,7 @@ function CharactersList() {
         <motion.div
           className="col-12 d-none d-xl-flex col-pagination-characters-list justify-content-center "
           animate={selectedCharacter && { opacity: 0 }}
+          transition={{ duration: 0.0 }}
         >
           <nav aria-label="Page navigation example">
             <ul className="pagination abc">
@@ -234,7 +236,7 @@ function CharactersList() {
               <motion.div
                 layoutId={character.id}
                 animate={selectedCharacter && { opacity: 0.4 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0.0 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
@@ -267,7 +269,7 @@ function CharactersList() {
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0 }}
               id="character"
             >
               <motion.button

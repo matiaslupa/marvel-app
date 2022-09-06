@@ -24,17 +24,17 @@ export const loadCharacters = createAsyncThunk(
       url = `https://gateway.marvel.com:443/v1/public/events/${letter.slice(0,-6)}/characters?orderBy=name&limit=5&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
 
 
-    }else if( letter.includes('s')){
+    }else if( letter.includes('series')){
 
       // By serie ID
-      url = `https://gateway.marvel.com:443/v1/public/series/${letter.slice(0,-1)}/characters?orderBy=name&limit=25&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/series/${letter.slice(0,-6)}/characters?orderBy=name&limit=25&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
     
     
     else{
 
       // By letter name start...
-      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=name&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=-modified&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     

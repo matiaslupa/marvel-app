@@ -1,24 +1,30 @@
-.img-comic-list-div{
-    max-height: 100%;
-    max-width: 300px;
-    
-}
 
 .col-comic-list{
-    background-color: rgba(138, 42, 202, 0.695); 
+    /* background-color: rgba(100, 16, 156, 0.250);  */
+    
+background: linear-gradient(144deg, rgba(82,10,130,30) 0%, rgba(82,10,130,0.30) 32%, rgba(40, 1, 72, 0.4) 98%);
 }
 
-.characters-comic-list{
-    background-color: rgba(138, 42, 202, 0.300); 
+.acordion-comic-list{
+    background-color: rgba(142, 34, 215, 0.35) !important; 
 }
+
+
+
 
 .name-comics-list{
-    background-color: rgba(138, 42, 202, 0.900); 
+    /* background-color: rgba(82, 10, 130, 0.65);  */
+    
+    
+background: linear-gradient(144deg, rgba(82,10,130,60) 0%, rgba(82,10,130,0.50) 32%, rgba(40, 1, 72, 0.6) 98%);
+
+
 }
+
 
 
 .abc-comics a{
-    color: rgba(138, 42, 202, 1);
+    color: rgb(156, 57, 222);
     /* background-color: var(--dark-color); */
     
 }

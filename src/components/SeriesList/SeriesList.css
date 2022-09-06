@@ -1,23 +1,20 @@
-.img-serie-list-div{
-    max-height: 60%;
-    
-    
-}
+
 
 .col-serie-list{
-    background-color: rgba(29, 164, 83, 0.695); 
+    
+    background: linear-gradient(144deg, rgba(6, 210, 176, 0.612) 0%, rgba(38, 153, 134, 0.2) 32%, rgba(10, 107, 89, 0.3) 98%);
 }
 
-.characters-serie-list{
-    background-color: rgba(29, 164, 83, 0.300); 
+.acordion-serie-list{
+    background-color: rgba(6, 210, 176, 0.35) !important; 
 }
 
 .name-series-list{
     background-color: rgba(29, 164, 83, 0.9); 
+    background: linear-gradient(144deg, rgba(0, 0, 0, 0.6) 0%, rgba(10, 92, 43, 0.5) 32%, rrgba(10, 92, 43, 0.498) 98%);
 }
 
 .abc-series a{
-    color: rgba(29, 164, 83, 1);
+    color: rgba(5, 126, 106, 0.912);
     /* background-color: var(--dark-color); */
-    
 }

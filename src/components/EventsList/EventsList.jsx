@@ -143,6 +143,7 @@ const EventsList = () => {
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
           animate={selectedEvent && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <FormControl
             variant="filled"
@@ -176,9 +177,10 @@ const EventsList = () => {
         <motion.div
           className="col-12 d-none d-xl-flex col-pagination-characters-list justify-content-center "
           animate={selectedEvent && { opacity: 0 }}
+          transition={{ duration: 0 }}
         >
           <nav aria-label="Page navigation example">
-            <ul className="pagination abc">
+            <ul className="pagination abc abc-events">
               <li className="page-item">
                 <Link
                   className="page-link"
@@ -233,7 +235,7 @@ const EventsList = () => {
               <motion.div
                 layoutId={event.id}
                 animate={selectedEvent && { opacity: 0.4 }}
-                transition={{ duration: 0.1 }}
+                transition={{ duration: 0 }}
                 onClick={() => setSelectedEvent(event)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={event.id}
@@ -249,7 +251,7 @@ const EventsList = () => {
                     alt={event.title}
                   />
 
-                  <div className="name-characters-list">
+                  <div className="name-characters-list name-events-list">
                     <h3 className="">{`${event.title.slice(0, 20)}${
                       event.title.length > 20 ? '...' : ''
                     }`}</h3>
@@ -263,10 +265,10 @@ const EventsList = () => {
          <AnimatePresence>
           {selectedEvent && (
             <motion.div
-              className="container col-character-list"
+              className="container col-character-list col-event-list"
               layoutId={selectedEvent.id}
               key={selectedEvent.id}
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0 }}
               id="character"
             >
               <motion.button
@@ -304,7 +306,7 @@ const EventsList = () => {
 
                 <div className="row">
                   <Accordion
-                    className="acordion-character-list"
+                    className="acordion-character-list acordion-event-list"
                     expanded={expanded === 'panel1'}
                     onChange={handleChangeAcordion('panel1')}
                   >
@@ -364,7 +366,7 @@ const EventsList = () => {
                   </Accordion>
 
                   <Accordion
-                    className="acordion-character-list"
+                    className="acordion-character-list acordion-event-list"
                     expanded={expanded === 'panel2'}
                     onChange={handleChangeAcordion('panel2')}
                   >
@@ -424,7 +426,7 @@ const EventsList = () => {
                   </Accordion>
 
                   <Accordion
-                    className="acordion-character-list"
+                    className="acordion-character-list acordion-event-list"
                     expanded={expanded === 'panel3'}
                     onChange={handleChangeAcordion('panel3')}
                   >

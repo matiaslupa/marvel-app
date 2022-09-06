@@ -1,18 +1,22 @@
 .col-event-list{
-    background-color: rgba(136, 0, 0, 0.695); 
+    
+    background: linear-gradient(144deg, rgba(255, 1, 1, 0.51) 0%, rgba(148, 9, 9, 0.2) 32%, rgba(60, 2, 2, 0.2) 98%);
 }
 
-.characters-event-list{
-    background-color: rgba(136, 0, 0, 0.300); 
+
+
+
+.acordion-event-list{
+    background-color: rgba(216, 28, 28, 0.35) !important; 
 }
+
 
 .name-events-list{
-    background-color: rgba(136, 0, 0, 0.900); 
+    
+    background: linear-gradient(144deg, rgba(178, 21, 21, 0.539) 0%, rgba(178, 21, 21, 0.539) 32%, rgba(137, 7, 20, 0.5) 98%);
 }
 
-@media only screen and (max-width: 576px) {
+.abc-events a {
+    color: rgba(221, 16, 16, 0.9); 
 
-    .row-events-list{
-        margin-top: 100px !important;
-    }
 }
