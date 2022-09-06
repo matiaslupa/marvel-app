@@ -5,7 +5,6 @@ import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
-  
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -49,6 +48,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -89,7 +89,6 @@ const AccordionSummary = styled((props) => (
   },
 }));
 
-
 const SeriesList = () => {
   const [expanded, setExpanded] = useState(null);
 
@@ -112,7 +111,7 @@ const SeriesList = () => {
   const series = useSelector(selectSeries);
   const isLoadingSeries = useSelector(selectIsLoadingSeries);
 
-  let { letter = 'a'} = useParams();
+  let { letter = 'a' } = useParams();
 
   const dispatch = useDispatch();
 
@@ -136,8 +135,6 @@ const SeriesList = () => {
   };
 
   let navigate = useNavigate();
-
-  
 
   return (
     <div className="container container-charcaters-list">
@@ -226,12 +223,28 @@ const SeriesList = () => {
         </motion.div>
 
         {isLoadingSeries ? (
-          <div className="col-12 spinner-characters-list d-flex justify-content-center">
-            <div className="spinner-border " role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        ) : (
+          alphabet.map((element, index) => {
+            return (
+              <div
+                className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
+                key={index}
+              >
+                <div className="card-character-list">
+                  <Skeleton
+                    sx={{ bgcolor: '#37474f' }}
+                    variant="rounded"
+                    width={280}
+                    height={288}
+                    className="character-skeleton-list"
+                    animation="wave"
+                  />
+
+                  <div className="name-characters-list name-series-list"></div>
+                </div>
+              </div>
+            );
+          })
+        ) : series.length > 0 ? (
           series.map((serie) => {
             return (
               <motion.div
@@ -243,6 +256,8 @@ const SeriesList = () => {
                 key={serie.id}
               >
                 <motion.div className="card-character-list">
+                  <div className='img-characters-list-div'>
+                    
                   <motion.img
                     className="img-characters-list"
                     whileHover={{
@@ -252,6 +267,7 @@ const SeriesList = () => {
                     src={`${serie.thumbnail.path}/portrait_uncanny.${serie.thumbnail.extension}`}
                     alt={serie.title}
                   />
+                  </div>
 
                   <div className="name-characters-list name-series-list">
                     <h3 className="">{`${serie.title.slice(0, 20)}${
@@ -262,9 +278,22 @@ const SeriesList = () => {
               </motion.div>
             );
           })
+        ) : (
+          <motion.div
+            className="col-12 not-available-characters"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: 1.4,
+            }}
+          >
+            <h3>Series not available</h3>
+          </motion.div>
         )}
 
-          <AnimatePresence>
+        <AnimatePresence>
           {selectedSerie && (
             <motion.div
               className="container col-character-list col-serie-list"
@@ -286,11 +315,13 @@ const SeriesList = () => {
               <div className="separator" id="separator">
                 <div className="row m-0 justify-content-around row-name-description-character-list">
                   <div className="col-5 img-character-list-div">
-                    <motion.img
-                      className="img-character"
-                      src={`${selectedSerie.thumbnail.path}.${selectedSerie.thumbnail.extension}`}
-                      alt={selectedSerie.title}
-                    />
+                    <div className="img-character-div">
+                      <motion.img
+                        className="img-character"
+                        src={`${selectedSerie.thumbnail.path}.${selectedSerie.thumbnail.extension}`}
+                        alt={selectedSerie.title}
+                      />
+                    </div>
                   </div>
                   <div className="col-7 col-name-description-character-list">
                     <h2 className="character-name">
@@ -318,8 +349,9 @@ const SeriesList = () => {
                       id="panel1d-header"
                       onClick={() =>
                         expanded !== 'panel1' &&
-                        dispatch(loadCharacters(`${selectedSerie.id.toString()}series`))
-                        
+                        dispatch(
+                          loadCharacters(`${selectedSerie.id.toString()}series`)
+                        )
                       }
                     >
                       <Typography className="acordion-character-list-typography">
@@ -335,7 +367,9 @@ const SeriesList = () => {
                               id="comics"
                               key={character.id}
                               className="comics-character-list-div"
-                              onClick={() => navigate(`/characters/${character.id}`)}
+                              onClick={() =>
+                                navigate(`/characters/${character.id}`)
+                              }
                             >
                               <motion.img
                                 className="img-comic-character"
@@ -346,7 +380,7 @@ const SeriesList = () => {
                                 <span>{`${character.name
                                   .slice(0, 23)
                                   .toUpperCase()}${
-                                    character.name.length > 23 ? '...' : ''
+                                  character.name.length > 23 ? '...' : ''
                                 }`}</span>
                               </div>
                             </motion.div>
@@ -377,9 +411,9 @@ const SeriesList = () => {
                       aria-controls="panel2d-content"
                       id="panel2d-header"
                       onClick={() =>
-                        expanded !== 'panel2' && dispatch(
-                          
-                            loadComics(`${selectedSerie.id.toString()}series`)
+                        expanded !== 'panel2' &&
+                        dispatch(
+                          loadComics(`${selectedSerie.id.toString()}series`)
                         )
                       }
                     >
@@ -490,7 +524,7 @@ const SeriesList = () => {
               </div>
             </motion.div>
           )}
-        </AnimatePresence>  
+        </AnimatePresence>
       </motion.div>
     </div>
   );

@@ -82,7 +82,7 @@ function NavBar() {
     (isActive && location.pathname.includes('/events')) ||
     (!isActive && location.pathname.includes('/events'))
   ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(178, 21, 21, 0.639)' };
+    backgroundColorNavbar = { backgroundColor: 'rgba(252, 8, 8, 0.589)' };
   }
 
   // Characters navbar
@@ -145,7 +145,7 @@ function NavBar() {
       variants={navbar}
       animate={['navbarShow', 'navBarShow2']}
       transition={{
-        duration: 2,
+        duration: 1,
         type: 'Tween',
         stiffness: 100,
         ease: 'easeIn',

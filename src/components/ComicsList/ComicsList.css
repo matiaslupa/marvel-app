@@ -9,6 +9,10 @@ background: linear-gradient(144deg, rgba(82,10,130,30) 0%, rgba(82,10,130,0.30) 
     background-color: rgba(142, 34, 215, 0.35) !important; 
 }
 
+.img-comic-div{
+    max-width: 330px;
+    min-height: 510px;
+}
 
 
 

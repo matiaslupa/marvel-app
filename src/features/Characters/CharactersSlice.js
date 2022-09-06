@@ -34,7 +34,7 @@ export const loadCharacters = createAsyncThunk(
     else{
 
       // By letter name start...
-      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=-modified&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${letter}&orderBy=-modified&limit=30&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     

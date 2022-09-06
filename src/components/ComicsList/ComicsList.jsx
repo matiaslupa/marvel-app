@@ -5,7 +5,6 @@ import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
-  
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -49,6 +48,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -135,9 +135,6 @@ const ComicsList = () => {
   };
 
   let navigate = useNavigate();
-
-
-  
 
   return (
     <div className="container container-charcaters-list">
@@ -226,12 +223,32 @@ const ComicsList = () => {
         </motion.div>
 
         {isLoadingComics ? (
-          <div className="col-12 spinner-characters-list d-flex justify-content-center">
-            <div className="spinner-border " role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        ) : (
+          alphabet.map((element, index) => {
+            return (
+              <div
+                className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
+                key={index}
+              >
+                <div className="card-character-list">
+                  <Skeleton
+                    sx={{ bgcolor: '#37474f' }}
+                    variant="rounded"
+                    width={280}
+                    height={288}
+                    className="character-skeleton-list"
+                    animation="wave"
+                  />
+
+                  <div className="name-characters-list name-comics-list">
+                    {/* <h3 className="">{`${character.name.slice(0, 20)}${
+                      character.name.length > 20 ? '...' : ''
+                    }`}</h3> */}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : comics.length > 0 ? (
           comics.map((comic) => {
             return (
               <motion.div
@@ -243,6 +260,7 @@ const ComicsList = () => {
                 key={comic.id}
               >
                 <motion.div className="card-character-list">
+                <div className='img-characters-list-div'>
                   <motion.img
                     className="img-characters-list"
                     whileHover={{
@@ -252,7 +270,7 @@ const ComicsList = () => {
                     src={`${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`}
                     alt={comic.title}
                   />
-
+                  </div>
                   <div className="name-characters-list name-comics-list">
                     <h3 className="">{`${comic.title.slice(0, 20)}${
                       comic.title.length > 20 ? '...' : ''
@@ -262,6 +280,19 @@ const ComicsList = () => {
               </motion.div>
             );
           })
+        ) : (
+          <motion.div
+            className="col-12 not-available-characters"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: 1.4,
+            }}
+          >
+            <h3>Comics not available</h3>
+          </motion.div>
         )}
 
         <AnimatePresence>
@@ -270,7 +301,7 @@ const ComicsList = () => {
               className="container col-character-list col-comic-list"
               layoutId={selectedComic.id}
               key={selectedComic.id}
-              transition={{ duration: 0}}
+              transition={{ duration: 0 }}
               id="character"
             >
               <motion.button
@@ -286,11 +317,13 @@ const ComicsList = () => {
               <div className="separator" id="separator">
                 <div className="row m-0 justify-content-around row-name-description-character-list">
                   <div className="col-5 img-character-list-div">
-                    <motion.img
-                      className="img-character"
-                      src={`${selectedComic.thumbnail.path}/detail.${selectedComic.thumbnail.extension}`}
-                      alt={selectedComic.title}
-                    />
+                    <div className="img-character-div img-comic-div">
+                      <motion.img
+                        className="img-character"
+                        src={`${selectedComic.thumbnail.path}/detail.${selectedComic.thumbnail.extension}`}
+                        alt={selectedComic.title}
+                      />
+                    </div>
                   </div>
                   <div className="col-7 col-name-description-character-list">
                     <h2 className="character-name">
@@ -318,7 +351,9 @@ const ComicsList = () => {
                       id="panel1d-header"
                       onClick={() =>
                         expanded !== 'panel1' &&
-                        dispatch(loadCharacters(`${selectedComic.id.toString()}comic`))
+                        dispatch(
+                          loadCharacters(`${selectedComic.id.toString()}comic`)
+                        )
                       }
                     >
                       <Typography className="acordion-character-list-typography">
@@ -331,10 +366,11 @@ const ComicsList = () => {
                         characters.map((character) => {
                           return (
                             <motion.div
-                            
                               key={character.id}
                               className="comics-character-list-div"
-                              onClick={() => navigate(`/characters/${character.id}`)}
+                              onClick={() =>
+                                navigate(`/characters/${character.id}`)
+                              }
                             >
                               <motion.img
                                 className="img-comic-character"
@@ -345,7 +381,7 @@ const ComicsList = () => {
                                 <span>{`${character.name
                                   .slice(0, 23)
                                   .toUpperCase()}${
-                                    character.name.length > 23 ? '...' : ''
+                                  character.name.length > 23 ? '...' : ''
                                 }`}</span>
                               </div>
                             </motion.div>
@@ -376,9 +412,9 @@ const ComicsList = () => {
                       aria-controls="panel2d-content"
                       id="panel2d-header"
                       onClick={() =>
-                        expanded !== 'panel2' && dispatch(
-                          
-                            loadEvents(`${selectedComic.id.toString()}comic`)
+                        expanded !== 'panel2' &&
+                        dispatch(
+                          loadEvents(`${selectedComic.id.toString()}comic`)
                         )
                       }
                     >
@@ -425,13 +461,11 @@ const ComicsList = () => {
                       )}
                     </div>
                   </Accordion>
-
-                  
                 </div>
               </div>
             </motion.div>
           )}
-        </AnimatePresence> 
+        </AnimatePresence>
       </motion.div>
     </div>
   );

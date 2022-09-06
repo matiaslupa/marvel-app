@@ -5,7 +5,6 @@ import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
-  
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -49,6 +48,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -88,7 +88,6 @@ const AccordionSummary = styled((props) => (
     marginLeft: theme.spacing(1),
   },
 }));
-
 
 const EventsList = () => {
   const [expanded, setExpanded] = useState(null);
@@ -224,12 +223,32 @@ const EventsList = () => {
         </motion.div>
 
         {isLoadingEvents ? (
-          <div className="col-12 spinner-characters-list d-flex justify-content-center">
-            <div className="spinner-border " role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        ) : (
+          alphabet.map((element, index) => {
+            return (
+              <div
+                className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
+                key={index}
+              >
+                <div className="card-character-list">
+                  <Skeleton
+                    sx={{ bgcolor: '#37474f' }}
+                    variant="rounded"
+                    width={280}
+                    height={288}
+                    className="character-skeleton-list"
+                    animation="wave"
+                  />
+
+                  <div className="name-characters-list name-events-list">
+                    {/* <h3 className="">{`${character.name.slice(0, 20)}${
+                      character.name.length > 20 ? '...' : ''
+                    }`}</h3> */}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : events.length > 0 ? (
           events.map((event) => {
             return (
               <motion.div
@@ -241,16 +260,17 @@ const EventsList = () => {
                 key={event.id}
               >
                 <motion.div className="card-character-list">
-                  <motion.img
-                    className="img-characters-list"
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.8 },
-                    }}
-                    src={`${event.thumbnail.path}/portrait_uncanny.${event.thumbnail.extension}`}
-                    alt={event.title}
-                  />
-
+                  <div className="img-characters-list-div">
+                    <motion.img
+                      className="img-characters-list"
+                      whileHover={{
+                        scale: 1.05,
+                        transition: { duration: 0.8 },
+                      }}
+                      src={`${event.thumbnail.path}/portrait_uncanny.${event.thumbnail.extension}`}
+                      alt={event.title}
+                    />
+                  </div>
                   <div className="name-characters-list name-events-list">
                     <h3 className="">{`${event.title.slice(0, 20)}${
                       event.title.length > 20 ? '...' : ''
@@ -260,9 +280,22 @@ const EventsList = () => {
               </motion.div>
             );
           })
+        ) : (
+          <motion.div
+            className="col-12 not-available-characters"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: 1.4,
+            }}
+          >
+            <h3>Events not available</h3>
+          </motion.div>
         )}
 
-         <AnimatePresence>
+        <AnimatePresence>
           {selectedEvent && (
             <motion.div
               className="container col-character-list col-event-list"
@@ -284,11 +317,13 @@ const EventsList = () => {
               <div className="separator" id="separator">
                 <div className="row m-0 justify-content-around row-name-description-character-list">
                   <div className="col-5 img-character-list-div">
-                    <motion.img
-                      className="img-character"
-                      src={`${selectedEvent.thumbnail.path}.${selectedEvent.thumbnail.extension}`}
-                      alt={selectedEvent.title}
-                    />
+                    <div className="img-character-div">
+                      <motion.img
+                        className="img-character"
+                        src={`${selectedEvent.thumbnail.path}.${selectedEvent.thumbnail.extension}`}
+                        alt={selectedEvent.title}
+                      />
+                    </div>
                   </div>
                   <div className="col-7 col-name-description-character-list">
                     <h2 className="character-name">
@@ -316,8 +351,9 @@ const EventsList = () => {
                       id="panel1d-header"
                       onClick={() =>
                         expanded !== 'panel1' &&
-                        dispatch(loadCharacters(`${selectedEvent.id.toString()}events`))
-                        
+                        dispatch(
+                          loadCharacters(`${selectedEvent.id.toString()}events`)
+                        )
                       }
                     >
                       <Typography className="acordion-character-list-typography">
@@ -333,7 +369,9 @@ const EventsList = () => {
                               id="comics"
                               key={character.id}
                               className="comics-character-list-div"
-                              onClick={() => navigate(`/characters/${character.id}`)}
+                              onClick={() =>
+                                navigate(`/characters/${character.id}`)
+                              }
                             >
                               <motion.img
                                 className="img-comic-character"
@@ -344,7 +382,7 @@ const EventsList = () => {
                                 <span>{`${character.name
                                   .slice(0, 23)
                                   .toUpperCase()}${
-                                    character.name.length > 23 ? '...' : ''
+                                  character.name.length > 23 ? '...' : ''
                                 }`}</span>
                               </div>
                             </motion.div>
@@ -375,9 +413,9 @@ const EventsList = () => {
                       aria-controls="panel2d-content"
                       id="panel2d-header"
                       onClick={() =>
-                        expanded !== 'panel2' && dispatch(
-                          
-                            loadComics(`${selectedEvent.id.toString()}events`)
+                        expanded !== 'panel2' &&
+                        dispatch(
+                          loadComics(`${selectedEvent.id.toString()}events`)
                         )
                       }
                     >
@@ -488,7 +526,7 @@ const EventsList = () => {
               </div>
             </motion.div>
           )}
-        </AnimatePresence> 
+        </AnimatePresence>
       </motion.div>
     </div>
   );

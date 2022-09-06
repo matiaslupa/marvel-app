@@ -6,7 +6,6 @@ import {
   loadCharacters,
   selectCharacters,
   selectIsLoading,
-  
 } from '../../features/Characters/CharactersSlice';
 
 import {
@@ -50,6 +49,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import Skeleton from '@mui/material/Skeleton';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -136,7 +136,6 @@ function CharactersList() {
   };
 
   let navigate = useNavigate();
-
 
   return (
     <div className="container container-charcaters-list">
@@ -225,12 +224,32 @@ function CharactersList() {
         </motion.div>
 
         {isLoading ? (
-          <div className="col-12 spinner-characters-list d-flex justify-content-center">
-            <div className="spinner-border " role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        ) : (
+          alphabet.map((element, index) => {
+            return (
+              <div
+                className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
+                key={index}
+              >
+                <div className="card-character-list">
+                  <Skeleton
+                    sx={{ bgcolor: '#37474f' }}
+                    variant="rounded"
+                    width={280}
+                    height={288}
+                    className="character-skeleton-list"
+                    animation="wave"
+                  />
+
+                  <div className="name-characters-list">
+                    {/* <h3 className="">{`${character.name.slice(0, 20)}${
+                      character.name.length > 20 ? '...' : ''
+                    }`}</h3> */}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : characters.length > 0 ? (
           characters.map((character) => {
             return (
               <motion.div
@@ -242,6 +261,8 @@ function CharactersList() {
                 key={character.id}
               >
                 <motion.div className="card-character-list">
+
+                <div className='img-characters-list-div'>
                   <motion.img
                     className="img-characters-list"
                     whileHover={{
@@ -251,6 +272,7 @@ function CharactersList() {
                     src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                     alt={character.name}
                   />
+                  </div>
 
                   <div className="name-characters-list">
                     <h3 className="">{`${character.name.slice(0, 20)}${
@@ -261,6 +283,19 @@ function CharactersList() {
               </motion.div>
             );
           })
+        ) : (
+          <motion.div
+            className="col-12 not-available-characters"
+            initial={{
+              opacity: 0,
+            }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: 1.4,
+            }}
+          >
+            <h3>Characters not available</h3>
+          </motion.div>
         )}
 
         <AnimatePresence>
@@ -285,11 +320,18 @@ function CharactersList() {
               <div className="separator" id="separator">
                 <div className="row m-0 justify-content-around row-name-description-character-list">
                   <div className="col-5 img-character-list-div">
-                    <motion.img
-                      className="img-character"
-                      src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
-                      alt={selectedCharacter.name}
-                    />
+                    <div className="img-character-div">
+                      
+                        <motion.img
+                          className="img-character"
+                          src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
+                          alt={selectedCharacter.name}
+                        />
+                        
+
+                        
+                      
+                    </div>
                   </div>
                   <div className="col-7 col-name-description-character-list">
                     <h2 className="character-name">
@@ -317,8 +359,11 @@ function CharactersList() {
                       id="panel1d-header"
                       onClick={() =>
                         expanded !== 'panel1' &&
-                        dispatch(loadComics(`${selectedCharacter.id.toString()}character`))
-                        
+                        dispatch(
+                          loadComics(
+                            `${selectedCharacter.id.toString()}character`
+                          )
+                        )
                       }
                     >
                       <Typography className="acordion-character-list-typography">
@@ -336,11 +381,16 @@ function CharactersList() {
                               className="comics-character-list-div"
                               onClick={() => navigate(`/comics/${comic.id}`)}
                             >
+                             
+                                
+                              
                               <motion.img
                                 className="img-comic-character"
                                 src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                                 alt={comic.title}
                               />
+
+                              
                               <div className="comic-title-character-list">
                                 <span>{`${comic.title
                                   .slice(0, 23)
@@ -376,9 +426,11 @@ function CharactersList() {
                       aria-controls="panel2d-content"
                       id="panel2d-header"
                       onClick={() =>
-                        expanded !== 'panel2' && dispatch(
-                          
-                            loadEvents(`${selectedCharacter.id.toString()}character`)
+                        expanded !== 'panel2' &&
+                        dispatch(
+                          loadEvents(
+                            `${selectedCharacter.id.toString()}character`
+                          )
                         )
                       }
                     >
@@ -438,7 +490,9 @@ function CharactersList() {
                       onClick={() =>
                         expanded !== 'panel3' &&
                         dispatch(
-                          loadSeries(`${selectedCharacter.id.toString()}character`)
+                          loadSeries(
+                            `${selectedCharacter.id.toString()}character`
+                          )
                         )
                       }
                     >
