@@ -119,6 +119,7 @@ const ComicsList = () => {
     dispatch(loadComics(letter));
   }, [letter]);
 
+
   useEffect(() => {
     if (selectedComic) {
       dispatch(toggleNavBarTrue());
@@ -372,11 +373,14 @@ const ComicsList = () => {
                                 navigate(`/characters/${character.id}`)
                               }
                             >
+                              <div className='img-comic-character-div'>
                               <motion.img
                                 className="img-comic-character"
                                 src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
                                 alt={character.name}
                               />
+
+                              </div>
                               <div className="comic-title-character-list">
                                 <span>{`${character.name
                                   .slice(0, 23)
@@ -398,6 +402,12 @@ const ComicsList = () => {
                         <span className="not-available">
                           Characters not available
                         </span>
+                      )}
+                      {characters.length > 9 && (
+                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/characters/${selectedComic.id.toString()}-comic-All/`)}>
+                        See all characters...
+                      </button>
+                        
                       )}
                     </div>
                   </Accordion>
@@ -432,11 +442,13 @@ const ComicsList = () => {
                               className="comics-character-list-div"
                               onClick={() => navigate(`/events/${event.id}`)}
                             >
+                              <div className='img-comic-character-div'>
                               <motion.img
                                 className="img-comic-character"
                                 src={`${event.thumbnail.path}/portrait_xlarge.${event.thumbnail.extension}`}
                                 alt={event.title}
                               />
+                              </div>
                               <div className="comic-title-character-list">
                                 <span>{`${event.title
                                   .slice(0, 23)
@@ -458,6 +470,12 @@ const ComicsList = () => {
                         <span className="not-available">
                           Events not available
                         </span>
+                      )}
+                      {characters.length > 9 && (
+                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/events/${selectedComic.id.toString()}-comic-All/`)}>
+                        See all characters...
+                      </button>
+                        
                       )}
                     </div>
                   </Accordion>

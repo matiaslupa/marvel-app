@@ -9,19 +9,25 @@ export const loadComics = createAsyncThunk(
     const regex = /^[0-9]*$/;
     let url = ''
 
-    if (comic.includes('character')) {
+    if (comic.endsWith('character')) {
 
       // By character ID
       url = `https://gateway.marvel.com:443/v1/public/characters/${comic.slice(0,-9)}/comics?orderBy=-onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
 
 
-    }else if(comic.includes('events')){
+    }else if(comic.endsWith('-character-All')){
+
+      // By character ID ALL
+      url = `https://gateway.marvel.com:443/v1/public/characters/${comic.slice(0,-14)}/comics?orderBy=-onsaleDate&limit=100&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+    }
+    
+    else if(comic.endsWith('events')){
 
       // By event ID
       url = `https://gateway.marvel.com:443/v1/public/events/${comic.slice(0,-6)}/comics?orderBy=-onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
-    else if(comic.includes('series')){
+    else if(comic.endsWith('series')){
 
       // By serie ID
       url = `https://gateway.marvel.com:443/v1/public/series/${comic.slice(0,-6)}/comics?orderBy=-onsaleDate&limit=10&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;

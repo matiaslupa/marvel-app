@@ -253,25 +253,24 @@ function CharactersList() {
           characters.map((character) => {
             return (
               <motion.div
+                transition={{ duration: 0.0 }}
                 layoutId={character.id}
                 animate={selectedCharacter && { opacity: 0.4 }}
-                transition={{ duration: 0.0 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
               >
                 <motion.div className="card-character-list">
-
-                <div className='img-characters-list-div'>
-                  <motion.img
-                    className="img-characters-list"
-                    whileHover={{
-                      scale: 1.05,
-                      transition: { duration: 0.8 },
-                    }}
-                    src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
-                    alt={character.name}
-                  />
+                  <div className="img-characters-list-div">
+                    <motion.img
+                      className="img-characters-list"
+                      whileHover={{
+                        scale: 1.05,
+                        transition: { duration: 0.8 },
+                      }}
+                      src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
+                      alt={character.name}
+                    />
                   </div>
 
                   <div className="name-characters-list">
@@ -304,7 +303,7 @@ function CharactersList() {
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-              transition={{ duration: 0 }}
+              transition={{ duration: 0.0 }}
               id="character"
             >
               <motion.button
@@ -321,16 +320,11 @@ function CharactersList() {
                 <div className="row m-0 justify-content-around row-name-description-character-list">
                   <div className="col-5 img-character-list-div">
                     <div className="img-character-div">
-                      
-                        <motion.img
-                          className="img-character"
-                          src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
-                          alt={selectedCharacter.name}
-                        />
-                        
-
-                        
-                      
+                      <motion.img
+                        className="img-character"
+                        src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
+                        alt={selectedCharacter.name}
+                      />
                     </div>
                   </div>
                   <div className="col-7 col-name-description-character-list">
@@ -381,16 +375,17 @@ function CharactersList() {
                               className="comics-character-list-div"
                               onClick={() => navigate(`/comics/${comic.id}`)}
                             >
-                             
+                              <div className='img-comic-character-div'>
+
+                                {/* copiar div en events y series, copiar botones */}
                                 
-                              
                               <motion.img
                                 className="img-comic-character"
                                 src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
                                 alt={comic.title}
-                              />
+                                />
 
-                              
+                              </div>
                               <div className="comic-title-character-list">
                                 <span>{`${comic.title
                                   .slice(0, 23)
@@ -412,6 +407,12 @@ function CharactersList() {
                         <span className="not-available">
                           Comics not available
                         </span>
+                      )}
+                      {comics.length > 9 && (
+                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/comics/${selectedCharacter.id.toString()}-character-All/`)}>
+                        See all comics...
+                      </button>
+                        
                       )}
                     </div>
                   </Accordion>
@@ -448,11 +449,14 @@ function CharactersList() {
                               className="comics-character-list-div"
                               onClick={() => navigate(`/events/${event.id}`)}
                             >
+                              <div className='img-comic-character-div'> 
+                                
                               <motion.img
                                 className="img-comic-character"
                                 src={`${event.thumbnail.path}/portrait_xlarge.${event.thumbnail.extension}`}
                                 alt={event.title}
-                              />
+                                />
+                                </div>
                               <div className="comic-title-character-list">
                                 <span>{`${event.title
                                   .slice(0, 23)
@@ -474,6 +478,12 @@ function CharactersList() {
                         <span className="not-available">
                           Events not available
                         </span>
+                      )}
+                      { events.length > 9 && (
+                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/events/${selectedCharacter.id.toString()}-character-All/`)}>
+                        See all events...
+                      </button>
+                        
                       )}
                     </div>
                   </Accordion>
@@ -510,11 +520,15 @@ function CharactersList() {
                               className="comics-character-list-div"
                               onClick={() => navigate(`/series/${serie.id}`)}
                             >
+                              <div className='img-comic-character-div'> 
                               <motion.img
                                 className="img-comic-character"
                                 src={`${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
                                 alt={serie.title}
                               />
+                              
+                                
+                              </div>
                               <div className="comic-title-character-list">
                                 <span>{`${serie.title
                                   .slice(0, 23)
@@ -536,6 +550,12 @@ function CharactersList() {
                         <span className="not-available">
                           Series not available
                         </span>
+                      )}
+                      { series.length > 9 && (
+                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/series/${selectedCharacter.id.toString()}-character-All/`)}>
+                        See all series...
+                      </button>
+                        
                       )}
                     </div>
                   </Accordion>
