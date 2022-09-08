@@ -3,11 +3,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { motion, useCycle, useScroll } from 'framer-motion';
 import { MenuToggle } from '../../components/MenuToggle/MenuToggle';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { selectNavBar } from './NavBarSlice';
-import { useSelector } from 'react-redux';
-
+import {
+  selectNavBar,
+  setSearchTerm,
+  clearSearchTerm,
+  selectSearchTerm,
+} from './NavBarSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import './NavBar.css';
 
 function NavBar() {
@@ -18,6 +22,39 @@ function NavBar() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const navBar = useSelector(selectNavBar);
+
+  const searchTerm = useSelector(selectSearchTerm);
+
+  const location = useLocation();
+
+  let termLocation = '';
+  if (location.pathname.includes('characters')) {
+    termLocation = 'characters';
+  } else if (location.pathname.includes('comics')) {
+    termLocation = 'comics';
+  } else if (location.pathname.includes('events')) {
+    termLocation = 'events';
+  } else if (location.pathname.includes('series')) {
+    termLocation = 'series';
+  }
+
+  const dispatch = useDispatch();
+
+  const onSearchChangeHandler = (e) => {
+    e.preventDefault();
+    dispatch(setSearchTerm(e.target.value));
+  };
+
+  let navigate = useNavigate();
+
+  const onSearchTermClearHandler = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      navigate(`${termLocation}/${searchTerm}`);
+      dispatch(clearSearchTerm());
+    }
+    
+  };
 
   const { scrollYProgress } = useScroll();
 
@@ -43,37 +80,7 @@ function NavBar() {
     },
   };
 
-  const location = useLocation();
-
   let topNavbar = {};
-
-  /* let prevScrollpos = window.pageYOffset;
-  window.onscroll = function () {
-    let currentScrollPos = window.pageYOffset;
-
-    if (prevScrollpos > currentScrollPos) {
-      setIsScroll('up');
-      topNavbar = {
-        top: '100px',
-        transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
-      };
-    } else {
-      if (isActive) {
-        topNavbar = {
-          top: '0px',
-          transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
-        };
-      } else {
-        setIsScroll('down');
-        topNavbar = {
-          top: '-79px',
-          transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
-        };
-      }
-    }
-
-    prevScrollpos = currentScrollPos;
-  }; */
 
   let backgroundColorNavbar = {};
 
@@ -113,13 +120,12 @@ function NavBar() {
   }
 
   if (navBar) {
-    if(isActive){
+    if (isActive) {
       topNavbar = {
         y: '-300px',
         transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
       };
-    }else{
-
+    } else {
       topNavbar = {
         y: '-79px',
         transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
@@ -137,8 +143,6 @@ function NavBar() {
 
     navBarShow2: topNavbar,
   };
-
-  
 
   return (
     <motion.nav
@@ -160,7 +164,6 @@ function NavBar() {
               window.scrollTo(0, 0);
               isActive && toggleOpen();
               setIsActive(false);
-              
             }}
             onMouseEnter={() => togglehover()}
             onMouseLeave={() => togglehover()}
@@ -263,18 +266,76 @@ function NavBar() {
               </li>
             </Link>
           </ul>
-          <form className="d-flex" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="🔍 Search your hero..."
-              aria-label="Search your hero..."
-            />
 
-            <button className="btn search-btn d-lg-none" type="submit">
-              SEARCH
-            </button>
-          </form>
+          {(location.pathname.includes('/characters') && (
+            <form className="d-flex" role="search">
+              <input
+                value={searchTerm}
+                onChange={onSearchChangeHandler}
+                onKeyPress={onSearchTermClearHandler}
+                onPointerOut={onSearchTermClearHandler}
+                className="form-control me-2"
+                type="search"
+                placeholder="🔍 Search your hero..."
+                aria-label="Search your hero..."
+              />
+
+              <button className="btn search-btn d-lg-none" type="submit">
+                SEARCH
+              </button>
+            </form>
+          )) ||
+            (location.pathname.includes('/comics') && (
+              <form className="d-flex" role="search">
+                <input
+                  value={searchTerm}
+                  onChange={onSearchChangeHandler}
+                  onKeyPress={onSearchTermClearHandler}
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="🔍 Search a comic..."
+                  aria-label="Search a comic..."
+                />
+
+                <button className="btn search-btn d-lg-none" type="submit">
+                  SEARCH
+                </button>
+              </form>
+            )) ||
+            (location.pathname.includes('/events') && (
+              <form className="d-flex" role="search">
+                <input
+                  value={searchTerm}
+                  onChange={onSearchChangeHandler}
+                  onKeyPress={onSearchTermClearHandler}
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="🔍 Search a event..."
+                  aria-label="Search a event..."
+                />
+
+                <button className="btn search-btn d-lg-none" type="submit">
+                  SEARCH
+                </button>
+              </form>
+            )) ||
+            (location.pathname.includes('/series') && (
+              <form className="d-flex" role="search">
+                <input
+                  value={searchTerm}
+                  onChange={onSearchChangeHandler}
+                  onKeyPress={onSearchTermClearHandler}
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="🔍 Search a serie..."
+                  aria-label="Search a serie..."
+                />
+
+                <button className="btn search-btn d-lg-none" type="submit">
+                  SEARCH
+                </button>
+              </form>
+            ))}
         </div>
       </div>
     </motion.nav>

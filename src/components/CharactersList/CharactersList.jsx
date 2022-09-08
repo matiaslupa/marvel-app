@@ -137,6 +137,13 @@ function CharactersList() {
 
   let navigate = useNavigate();
 
+  /* window.addEventListener('click', function (e) {
+    if (!document.getElementById('character').contains(e.target)) {
+      setExpanded(null);
+      
+    }
+  }); */
+
   return (
     <div className="container container-charcaters-list">
       <motion.div className="row justify-content-center row-characters-list">
@@ -296,272 +303,304 @@ function CharactersList() {
             <h3>Characters not available</h3>
           </motion.div>
         )}
-
+        {selectedCharacter && (
+           <div
+           className="expanded-col-character-list"
+           onClick={() => {
+             setExpanded(null);
+             setSelectedCharacter(null);
+           }}
+         ></div>
+        )}
         <AnimatePresence>
           {selectedCharacter && (
-            <motion.div
-              className="container col-character-list"
-              layoutId={selectedCharacter.id}
-              key={selectedCharacter.id}
-              transition={{ duration: 0.0 }}
-              id="character"
-            >
-              <motion.button
-                className="btn btn-outline-warning btn-close-character"
-                onClick={() => {
-                  setExpanded(null);
-                  setSelectedCharacter(null);
-                }}
+           
+              <motion.div
+                className="container col-character-list"
+                layoutId={selectedCharacter.id}
+                key={selectedCharacter.id}
+                transition={{ duration: 0.0 }}
+                id="character"
               >
-                X
-              </motion.button>
+                <motion.button
+                  className="btn btn-outline-warning btn-close-character"
+                  onClick={() => {
+                    setExpanded(null);
+                    setSelectedCharacter(null);
+                  }}
+                >
+                  X
+                </motion.button>
 
-              <div className="separator" id="separator">
-                <div className="row m-0 justify-content-around row-name-description-character-list">
-                  <div className="col-5 img-character-list-div">
-                    <div className="img-character-div">
-                      <motion.img
-                        className="img-character"
-                        src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
-                        alt={selectedCharacter.name}
-                      />
+                <div className="separator" id="separator">
+                  <div className="row m-0 justify-content-around row-name-description-character-list">
+                    <div className="col-5 img-character-list-div">
+                      <div className="img-character-div">
+                        <motion.img
+                          className="img-character"
+                          src={`${selectedCharacter.thumbnail.path}/detail.${selectedCharacter.thumbnail.extension}`}
+                          alt={selectedCharacter.name}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-7 col-name-description-character-list">
-                    <h2 className="character-name">
-                      {selectedCharacter.name.toUpperCase()}
-                    </h2>
-                    <div className="character-description">
-                      <span>
-                        {selectedCharacter.description
-                          ? selectedCharacter.description
-                          : 'Description not available'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <Accordion
-                    className="acordion-character-list"
-                    expanded={expanded === 'panel1'}
-                    onChange={handleChangeAcordion('panel1')}
-                  >
-                    <AccordionSummary
-                      className="acordion-character-list-summary"
-                      aria-controls="panel1d-content"
-                      id="panel1d-header"
-                      onClick={() =>
-                        expanded !== 'panel1' &&
-                        dispatch(
-                          loadComics(
-                            `${selectedCharacter.id.toString()}character`
-                          )
-                        )
-                      }
-                    >
-                      <Typography className="acordion-character-list-typography">
-                        COMICS
-                      </Typography>
-                    </AccordionSummary>
-
-                    <div className="comics-character-list">
-                      {!isLoadingComics ? (
-                        comics.map((comic) => {
-                          return (
-                            <motion.div
-                              id="comics"
-                              key={comic.id}
-                              className="comics-character-list-div"
-                              onClick={() => navigate(`/comics/${comic.id}`)}
-                            >
-                              <div className='img-comic-character-div'>
-
-                                {/* copiar div en events y series, copiar botones */}
-                                
-                              <motion.img
-                                className="img-comic-character"
-                                src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
-                                alt={comic.title}
-                                />
-
-                              </div>
-                              <div className="comic-title-character-list">
-                                <span>{`${comic.title
-                                  .slice(0, 23)
-                                  .toUpperCase()}${
-                                  comic.title.length > 23 ? '...' : ''
-                                }`}</span>
-                              </div>
-                            </motion.div>
-                          );
-                        })
-                      ) : (
-                        <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
-                          <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
-                        </div>
-                      )}
-                      {comics.length === 0 && (
-                        <span className="not-available">
-                          Comics not available
+                    <div className="col-7 col-name-description-character-list">
+                      <h2 className="character-name">
+                        {selectedCharacter.name.toUpperCase()}
+                      </h2>
+                      <div className="character-description">
+                        <span>
+                          {selectedCharacter.description
+                            ? selectedCharacter.description
+                            : 'Description not available'}
                         </span>
-                      )}
-                      {comics.length > 9 && (
-                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/comics/${selectedCharacter.id.toString()}-character-All/`)}>
-                        See all comics...
-                      </button>
-                        
-                      )}
+                      </div>
                     </div>
-                  </Accordion>
+                  </div>
 
-                  <Accordion
-                    className="acordion-character-list"
-                    expanded={expanded === 'panel2'}
-                    onChange={handleChangeAcordion('panel2')}
-                  >
-                    <AccordionSummary
-                      className="acordion-character-list-summary"
-                      aria-controls="panel2d-content"
-                      id="panel2d-header"
-                      onClick={() =>
-                        expanded !== 'panel2' &&
-                        dispatch(
-                          loadEvents(
-                            `${selectedCharacter.id.toString()}character`
-                          )
-                        )
-                      }
+                  <div className="row">
+                    <Accordion
+                      className="acordion-character-list"
+                      expanded={expanded === 'panel1'}
+                      onChange={handleChangeAcordion('panel1')}
                     >
-                      <Typography className="acordion-character-list-typography">
-                        EVENTS
-                      </Typography>
-                    </AccordionSummary>
+                      <AccordionSummary
+                        className="acordion-character-list-summary"
+                        aria-controls="panel1d-content"
+                        id="panel1d-header"
+                        onClick={() =>
+                          expanded !== 'panel1' &&
+                          dispatch(
+                            loadComics(
+                              `${selectedCharacter.id.toString()}character`
+                            )
+                          )
+                        }
+                      >
+                        <Typography className="acordion-character-list-typography">
+                          COMICS
+                        </Typography>
+                      </AccordionSummary>
 
-                    <div className="comics-character-list">
-                      {!isLoadingEvents ? (
-                        events.map((event) => {
-                          return (
-                            <motion.div
-                              key={event.id}
-                              className="comics-character-list-div"
-                              onClick={() => navigate(`/events/${event.id}`)}
-                            >
-                              <div className='img-comic-character-div'> 
-                                
-                              <motion.img
-                                className="img-comic-character"
-                                src={`${event.thumbnail.path}/portrait_xlarge.${event.thumbnail.extension}`}
-                                alt={event.title}
-                                />
+                      <div className="comics-character-list">
+                        {!isLoadingComics ? (
+                          comics.map((comic) => {
+                            return (
+                              <motion.div
+                                id="comics"
+                                key={comic.id}
+                                className="comics-character-list-div"
+                                onClick={() => navigate(`/comics/${comic.id}`)}
+                              >
+                                <div className="img-comic-character-div">
+                                  {/* copiar div en events y series, copiar botones */}
+
+                                  <motion.img
+                                    className="img-comic-character"
+                                    src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
+                                    alt={comic.title}
+                                  />
                                 </div>
-                              <div className="comic-title-character-list">
-                                <span>{`${event.title
-                                  .slice(0, 23)
-                                  .toUpperCase()}${
-                                  event.title.length > 23 ? '...' : ''
-                                }`}</span>
-                              </div>
-                            </motion.div>
-                          );
-                        })
-                      ) : (
-                        <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
-                          <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
+                                <div className="comic-title-character-list">
+                                  <span>{`${comic.title
+                                    .slice(0, 23)
+                                    .toUpperCase()}${
+                                    comic.title.length > 23 ? '...' : ''
+                                  }`}</span>
+                                </div>
+                              </motion.div>
+                            );
+                          })
+                        ) : (
+                          <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                            <div className="spinner-border" role="status">
+                              <span className="visually-hidden">
+                                Loading...
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                      {events.length === 0 && (
-                        <span className="not-available">
-                          Events not available
-                        </span>
-                      )}
-                      { events.length > 9 && (
-                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/events/${selectedCharacter.id.toString()}-character-All/`)}>
-                        See all events...
-                      </button>
-                        
-                      )}
-                    </div>
-                  </Accordion>
+                        )}
+                        {comics.length === 0 && (
+                          <span className="not-available">
+                            Comics not available
+                          </span>
+                        )}
+                        {comics.length > 9 && (
+                          <button
+                            type="button"
+                            className="btn btn-comic-character-list"
+                            onClick={() =>
+                              navigate(
+                                `/comics/${selectedCharacter.id.toString()}-character-All/`
+                              )
+                            }
+                          >
+                            See all comics...
+                          </button>
+                        )}
+                      </div>
+                    </Accordion>
 
-                  <Accordion
-                    className="acordion-character-list"
-                    expanded={expanded === 'panel3'}
-                    onChange={handleChangeAcordion('panel3')}
-                  >
-                    <AccordionSummary
-                      className="acordion-character-list-summary"
-                      aria-controls="panel3d-content"
-                      id="panel3d-header"
-                      onClick={() =>
-                        expanded !== 'panel3' &&
-                        dispatch(
-                          loadSeries(
-                            `${selectedCharacter.id.toString()}character`
-                          )
-                        )
-                      }
+                    <Accordion
+                      className="acordion-character-list"
+                      expanded={expanded === 'panel2'}
+                      onChange={handleChangeAcordion('panel2')}
                     >
-                      <Typography className="acordion-character-list-typography">
-                        SERIES
-                      </Typography>
-                    </AccordionSummary>
+                      <AccordionSummary
+                        className="acordion-character-list-summary"
+                        aria-controls="panel2d-content"
+                        id="panel2d-header"
+                        onClick={() =>
+                          expanded !== 'panel2' &&
+                          dispatch(
+                            loadEvents(
+                              `${selectedCharacter.id.toString()}character`
+                            )
+                          )
+                        }
+                      >
+                        <Typography className="acordion-character-list-typography">
+                          EVENTS
+                        </Typography>
+                      </AccordionSummary>
 
-                    <div className="comics-character-list">
-                      {!isLoadingSeries ? (
-                        series.map((serie) => {
-                          return (
-                            <motion.div
-                              key={serie.id}
-                              className="comics-character-list-div"
-                              onClick={() => navigate(`/series/${serie.id}`)}
-                            >
-                              <div className='img-comic-character-div'> 
-                              <motion.img
-                                className="img-comic-character"
-                                src={`${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
-                                alt={serie.title}
-                              />
-                              
-                                
-                              </div>
-                              <div className="comic-title-character-list">
-                                <span>{`${serie.title
-                                  .slice(0, 23)
-                                  .toUpperCase()}${
-                                  serie.title.length > 23 ? '...' : ''
-                                }`}</span>
-                              </div>
-                            </motion.div>
-                          );
-                        })
-                      ) : (
-                        <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
-                          <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
+                      <div className="comics-character-list">
+                        {!isLoadingEvents ? (
+                          events.map((event) => {
+                            return (
+                              <motion.div
+                                key={event.id}
+                                className="comics-character-list-div"
+                                onClick={() => navigate(`/events/${event.id}`)}
+                              >
+                                <div className="img-comic-character-div">
+                                  <motion.img
+                                    className="img-comic-character"
+                                    src={`${event.thumbnail.path}/portrait_xlarge.${event.thumbnail.extension}`}
+                                    alt={event.title}
+                                  />
+                                </div>
+                                <div className="comic-title-character-list">
+                                  <span>{`${event.title
+                                    .slice(0, 23)
+                                    .toUpperCase()}${
+                                    event.title.length > 23 ? '...' : ''
+                                  }`}</span>
+                                </div>
+                              </motion.div>
+                            );
+                          })
+                        ) : (
+                          <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                            <div className="spinner-border" role="status">
+                              <span className="visually-hidden">
+                                Loading...
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                      {series.length === 0 && (
-                        <span className="not-available">
-                          Series not available
-                        </span>
-                      )}
-                      { series.length > 9 && (
-                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/series/${selectedCharacter.id.toString()}-character-All/`)}>
-                        See all series...
-                      </button>
-                        
-                      )}
-                    </div>
-                  </Accordion>
+                        )}
+                        {events.length === 0 && (
+                          <span className="not-available">
+                            Events not available
+                          </span>
+                        )}
+                        {events.length > 9 && (
+                          <button
+                            type="button"
+                            className="btn btn-comic-character-list"
+                            onClick={() =>
+                              navigate(
+                                `/events/${selectedCharacter.id.toString()}-character-All/`
+                              )
+                            }
+                          >
+                            See all events...
+                          </button>
+                        )}
+                      </div>
+                    </Accordion>
+
+                    <Accordion
+                      className="acordion-character-list"
+                      expanded={expanded === 'panel3'}
+                      onChange={handleChangeAcordion('panel3')}
+                    >
+                      <AccordionSummary
+                        className="acordion-character-list-summary"
+                        aria-controls="panel3d-content"
+                        id="panel3d-header"
+                        onClick={() =>
+                          expanded !== 'panel3' &&
+                          dispatch(
+                            loadSeries(
+                              `${selectedCharacter.id.toString()}character`
+                            )
+                          )
+                        }
+                      >
+                        <Typography className="acordion-character-list-typography">
+                          SERIES
+                        </Typography>
+                      </AccordionSummary>
+
+                      <div className="comics-character-list">
+                        {!isLoadingSeries ? (
+                          series.map((serie) => {
+                            return (
+                              <motion.div
+                                key={serie.id}
+                                className="comics-character-list-div"
+                                onClick={() => navigate(`/series/${serie.id}`)}
+                              >
+                                <div className="img-comic-character-div">
+                                  <motion.img
+                                    className="img-comic-character"
+                                    src={`${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
+                                    alt={serie.title}
+                                  />
+                                </div>
+                                <div className="comic-title-character-list">
+                                  <span>{`${serie.title
+                                    .slice(0, 23)
+                                    .toUpperCase()}${
+                                    serie.title.length > 23 ? '...' : ''
+                                  }`}</span>
+                                </div>
+                              </motion.div>
+                            );
+                          })
+                        ) : (
+                          <div className="col-12 spinner-character-list d-flex justify-content-center align-items-center">
+                            <div className="spinner-border" role="status">
+                              <span className="visually-hidden">
+                                Loading...
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                        {series.length === 0 && (
+                          <span className="not-available">
+                            Series not available
+                          </span>
+                        )}
+                        {series.length > 9 && (
+                          <button
+                            type="button"
+                            className="btn btn-comic-character-list"
+                            onClick={() =>
+                              navigate(
+                                `/series/${selectedCharacter.id.toString()}-character-All/`
+                              )
+                            }
+                          >
+                            See all series...
+                          </button>
+                        )}
+                      </div>
+                    </Accordion>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            
           )}
         </AnimatePresence>
       </motion.div>

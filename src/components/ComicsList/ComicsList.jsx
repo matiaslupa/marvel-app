@@ -295,7 +295,15 @@ const ComicsList = () => {
             <h3>Comics not available</h3>
           </motion.div>
         )}
-
+        {selectedComic && (
+           <div
+           className="expanded-col-character-list"
+           onClick={() => {
+             setExpanded(null);
+             setSelectedComic(null);
+           }}
+         ></div>
+        )}
         <AnimatePresence>
           {selectedComic && (
             <motion.div
