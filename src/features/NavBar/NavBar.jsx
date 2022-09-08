@@ -122,19 +122,19 @@ function NavBar() {
   if (navBar) {
     if (isActive) {
       topNavbar = {
-        y: '-300px',
-        transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
+        display: '-300px',
+        transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
       };
     } else {
       topNavbar = {
         y: '-79px',
-        transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
+        transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
       };
     }
   } else {
     topNavbar = {
       y: '0px',
-      transition: { type: 'Tween', stiffness: 300, duration: 0.6 },
+      transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
     };
   }
 
