@@ -3,7 +3,7 @@ import './Series.css'
 
 const Series = () => {
   return (
-    <div>Series</div>
+    <div className='series-container'>Series</div>
   )
 }
 

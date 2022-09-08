@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   selectCharacters,
   selectIsLoading,
@@ -8,16 +8,55 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import './Characters.css';
 
-import { motion } from 'framer-motion';
-
 import ParallaxText from '../../components/ParallaxText/ParallaxText';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { wrap } from 'popmotion';
+
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
+const variants = {
+  enter: (direction) => {
+    return {
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    };
+  },
+  center: {
+    zIndex: 1,
+    x: 0,
+    opacity: 0.9,
+  },
+  exit: (direction) => {
+    return {
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    };
+  },
+};
+
+/**
+ * Experimenting with distilling swipe offset and velocity into a single variable, so the
+ * less distance a user has swiped, the more velocity they need to register as a swipe.
+ * Should accomodate longer swipes and short flicks without having binary checks on
+ * just distance thresholds and velocity > 0.
+ */
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset, velocity) => {
+  return Math.abs(offset) * velocity;
+};
 
 function Characters() {
   const characters = useSelector(selectCharacters);
   const isLoading = useSelector(selectIsLoading);
 
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(loadCharacters('314-events-All'));
+  }, ['a']);
 
   const item = {
     marvel: {
@@ -71,25 +110,18 @@ function Characters() {
     initial: { rotate: 25 },
   };
 
-  const image = {
-    image: {
-      opacity: [0.7, 0.6, 0.6, 0.6, 0.7],
-      transition: {
-        duration: 10,
-        times: [0, 0.2, 0.4, 0.6, 0.8],
-        repeat: Infinity,
-        repeatType: 'reverse',
-      },
-    },
-    imageScale: {
-      scale: 1.3,
-      transition: {
-        duration: 5,
-        repeat: Infinity,
-        repeatType: 'reverse',
-      },
-    },
-    initial: { opacity: 0.6 },
+  const [[page, direction], setPage] = useState([0, 0]);
+
+  
+
+  // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
+  // then wrap that within 0-2 to find our image ID in the array below. By passing an
+  // absolute page index as the `motion` component's `key` prop, `AnimatePresence` will
+  // detect it as an entirely new image. So you can infinitely paginate as few as 1 images.
+  const imageIndex = wrap(1, characters.length, page);
+
+  const paginate = (newDirection) => {
+    setPage([page + newDirection, newDirection]);
   };
 
   return (
@@ -172,23 +204,64 @@ function Characters() {
             <ParallaxText baseVelocity={-1}>-MARVEL-</ParallaxText>
           </motion.div>
         </motion.div>
-      </motion.div> */}
+      </motion.div>  */}
 
-      {/* <motion.row className="row row-image-character">
-        <div className="col-12 justify-content-center d-flex col-image-character">
-          <motion.img
-            animate={["image", "imageScale"]} variants={image} initial='initial'
+      <div className="row row-img-characters">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+          className='img-characters-div'
+          
+          >
             
+          
+          <motion.img
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: 'spring', stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+  
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
             src={
-              characters[17] &&
-              characters[17].thumbnail &&
-              `${characters[17].thumbnail.path}/detail.${characters[17].thumbnail.extension}`
+              characters &&
+              characters[1] &&
+              characters[1].thumbnail &&
+              `${characters[imageIndex].thumbnail.path}.${characters[imageIndex].thumbnail.extension}`
             }
-            className="image-characters rounded"
-            alt="..."
+            
           />
+          <h3>{
+              characters &&
+              characters[1] &&
+              characters[1].name &&
+              characters[imageIndex].name.toUpperCase()
+
+            }</h3>
+            </motion.div>
+        </AnimatePresence>
+
+        <div className="next d-none d-md-flex" onClick={() => paginate(1)}>
+          <NavigateNextIcon fontSize="large" />
         </div>
-      </motion.row> */}
+        <div className="prev d-none d-md-flex" onClick={() => paginate(-1)}>
+          <NavigateNextIcon fontSize="large" />
+        </div>
+      </div>
     </div>
   );
 }

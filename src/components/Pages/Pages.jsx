@@ -13,6 +13,7 @@ import {
 import Characters from '../../features/Characters/Characters';
 import Comics from '../../features/Comics/Comics';
 import Events from '../../features/Events/Events';
+import Series from '../../features/Series/Series';
 
 import './Pages.css';
 
@@ -35,6 +36,10 @@ function Pages() {
 
       <motion.div >
         <Events />
+      </motion.div>
+
+      <motion.div >
+        <Series />
       </motion.div>
     </div>
   );
