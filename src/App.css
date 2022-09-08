@@ -8,7 +8,7 @@
     --text-dark-color: #FFC107;
     background-color: black;
     font-family: 'Roboto';
-    
+    max-width: 100vw;
   }
 
   html {

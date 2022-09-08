@@ -48,7 +48,7 @@ export const loadSeries = createAsyncThunk(
     else{
 
       // By letter name start...
-      url = `https://gateway.marvel.com/v1/public/series?titleStartsWith=${serie}&contains=comic&orderBy=title&limit=50&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com/v1/public/series?titleStartsWith=${serie}&contains=comic&orderBy=title&limit=20&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     const response = await fetch(url)

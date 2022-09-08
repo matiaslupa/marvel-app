@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './Characters.css';
 
 import ParallaxText from '../../components/ParallaxText/ParallaxText';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { wrap } from 'popmotion';
 
@@ -124,6 +124,8 @@ function Characters() {
     setPage([page + newDirection, newDirection]);
   };
 
+  let navigate = useNavigate();
+
   return (
     <div className="container-fluid characters-container">
       {/* <motion.div className="row row-characters d-flex justify-content-center">
@@ -210,9 +212,11 @@ function Characters() {
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
           className='img-characters-div'
-          
-          >
+          onClick={() => 
+            navigate(`characters`)}
+            >
             
+            <h2>CHARACTERS</h2>
           
           <motion.img
             key={page}
