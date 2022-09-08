@@ -122,7 +122,7 @@ function NavBar() {
   if (navBar) {
     if (isActive) {
       topNavbar = {
-        display: '-300px',
+        y: '-300px',
         transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
       };
     } else {
@@ -146,6 +146,7 @@ function NavBar() {
 
   return (
     <motion.nav
+      layout
       variants={navbar}
       animate={['navbarShow', 'navBarShow2']}
       transition={{
