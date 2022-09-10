@@ -142,13 +142,19 @@ function NavBar() {
     navbarShow: backgroundColorNavbar,
 
     navBarShow2: topNavbar,
+
+    navBarShow3: {
+      opacity: 1,
+      transition: {duration: 3,delay:8}
+    }
   };
 
   return (
     <motion.nav
       layout
       variants={navbar}
-      animate={['navbarShow', 'navBarShow2']}
+      initial={{opacity: 0}}
+      animate={['navbarShow', 'navBarShow2','navBarShow3']}
       transition={{
         duration: 1,
         type: 'Tween',

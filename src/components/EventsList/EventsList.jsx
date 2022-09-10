@@ -138,7 +138,17 @@ const EventsList = () => {
 
   return (
     <div className="container container-charcaters-list">
-      <motion.div className="row justify-content-center row-characters-list">
+      <motion.div
+        className="row justify-content-center row-characters-list"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 1,
+          type: 'Tween',
+          stiffness: 100,
+          ease: 'easeIn',
+        }}
+      >
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
           animate={selectedEvent && { opacity: 0 }}
@@ -295,13 +305,13 @@ const EventsList = () => {
           </motion.div>
         )}
         {selectedEvent && (
-           <div
-           className="expanded-col-character-list"
-           onClick={() => {
-             setExpanded(null);
-             setSelectedEvent(null);
-           }}
-         ></div>
+          <div
+            className="expanded-col-character-list"
+            onClick={() => {
+              setExpanded(null);
+              setSelectedEvent(null);
+            }}
+          ></div>
         )}
         <AnimatePresence>
           {selectedEvent && (
@@ -381,12 +391,12 @@ const EventsList = () => {
                                 navigate(`/characters/${character.id}`)
                               }
                             >
-                              <div className='img-comic-character-div'>
-                              <motion.img
-                                className="img-comic-character"
-                                src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
-                                alt={character.name}
-                              />
+                              <div className="img-comic-character-div">
+                                <motion.img
+                                  className="img-comic-character"
+                                  src={`${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`}
+                                  alt={character.name}
+                                />
                               </div>
                               <div className="comic-title-character-list">
                                 <span>{`${character.name
@@ -411,9 +421,17 @@ const EventsList = () => {
                         </span>
                       )}
                       {characters.length > 9 && (
-                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/characters/${selectedEvent.id.toString()}-events-All/`)}>
-                        See all characters...
-                      </button>
+                        <button
+                          type="button"
+                          className="btn btn-comic-character-list"
+                          onClick={() =>
+                            navigate(
+                              `/characters/${selectedEvent.id.toString()}-events-All/`
+                            )
+                          }
+                        >
+                          See all characters...
+                        </button>
                       )}
                     </div>
                   </Accordion>
@@ -449,11 +467,11 @@ const EventsList = () => {
                               onClick={() => navigate(`/comics/${comic.id}`)}
                             >
                               <div className="img-comic-character-div">
-                              <motion.img
-                                className="img-comic-character"
-                                src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
-                                alt={comic.title}
-                              />
+                                <motion.img
+                                  className="img-comic-character"
+                                  src={`${comic.thumbnail.path}/portrait_xlarge.${comic.thumbnail.extension}`}
+                                  alt={comic.title}
+                                />
                               </div>
                               <div className="comic-title-character-list">
                                 <span>{`${comic.title
@@ -478,9 +496,17 @@ const EventsList = () => {
                         </span>
                       )}
                       {comics.length > 9 && (
-                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/comics/${selectedEvent.id.toString()}-events-All/`)}>
-                        See all comics...
-                      </button>
+                        <button
+                          type="button"
+                          className="btn btn-comic-character-list"
+                          onClick={() =>
+                            navigate(
+                              `/comics/${selectedEvent.id.toString()}-events-All/`
+                            )
+                          }
+                        >
+                          See all comics...
+                        </button>
                       )}
                     </div>
                   </Accordion>
@@ -516,11 +542,11 @@ const EventsList = () => {
                               onClick={() => navigate(`/series/${serie.id}`)}
                             >
                               <div className="img-comic-character-div">
-                              <motion.img
-                                className="img-comic-character"
-                                src={`${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
-                                alt={serie.title}
-                              />
+                                <motion.img
+                                  className="img-comic-character"
+                                  src={`${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
+                                  alt={serie.title}
+                                />
                               </div>
                               <div className="comic-title-character-list">
                                 <span>{`${serie.title
@@ -545,9 +571,17 @@ const EventsList = () => {
                         </span>
                       )}
                       {series.length > 9 && (
-                      <button type="button" className="btn btn-comic-character-list" onClick={() => navigate(`/series/${selectedEvent.id.toString()}-events-All/`)}>
-                        See all series...
-                      </button>
+                        <button
+                          type="button"
+                          className="btn btn-comic-character-list"
+                          onClick={() =>
+                            navigate(
+                              `/series/${selectedEvent.id.toString()}-events-All/`
+                            )
+                          }
+                        >
+                          See all series...
+                        </button>
                       )}
                     </div>
                   </Accordion>

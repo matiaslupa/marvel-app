@@ -146,7 +146,16 @@ function CharactersList() {
 
   return (
     <div className="container container-charcaters-list">
-      <motion.div className="row justify-content-center row-characters-list">
+      <motion.div className="row justify-content-center row-characters-list"
+      initial={{opacity:0}}
+      animate={{opacity: 1}}
+      transition={{
+        duration: 1,
+        type: 'Tween',
+        stiffness: 100,
+        ease: 'easeIn',
+      }}>
+      
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
           animate={selectedCharacter && { opacity: 0 }}
@@ -260,16 +269,13 @@ function CharactersList() {
           characters.map((character) => {
             return (
               <motion.div
-              // selectedCharacter && { opacity: 0.4 } && 
-                // transition={{ duration: 0.3 }}
-                initial={{ opacity: 0}}
-                animate={{ opacity: 1 , transition: { duration: 2 }}}
-                exit={{ opacity: 1, transition: { duration: 0.0 }}} 
+                transition={{ duration: 0.0 }}
                 layoutId={character.id}
-                
+                animate={selectedCharacter && { opacity: 0.4 }}
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
+                
               >
                 <motion.div className="card-character-list">
                   <div className="img-characters-list-div">
@@ -316,20 +322,13 @@ function CharactersList() {
             }}
           ></div>
         )}
-
-
         <AnimatePresence>
           {selectedCharacter && (
             <motion.div
-
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-               initial={{ opacity: 0}}
-                animate={{ opacity: 1}}
-                exit={{ opacity: 0, transition: { duration: 0.6 }}} 
-
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.0 }}
               id="character"
             >
               <motion.button

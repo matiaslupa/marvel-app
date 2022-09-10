@@ -1,5 +1,11 @@
 .comics-container{
     height: 100vh;
+    width: 100vw;
     scroll-snap-align: start end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(144deg, rgba(82,10,130,30) 0%, rgba(82,10,130,0.30) 32%, rgba(40, 1, 72, 0.4) 98%);
+    padding: 0;
     
 }

@@ -1,0 +1,27 @@
+.mainPage-container{
+    height: 100vh;
+    width: 100vw;
+    scroll-snap-align: start end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(144deg, rgba(172, 171, 171, 0.561) 0%, rgba(199, 198, 198, 0.2) 32%, rgba(123, 123, 123, 0.25) 98%);
+    padding: 0;
+}
+
+
+.marvel-mainpage-col{
+    display: flex;
+    justify-content: center;
+}
+
+.marvel-mainpage {
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 576px) {
+    .marvel-mainpage {
+        scale: 0.6;
+    }
+}

@@ -10,6 +10,7 @@ import {
   MotionValue,
 } from 'framer-motion';
 
+import MainPage from '../MainPage/MainPage';
 import Characters from '../../features/Characters/Characters';
 import Comics from '../../features/Comics/Comics';
 import Events from '../../features/Events/Events';
@@ -25,6 +26,10 @@ function Pages() {
   return (
     <div className="pages-container">
       
+      <motion.div >
+        <MainPage />
+      </motion.div>
+
       <motion.div >
         <Characters />
       </motion.div>
