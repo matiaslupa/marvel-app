@@ -13,15 +13,22 @@
 .marvel-mainpage-col{
     display: flex;
     justify-content: center;
+
 }
 
 .marvel-mainpage {
     display: flex;
     justify-content: center;
 }
+.arrow-down{
+    position: absolute;
+    bottom: 30px;
+    color: brown;
+}
 
 @media only screen and (max-width: 576px) {
     .marvel-mainpage {
         scale: 0.6;
+        margin-bottom: 30px;
     }
 }

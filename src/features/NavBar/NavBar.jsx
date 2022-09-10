@@ -56,13 +56,6 @@ function NavBar() {
     
   };
 
-  const { scrollYProgress } = useScroll();
-
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      setScrollProgress(latest * 100 - 5.6);
-    });
-  }, []);
 
   const svgMarvel = {
     hidden: {

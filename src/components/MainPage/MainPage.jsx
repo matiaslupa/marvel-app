@@ -2,6 +2,7 @@ import React from 'react';
 import './MainPage.css';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 const MainPage = () => {
 
@@ -47,7 +48,7 @@ const MainPage = () => {
               strokeWidth="1"
           stroke="#ed0c08"
           strokeLinecap="square"
-          initial={{ pathLength: 0, opacity: 0.2 }}
+          initial={{ pathLength: 0, opacity: 0.3 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={transition}
 
@@ -68,8 +69,27 @@ const MainPage = () => {
           transition={transition}
             ></motion.path>
           </motion.svg>
+
         
       </div>
+          <motion.div 
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          transition={{duration: 3, delay: 8}}
+
+          className='arrow-down'>
+            <motion.div 
+            initial={{y: -10}}
+            animate={{
+                y:10,
+            }}
+            transition={{duration: 0.6, ease: 'easeIn', repeat: Infinity, repeatType: 'reverse'}}
+            >
+            
+
+            <KeyboardDoubleArrowDownIcon fontSize='large'/>
+            </motion.div>
+          </motion.div>
     </div>
   );
 };
