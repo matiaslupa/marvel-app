@@ -260,9 +260,13 @@ function CharactersList() {
           characters.map((character) => {
             return (
               <motion.div
-                transition={{ duration: 0.0 }}
+              // selectedCharacter && { opacity: 0.4 } && 
+                // transition={{ duration: 0.3 }}
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1 , transition: { duration: 2 }}}
+                exit={{ opacity: 1, transition: { duration: 0.0 }}} 
                 layoutId={character.id}
-                animate={selectedCharacter && { opacity: 0.4 }}
+                
                 onClick={() => setSelectedCharacter(character)}
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
                 key={character.id}
@@ -312,13 +316,20 @@ function CharactersList() {
             }}
           ></div>
         )}
+
+
         <AnimatePresence>
           {selectedCharacter && (
             <motion.div
+
               className="container col-character-list"
               layoutId={selectedCharacter.id}
               key={selectedCharacter.id}
-              transition={{ duration: 0.0 }}
+               initial={{ opacity: 0}}
+                animate={{ opacity: 1}}
+                exit={{ opacity: 0, transition: { duration: 0.6 }}} 
+
+              transition={{ duration: 0.2 }}
               id="character"
             >
               <motion.button

@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './Characters.css';
 
 import ParallaxText from '../../components/ParallaxText/ParallaxText';
-import { Link , useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { wrap } from 'popmotion';
 
@@ -50,7 +50,6 @@ const swipePower = (offset, velocity) => {
 function Characters() {
   const characters = useSelector(selectCharacters);
   const isLoading = useSelector(selectIsLoading);
-
 
   const dispatch = useDispatch();
 
@@ -111,8 +110,6 @@ function Characters() {
   };
 
   const [[page, direction], setPage] = useState([0, 0]);
-
-  
 
   // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
   // then wrap that within 0-2 to find our image ID in the array below. By passing an
@@ -209,55 +206,57 @@ function Characters() {
       </motion.div>  */}
 
       <div className="row row-img-characters">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-          className='img-characters-div'
-          onClick={() => 
-            navigate(`characters`)}
+          <AnimatePresence initial={false} custom={direction}>
+        
+            <motion.div
+              className="img-characters-div"
+              onClick={() => navigate(`characters`)}
             >
-            
-            <h2>CHARACTERS</h2>
-          
-          <motion.img
-            key={page}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: 'spring', stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-  
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-            src={
-              characters &&
-              characters[1] &&
-              characters[1].thumbnail &&
-              `${characters[imageIndex].thumbnail.path}.${characters[imageIndex].thumbnail.extension}`
-            }
-            
-          />
-          <h3>{
-              characters &&
-              characters[1] &&
-              characters[1].name &&
-              characters[imageIndex].name.toUpperCase()
+              
 
-            }</h3>
+              <motion.img
+                key={page}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: 'spring', stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 },
+                }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+
+                  if (swipe < -swipeConfidenceThreshold) {
+                    paginate(1);
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    paginate(-1);
+                  }
+                }}
+                src={
+                  characters &&
+                  characters[1] &&
+                  characters[1].thumbnail &&
+                  `${characters[imageIndex].thumbnail.path}.${characters[imageIndex].thumbnail.extension}`
+                }
+              />
+              <h3>
+                {characters &&
+                  characters[1] &&
+                  characters[1].name &&
+                  characters[imageIndex].name.toUpperCase()}
+              </h3>
+
+              <h2>CHARACTERS</h2>
             </motion.div>
-        </AnimatePresence>
+        
+          </AnimatePresence>
+
+          
 
         <div className="next d-none d-md-flex" onClick={() => paginate(1)}>
           <NavigateNextIcon fontSize="large" />
