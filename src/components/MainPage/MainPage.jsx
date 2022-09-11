@@ -17,19 +17,7 @@ const MainPage = () => {
 
   return (
     <div className="mainPage-container">
-      <motion.div
-        className="marvel-mainpage-col"
-        drag
-        dragConstraints={{
-          top: -10,
-          left: -10,
-          right: 10,
-          bottom: 10,
-        }}
-        dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
-      >
-       
-
+      <motion.div className="marvel-mainpage-col">
         <motion.svg
           variants={variants}
           initial={'initialSVG2'}
@@ -40,7 +28,7 @@ const MainPage = () => {
           width="130"
           height="52"
         >
-          <path fill='transparent' d="M0 0h30v52H0z"></path>
+          {/* <path fill="transparent" d="M0 0h30v52H0z"></path>
 
           <motion.path
             strokeWidth="1"
@@ -49,13 +37,12 @@ const MainPage = () => {
             initial={{ pathLength: 0, opacity: 1 }}
             animate={{ pathLength: 1, opacity: 1, stroke: '#ed0c08' }}
             transition={{
-              duration: 6,
-
+              duration: 1,
               ease: 'easeInOut',
             }}
             fill="transparent"
             d="M31.5 48V4H21.291l-3.64 22.735L14.102 4H4v44h8V26.792L15.577 48h4.229l3.568-21.208V48z"
-          ></motion.path> 
+          ></motion.path> */}
 
           <rect fill="transparent" width="100%" height="100%"></rect>
 
@@ -66,9 +53,11 @@ const MainPage = () => {
             stroke="rgba(223, 10, 10, 0.252)"
             strokeLinecap="square"
             initial={{ pathLength: 0, opacity: 1 }}
-            animate={{ pathLength: 1, opacity: 1, stroke: '#ed0c08', fill: 'rgba(223, 10, 10, 0.102)' }}
+            animate={{ pathLength: 1, opacity: 1, stroke: '#ed0c08' }}
             transition={{
-              duration: 16.2,
+              duration: 10,
+              type: "tween" ,
+             
 
               ease: 'easeInOut',
             }}

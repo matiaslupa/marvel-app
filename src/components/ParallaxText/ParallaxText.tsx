@@ -25,7 +25,7 @@ const ParallaxText = ({ children, baseVelocity = 100 }: ParallaxProps) => {
     const scrollVelocity = useVelocity(scrollY);
     const smoothVelocity = useSpring(scrollVelocity, {
       damping: 50,
-      stiffness: 600
+      stiffness: 400
     });
     const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
       clamp: false
@@ -68,17 +68,9 @@ const ParallaxText = ({ children, baseVelocity = 100 }: ParallaxProps) => {
       <div className="parallax">
         <motion.div className="scroller" style={{ x }}>
           <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children}</span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
-          <span> {children} </span>
+          
+          
+          
           
           
           

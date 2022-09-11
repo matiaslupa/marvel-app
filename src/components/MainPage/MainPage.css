@@ -20,7 +20,9 @@
 .marvel-mainpage {
     display: flex;
     justify-content: center;
+
 }
+
 .arrow-down{
     position: absolute;
     bottom: 30px;
