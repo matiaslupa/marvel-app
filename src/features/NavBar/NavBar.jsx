@@ -56,6 +56,12 @@ function NavBar() {
     
   };
 
+  const onSubmitSearchTerm = (e) => {
+    e.preventDefault();
+      navigate(`${termLocation}/${searchTerm}`);
+      dispatch(clearSearchTerm());
+  }
+
 
   const svgMarvel = {
     hidden: {
@@ -268,7 +274,7 @@ function NavBar() {
           </ul>
 
           {(location.pathname.includes('/characters') && (
-            <form className="d-flex" role="search">
+            <form className="d-flex mb-2 mb-lg-0" role="search">
               <input
                 value={searchTerm}
                 onChange={onSearchChangeHandler}
@@ -280,13 +286,13 @@ function NavBar() {
                 aria-label="Search your hero..."
               />
 
-              <button className="btn search-btn d-lg-none" type="submit">
+              <button className="btn search-btn d-lg-none" type="submit" onClick={onSubmitSearchTerm}>
                 SEARCH
               </button>
             </form>
           )) ||
             (location.pathname.includes('/comics') && (
-              <form className="d-flex" role="search">
+              <form className="d-flex mb-2 mb-lg-0" role="search">
                 <input
                   value={searchTerm}
                   onChange={onSearchChangeHandler}
@@ -297,13 +303,13 @@ function NavBar() {
                   aria-label="Search a comic..."
                 />
 
-                <button className="btn search-btn d-lg-none" type="submit">
+                <button className="btn search-btn d-lg-none" type="submit" onClick={onSubmitSearchTerm}>
                   SEARCH
                 </button>
               </form>
             )) ||
             (location.pathname.includes('/events') && (
-              <form className="d-flex" role="search">
+              <form className="d-flex mb-2 mb-lg-0" role="search">
                 <input
                   value={searchTerm}
                   onChange={onSearchChangeHandler}
@@ -314,24 +320,24 @@ function NavBar() {
                   aria-label="Search a event..."
                 />
 
-                <button className="btn search-btn d-lg-none" type="submit">
+                <button className="btn search-btn d-lg-none" type="submit" onClick={onSubmitSearchTerm}>
                   SEARCH
                 </button>
               </form>
             )) ||
             (location.pathname.includes('/series') && (
-              <form className="d-flex" role="search">
+              <form className="d-flex mb-2 mb-lg-0" role="search">
                 <input
                   value={searchTerm}
                   onChange={onSearchChangeHandler}
                   onKeyPress={onSearchTermClearHandler}
-                  className="form-control me-2"
+                  className="form-control me-2 "
                   type="search"
                   placeholder="🔍 Search a serie..."
                   aria-label="Search a serie..."
                 />
 
-                <button className="btn search-btn d-lg-none" type="submit">
+                <button className="btn search-btn d-lg-none" type="submit" onClick={onSubmitSearchTerm}>
                   SEARCH
                 </button>
               </form>
