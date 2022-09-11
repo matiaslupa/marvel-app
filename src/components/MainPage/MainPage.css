@@ -13,6 +13,7 @@
 .marvel-mainpage-col{
     display: flex;
     justify-content: center;
+    cursor: pointer;
 
 }
 

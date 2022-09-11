@@ -130,7 +130,9 @@ function NavBar() {
         transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
       };
     }
-  } else {
+  } 
+  
+  else {
     topNavbar = {
       y: '0px',
       transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
@@ -144,7 +146,7 @@ function NavBar() {
 
     navBarShow3: {
       opacity: 1,
-      transition: {duration: 3,delay:8}
+      transition: {duration: 3,delay:6}
     }
   };
 

@@ -26,14 +26,18 @@ function Characters() {
     dispatch(loadCharacters('314-events-All'));
   }, ['a']);
 
- 
+  
   
   let navigate = useNavigate();
 
   return (
     <div className="container-fluid characters-container">
       
+      <div className="row">
+        <div className="col">
 
+        </div>
+      </div>
      
     </div>
   );
