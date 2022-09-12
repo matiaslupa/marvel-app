@@ -5,6 +5,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(144deg, rgba(6, 210, 176, 0.612) 0%, rgba(25, 126, 109, 0.3) 32%, rgba(9, 121, 100, 0.4) 98%);
+    background: linear-gradient(144deg, rgba(15, 162, 137, 0.612) 0%, rgba(22, 138, 118, 0.3) 32%, rgba(9, 94, 79, 0.4) 98%);
     padding: 0;
+    overflow: hidden;
 }
+
+/* @media only screen and (max-width: 1365px) {
+    .col-series-mainpage{
+        max-height: 620px;
+    }
+} */

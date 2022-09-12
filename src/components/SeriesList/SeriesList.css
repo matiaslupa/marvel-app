@@ -1,4 +1,6 @@
-
+.container-series-list{
+    background: linear-gradient(144deg, rgba(15, 162, 137, 0.612) 0%, rgba(22, 138, 118, 0.3) 32%, rgba(9, 94, 79, 0.4) 98%);
+}
 
 .col-serie-list{
     

@@ -112,7 +112,7 @@ function CharactersList() {
   const series = useSelector(selectSeries);
   const isLoadingSeries = useSelector(selectIsLoadingSeries);
 
-  let { letter = 'a' } = useParams();
+  let { letter = 'a'  } = useParams();
 
   const dispatch = useDispatch();
 
@@ -145,16 +145,9 @@ function CharactersList() {
   }); */
 
   return (
-    <div className="container container-charcaters-list">
+    <div className="container-fluid container-charcaters-list">
       <motion.div className="row justify-content-center row-characters-list"
-      initial={{opacity:0}}
-      animate={{opacity: 1}}
-      transition={{
-        duration: 1,
-        type: 'Tween',
-        stiffness: 100,
-        ease: 'easeIn',
-      }}>
+      >
       
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
@@ -239,6 +232,7 @@ function CharactersList() {
           </nav>
         </motion.div>
 
+
         {isLoading ? (
           alphabet.map((element, index) => {
             return (
@@ -257,9 +251,7 @@ function CharactersList() {
                   />
 
                   <div className="name-characters-list">
-                    {/* <h3 className="">{`${character.name.slice(0, 20)}${
-                      character.name.length > 20 ? '...' : ''
-                    }`}</h3> */}
+                    
                   </div>
                 </div>
               </div>
@@ -278,17 +270,22 @@ function CharactersList() {
                 
               >
                 <motion.div className="card-character-list">
-                  <div className="img-characters-list-div">
+                  <motion.div className="img-characters-list-div"
+                  
+                  
+                  >
                     <motion.img
                       className="img-characters-list"
+                      animate={{opacity: 0.8,filter: 'saturate(150%)'}}
                       whileHover={{
-                        scale: 1.05,
-                        transition: { duration: 0.8 },
+                        opacity: 0.95,filter: 'saturate(160%)',
+                        scale: 1.02,
+                        transition: { duration: 0.3 },
                       }}
                       src={`${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`}
                       alt={character.name}
                     />
-                  </div>
+                  </motion.div>
 
                   <div className="name-characters-list">
                     <h3 className="">{`${character.name.slice(0, 20)}${
@@ -312,10 +309,15 @@ function CharactersList() {
           >
             <h3>Characters not available</h3>
           </motion.div>
-        )}
+        )} 
+
+
+
+        
         {selectedCharacter && (
           <div
             className="expanded-col-character-list"
+            animate={selectedCharacter && { backdropFilter: 'grayscale(70%)' }}
             onClick={() => {
               setExpanded(null);
               setSelectedCharacter(null);
@@ -563,7 +565,7 @@ function CharactersList() {
                               <div className="img-comic-character-div">
                                 <motion.img
                                   className="img-comic-character"
-                                  src={`${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
+                                  src={ `${serie.thumbnail.path}/portrait_xlarge.${serie.thumbnail.extension}`}
                                   alt={serie.title}
                                 />
                               </div>

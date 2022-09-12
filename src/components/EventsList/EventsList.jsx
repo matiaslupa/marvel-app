@@ -137,17 +137,10 @@ const EventsList = () => {
   let navigate = useNavigate();
 
   return (
-    <div className="container container-charcaters-list">
+    <div className="container-fluid container-charcaters-list container-events-list">
       <motion.div
         className="row justify-content-center row-characters-list"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 1,
-          type: 'Tween',
-          stiffness: 100,
-          ease: 'easeIn',
-        }}
+        
       >
         <motion.div
           className="col-12 d-flex d-xl-none col-pagination-characters-list justify-content-end"
@@ -273,9 +266,11 @@ const EventsList = () => {
                   <div className="img-characters-list-div">
                     <motion.img
                       className="img-characters-list"
+                      animate={{opacity: 0.8,filter: 'saturate(140%)'}}
                       whileHover={{
-                        scale: 1.05,
-                        transition: { duration: 0.8 },
+                        opacity: 0.95,filter: 'saturate(150%)',
+                        scale: 1.02,
+                        transition: { duration: 0.3 },
                       }}
                       src={`${event.thumbnail.path}/portrait_uncanny.${event.thumbnail.extension}`}
                       alt={event.title}
@@ -307,6 +302,7 @@ const EventsList = () => {
         {selectedEvent && (
           <div
             className="expanded-col-character-list"
+            animate={selectedEvent && { backdropFilter: 'grayscale(70%)' }}
             onClick={() => {
               setExpanded(null);
               setSelectedEvent(null);

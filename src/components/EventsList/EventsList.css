@@ -1,3 +1,8 @@
+.container-events-list{
+    background: linear-gradient(144deg, rgba(255, 1, 1, 0.344) 0%, rgba(118, 9, 9, 0.43) 32%, rgba(116, 7, 7, 0.324) 98%);
+}
+
+
 .col-event-list{
     
     background: linear-gradient(144deg, rgba(255, 1, 1, 0.561) 0%, rgba(210, 21, 21, 0.2) 32%, rgba(162, 13, 13, 0.250) 98%);

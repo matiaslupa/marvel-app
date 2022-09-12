@@ -2,8 +2,19 @@
     
     color: var(--text-dark-color);
     width: 100vw;
+
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(144deg, rgba(16, 95, 222, 0.639) 0%, rgba(22, 73, 136, 0.5) 40%, rgba(1, 19, 42, 0.5) 98%);
+    overflow-y: scroll;
+    scroll-behavior: auto;
     
 }
+
+.container-charcaters-list::-webkit-scrollbar{
+    display: none;
+}
+
 
 .abc-form{
     color: var(--text-dark-color);
@@ -61,23 +72,27 @@
 }
 
 .not-available-characters{
-    margin-top: 40px;
+    margin-top: -250px;
 }
+
 
 .col-pagination-characters-list {
     margin-bottom: 20px;
+    margin-top: 120px;
+    max-height: 100px;
 }
 
 .row-characters-list{
-    margin: 0px;
-    margin-top: 120px;
+    margin: 0px 20px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .col-characters-list{
     margin-bottom: 25px;
     display: flex;
     justify-content: center;
+    max-width: 180px;
 }
 
 .card-character-list{
@@ -95,6 +110,7 @@
 
 .img-characters-list-div{
     display: flex;
+    backdrop-filter: grayscale(10%) opacity(150%) ;
 }
 
 .img-characters-list{
@@ -424,10 +440,12 @@ background: rgba(164, 163, 163, 0.839);
     }
 
     
-
+    .col-pagination-characters-list {
+         margin-top: 65px !important; 
+    }
 
     .row-characters-list{
-        margin-top: 65px !important;
+        /* margin-top: 65px !important; */
     }
 
     .img-character-list-div{

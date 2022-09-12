@@ -5,15 +5,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(144deg, rgba(223, 10, 10, 0.252) 0%, rgba(118, 7, 7, 0.2) 50%, rgba(213, 10, 10, 0.25) 98%);
+    background: linear-gradient(144deg, rgba(196, 10, 221, 0.35) 0%, rgba(118, 7, 7, 0.2) 50%, rgba(196, 10, 221, 0.307) 98%);
     padding: 0;
+    overflow: hidden;
 }
 
 
 .marvel-mainpage-col{
     display: flex;
     justify-content: center;
-    cursor: pointer;
+   
 
 }
 
@@ -26,7 +27,7 @@
 .arrow-down{
     position: absolute;
     bottom: 30px;
-    color: brown;
+    color: rgba(197, 10, 221, 0.618);
 }
 
 @media only screen and (max-width: 576px) {

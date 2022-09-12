@@ -34,20 +34,20 @@
     
 }
 .col-character-div-mainpage{
-    
+    background-color: transparent;
     max-width: 100px;
     border-radius: 5px;
     display: flex;
     max-height: 200px;
     margin: 10px auto;
     cursor: pointer;
-    backdrop-filter: grayscale(10%) opacity(150%);
+    backdrop-filter: grayscale(10%) opacity(150%) ;
+    
 }
 
 
 .col-characters-mainpage img{
     max-width: 150px;
-    
     
     border-radius: 5px;
     

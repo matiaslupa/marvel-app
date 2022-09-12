@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const loadCharacters = createAsyncThunk(
   'characters/loadCharacters',
-  async (letter = 'a') => {
+  async (letter ) => {
 
     const regex = /^[0-9]*$/;
     let url = ''

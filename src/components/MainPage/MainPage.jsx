@@ -28,6 +28,9 @@ const MainPage = () => {
           width="130"
           height="52"
         >
+            
+
+
           {/* <path fill="transparent" d="M0 0h30v52H0z"></path>
 
           <motion.path
@@ -44,16 +47,16 @@ const MainPage = () => {
             d="M31.5 48V4H21.291l-3.64 22.735L14.102 4H4v44h8V26.792L15.577 48h4.229l3.568-21.208V48z"
           ></motion.path> */}
 
-          <rect fill="transparent" width="100%" height="100%"></rect>
+          <rect  width="100%" height="100%" fill="transparent"></rect>
 
           <motion.path
             className=""
             fill="transparent"
             strokeWidth="1"
-            stroke="rgba(223, 10, 10, 0.252)"
+            stroke="rgba(197, 10, 221, 0.618)"
             strokeLinecap="square"
-            initial={{ pathLength: 0, opacity: 1 }}
-            animate={{ pathLength: 1, opacity: 1, stroke: '#ed0c08' }}
+            initial={{ pathLength: 0, opacity: 1,  }}
+            animate={{ pathLength: 1, opacity: 1, stroke: 'rgba(197, 10, 221, 0.618)' }}
             transition={{
               duration: 10,
               type: "tween" ,

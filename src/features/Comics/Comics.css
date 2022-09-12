@@ -5,67 +5,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(144deg, rgba(82,10,130,30) 0%, rgba(82,10,130,0.30) 32%, rgba(40, 1, 72, 0.4) 98%);
+    background: linear-gradient(144deg, rgba(197, 10, 221, 0.618) 0%, rgba(136, 11, 152, 0.424) 32%, rgba(54, 1, 65, 0.564) 98%);
     padding: 0;
-    
-}
-
-.row-character-div-mainpage{
-    margin: 0;
-    margin-top: 20px;
-    margin-left: -35px;
-     
-}
-
-
-.col-comics-mainpage{
-    
-    display: flex;
-    max-height: 660px;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
     overflow: hidden;
     
-    
-    
-    
 }
+
+
+    
+
 .col-comics-div-mainpage{
     
-    max-width: 150px;
-    border-radius: 5px;
-    display: flex;
-    max-height: 200px;
-    margin: 10px auto;
-    cursor: pointer;
-    backdrop-filter: grayscale(10%) contrast(30%); 
+    backdrop-filter:   contrast(300%) ; 
 }
 
 
-.col-comics-mainpage img{
-    max-width: 150px;
-    
-    
-    
-}
-
-
-
-@media only screen and (max-width: 576px) {
-    .col-comics-mainpage{
-        max-height: 570px;
-        margin-top: 40px;
-        
-    }
-    .col-comics-div-mainpage{
-        max-width: 70px;
-        margin: 5px auto;
-        
-    }
-    
-    
-    .col-comics-mainpage img{
-        max-width: 120px;
-    }
-}

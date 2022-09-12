@@ -44,8 +44,8 @@ function Characters() {
               
               return (
                 <motion.div className='col-character-div-mainpage' key={character.id}
-                animate={{opacity: 0.4,filter: 'blur(0.5px) saturate(250%)'}}
-                whileHover={{ zIndex: 10,scale:1.04, x: -20, opacity: 0.8,filter: 'blur(0px) saturate(150%)', transition:{duration:0.2}}}
+                animate={{opacity: 0.6,filter: 'blur(0.5px) saturate(250%)'}}
+                whileHover={{ zIndex: 10,scale:1.04, y: -6, x:-10, opacity: 0.9,filter: 'blur(0px) saturate(150%)', transition:{duration:0.2}}}
                 onClick={ () => navigate(`/characters`)}
                 
                 >
