@@ -79,13 +79,14 @@
 .col-pagination-characters-list {
     margin-bottom: 20px;
     margin-top: 120px;
-    max-height: 100px;
+    max-height: 70px;
 }
 
 .row-characters-list{
     margin: 0px 20px;
     width: 100%;
     margin-bottom: 20px;
+    
     
 }
 
