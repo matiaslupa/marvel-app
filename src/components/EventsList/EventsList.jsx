@@ -226,7 +226,7 @@ const EventsList = () => {
         </motion.div>
 
         {isLoadingEvents ? (
-          alphabet.map((element, index) => {
+          alphabet.slice(6).map((element, index) => {
             return (
               <div
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
@@ -302,7 +302,7 @@ const EventsList = () => {
         {selectedEvent && (
           <div
             className="expanded-col-character-list"
-            animate={selectedEvent && { backdropFilter: 'grayscale(70%)' }}
+            animate={selectedEvent && { backdropFilter: 'grayscale(70%) blur(3px)' }}
             onClick={() => {
               setExpanded(null);
               setSelectedEvent(null);

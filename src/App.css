@@ -19,7 +19,21 @@
 .App{
   background-color: black;
   color: var(--text-dark-color);
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-align: start end;
+  scroll-snap-type: y mandatory;
+  scroll-behavior:smooth;
+  
 }
+
+.App::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none; 
+}
+
+
 
 html::-webkit-scrollbar {
   display: none;

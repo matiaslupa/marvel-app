@@ -111,7 +111,7 @@ const SeriesList = () => {
   const series = useSelector(selectSeries);
   const isLoadingSeries = useSelector(selectIsLoadingSeries);
 
-  let { letter = 'a' } = useParams();
+  let { letter = 'avengers' } = useParams();
 
   const dispatch = useDispatch();
 
@@ -226,7 +226,7 @@ const SeriesList = () => {
         </motion.div>
 
         {isLoadingSeries ? (
-          alphabet.map((element, index) => {
+          alphabet.slice(6).map((element, index) => {
             return (
               <div
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
@@ -299,7 +299,7 @@ const SeriesList = () => {
         {selectedSerie && (
           <div
             className="expanded-col-character-list"
-            animate={selectedSerie && { backdropFilter: 'grayscale(70%)' }}
+            animate={selectedSerie && { backdropFilter: 'grayscale(70%) blur(3px)' }}
             onClick={() => {
               setExpanded(null);
               setSelectedSerie(null);

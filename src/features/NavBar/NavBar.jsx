@@ -17,9 +17,9 @@ import './NavBar.css';
 function NavBar() {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [isHover, togglehover] = useCycle(false, true);
-  const [isScroll, setIsScroll] = useState('');
+  
   const [isActive, setIsActive] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  
 
   const navBar = useSelector(selectNavBar);
 
@@ -81,52 +81,16 @@ function NavBar() {
 
   let topNavbar = {};
 
-  /* let backgroundColorNavbar = {};
 
-  // Events navbar
-  if (
-    (isActive && location.pathname.includes('/events')) ||
-    (!isActive && location.pathname.includes('/events'))
-  ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(252, 8, 8, 0.589)' };
-  }
-
-  // Characters navbar
-  if (
-    (!isActive && location.pathname.includes('/characters')) ||
-    (isActive && location.pathname.includes('/characters'))
-  ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(13, 117, 244, 0.639)' };
-  }
-
-  //comics
-
-  if (
-    (!isActive && location.pathname.includes('/comics')) ||
-    (isActive && location.pathname.includes('/comics'))
-  ) {
-    // backgroundColorNavbar = { backgroundColor: 'rgba(100, 16, 156, 0.695)' };
-    backgroundColorNavbar = { backgroundColor: 'rgba(100, 16, 156, 0.695)' };
-  }
-
-  //Series
-
-  if (
-    (!isActive && location.pathname.includes('/series')) ||
-    (isActive && location.pathname.includes('/series'))
-  ) {
-    backgroundColorNavbar = { backgroundColor: 'rgba(29, 120, 105, 0.800)' };
-  } */
-
-  if (navBar) {
+   if (navBar) {
     if (isActive) {
       topNavbar = {
-        y: '-300px',
+        top: '-300px',
         transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
       };
     } else {
       topNavbar = {
-        y: '-79px',
+        top: '-79px',
         transition: { type: 'Tween', stiffness: 300, duration: 0.1 },
       };
     }
@@ -134,10 +98,10 @@ function NavBar() {
   
   else {
     topNavbar = {
-      y: '0px',
+      top: '0px',
       transition: { type: 'Tween', stiffness: 300, duration: 0.4 },
     };
-  }
+  } 
 
   const navbar = {
     
@@ -146,8 +110,11 @@ function NavBar() {
 
     navBarShow3: {
       opacity: 1,
+      
       transition: {duration: 3,delay:6}
-    }
+    },
+
+
   };
 
   return (
@@ -155,7 +122,7 @@ function NavBar() {
       layout
       variants={navbar}
       initial={{opacity: 0}}
-      animate={[ 'navBarShow2','navBarShow3']}
+      animate={[ 'navBarShow2','navBarShow3', 'navBarShow']}
       transition={{
         duration: 1,
         type: 'Tween',

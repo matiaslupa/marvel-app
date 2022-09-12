@@ -234,7 +234,7 @@ function CharactersList() {
 
 
         {isLoading ? (
-          alphabet.map((element, index) => {
+          alphabet.slice(6).map((element, index) => {
             return (
               <div
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
@@ -317,7 +317,7 @@ function CharactersList() {
         {selectedCharacter && (
           <div
             className="expanded-col-character-list"
-            animate={selectedCharacter && { backdropFilter: 'grayscale(70%)' }}
+            animate={selectedCharacter && { backdropFilter: 'grayscale(70%) blur(3px)' }}
             onClick={() => {
               setExpanded(null);
               setSelectedCharacter(null);

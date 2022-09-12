@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const loadEvents = createAsyncThunk(
   'events/loadEvents',
-  async (event = 'a') => {
+  async (event = 'AllEVENTS') => {
     const regex = /^[0-9]*$/;
     let url = '';
 
@@ -55,7 +55,7 @@ export const loadEvents = createAsyncThunk(
     } else if (event.endsWith('AllEVENTS')){
 
       // By default
-      url = `https://gateway.marvel.com:443/v1/public/events?limit=50&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
+      url = `https://gateway.marvel.com:443/v1/public/events?limit=20&ts=1000&apikey=ed2af8fad6429d8d927d100991c84a26&hash=be93f5fa58ad58c9ef658f7e99e84904`;
     }
 
     const response = await fetch(url);

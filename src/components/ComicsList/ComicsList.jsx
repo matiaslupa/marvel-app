@@ -226,7 +226,7 @@ const ComicsList = () => {
         </motion.div>
 
         {isLoadingComics ? (
-          alphabet.map((element, index) => {
+          alphabet.slice(6).map((element, index) => {
             return (
               <div
                 className="col-6 col-md-4 col-lg-3 col-xl-2 col-characters-list"
@@ -302,7 +302,7 @@ const ComicsList = () => {
         {selectedComic && (
           <motion.div
             className="expanded-col-character-list"
-            animate={selectComics && { backdropFilter: 'grayscale(70%)' }}
+            animate={selectComics && { backdropFilter: 'grayscale(70%) blur(3px)' }}
             onClick={() => {
               setExpanded(null);
               setSelectedComic(null);

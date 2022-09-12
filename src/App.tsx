@@ -22,9 +22,10 @@ import SeriesList from './components/SeriesList/SeriesList';
 function App() {
   return (
     <div className="App">
-      <NavBar />
 
+      <NavBar />
       <Routes>
+
         <Route path="/" element={<Pages />} />
 
         <Route path="characters" element={<CharactersList />} >
@@ -45,6 +46,7 @@ function App() {
 
         
       </Routes>
+
     </div>
   );
 }
