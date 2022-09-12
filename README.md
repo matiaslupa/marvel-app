@@ -2,7 +2,7 @@
 
 Project of choice that using the Marvel API displays Marvel characters, comics, events and series.
 
-[Live Reddit App](https://marveloso.netlify.app/)
+[Live Marvel App](https://marveloso.netlify.app/)
 
 ## Technologies
 
